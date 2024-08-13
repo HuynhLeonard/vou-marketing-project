@@ -1,2 +1,4 @@
-package com.voufinal.brand_service.dto;public class VoucherDTO {
+package com.voufinal.brand_service.dto;
+
+public class VoucherDTO {
 }
