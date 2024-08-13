@@ -1,5 +1,8 @@
 package com.voufinal.user_service.repository;
 
-public class UserRepository {
+import com.voufinal.user_service.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
     
 }
