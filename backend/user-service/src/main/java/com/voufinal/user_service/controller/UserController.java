@@ -29,20 +29,20 @@ public class UserController {
     public List<User> getAllUsers(){ return userService.getAllUsers(); }
 
     @GetMapping("/get")
-    public User getUserById(@RequestParam Integer idUser){
-        return userService.getUserByID(idUser);
+    public User getUserById(@RequestParam Long id){
+        return userService.getUserByID(id);
     }
 
-    @PutMapping("/update/{idUser}")
-    public ResponseEntity<Void> updateUser(@PathVariable Integer idUser, @RequestBody User user){
-        userService.updateUser(idUser, user);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody User user){
+        userService.updateUser(id, user);
 
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/delete/{idUser}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Integer idUser){
-        userService.deleteUser(idUser);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
 
         return ResponseEntity.noContent().build();
     }

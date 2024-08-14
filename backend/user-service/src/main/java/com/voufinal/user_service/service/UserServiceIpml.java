@@ -25,7 +25,7 @@ public class UserServiceIpml implements UserService {
     }
 
     @Override
-    public User getUserByID(Integer id) {
+    public User getUserByID(Long id) {
         User user =userRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found" + id));
@@ -33,20 +33,20 @@ public class UserServiceIpml implements UserService {
     }
 
     @Override
-    public void updateUser(Integer idUser, User user) {
+    public void updateUser(Long id, User user) {
         userRepository
-                .findById(idUser)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found" + idUser));
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found" + id));
 
-        user.setIdUser(idUser);
+        user.setId(id);
         userRepository.save(user);
     }
 
     @Override
-    public void deleteUser(Integer idUser) {
+    public void deleteUser(Long id) {
         User user =userRepository
-                .findById(idUser)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found" + idUser));
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found" + id));
 
         userRepository.delete(user);
     }
