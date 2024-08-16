@@ -1,9 +1,14 @@
 package com.voufinal.brand_service.service;
 
+import com.voufinal.brand_service.dto.RegisterDTO;
 import com.voufinal.brand_service.model.Brand;
 import com.voufinal.brand_service.repository.BrandRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,9 +20,29 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BrandService {
     private final BrandRepository brandRepository;
-    private RestTemplate restTemplate;
+    PasswordEncoder passwordEncoder;
+    RestTemplate restTemplate;
 
     // create game later with game-service
+
+    // register new brand
+    public void register(RegisterDTO registerDTO){
+        String name = registerDTO.getBrandName();
+        String password = registerDTO.getPassword();
+        String category = registerDTO.getCategory();
+        boolean isShaking = registerDTO.isShaking();
+        boolean isTrivia = registerDTO.isTrivia();
+
+        passwordEncoder = new BCryptPasswordEncoder();
+        Brand brand = new Brand();
+        brand.setBrandname(name);
+        brand.setPassword(passwordEncoder.encode(password));
+        brand.setCategory(category);
+        brand.setShaking(isShaking);
+        brand.setTriviaQuest(isTrivia);
+
+        brandRepository.save(brand);
+    }
 
     public Optional<Brand> findByBrandName(String name) {
         return brandRepository.findBrandByBrandname(name);
@@ -36,5 +61,5 @@ public class BrandService {
         return brandRepository.findAll();
     }
 
-    // game service here
+    // game service here (4 services here)
 }

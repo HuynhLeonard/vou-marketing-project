@@ -12,8 +12,8 @@ public class Voucher {
     @Column(name = "id")
     private String id;
 
-//    @Column(name = "image_qr")
-//    private String imageQR;
+    @Column(name = "image_qr")
+    private String imageQR;
 
     @Column(name = "image_url")
     private String imageURL;

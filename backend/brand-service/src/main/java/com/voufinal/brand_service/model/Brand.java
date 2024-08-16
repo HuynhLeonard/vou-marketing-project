@@ -22,4 +22,10 @@ public class Brand {
 
     @Column(name = "status")
     private boolean status = false;  // allow by admin
+
+    @Column(name = "is_shaking")
+    private boolean isShaking = false;
+
+    @Column(name = "is_trivia")
+    private boolean isTriviaQuest = false;
 }

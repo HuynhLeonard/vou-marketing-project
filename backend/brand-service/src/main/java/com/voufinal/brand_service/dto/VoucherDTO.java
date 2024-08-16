@@ -8,6 +8,7 @@ import java.util.Date;
 public class VoucherDTO {
     private String id;
     private int value;
+    private int quantity;
     private String description;
     private Date endDate;
 }

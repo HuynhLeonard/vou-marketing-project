@@ -8,4 +8,6 @@ public class RegisterDTO {
     private String password;
     private String category;
     private String confirmation;
+    private boolean isTrivia;
+    private boolean isShaking;
 }
