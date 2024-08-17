@@ -1,9 +1,14 @@
 package com.voufinal.user_service.controller;
 
+import com.voufinal.user_service.dto.LoginResponse;
+import com.voufinal.user_service.dto.LoginUserResponse;
+import com.voufinal.user_service.dto.UserResponse;
 import com.voufinal.user_service.model.User;
 import com.voufinal.user_service.repository.UserRepository;
 import com.voufinal.user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +20,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
     @PostMapping("/create")
-    public String createUser(@RequestBody User user){
-        userService.addUser(user);
+    public String createUser(@RequestBody UserResponse userResponse){
+        userService.addUser(userResponse);
 
         return "Create user succeed";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginUserResponse loginUserResponse){
+        log.info(loginUserResponse.getEmail());
+        LoginResponse loginMessage = userService.loginUser(loginUserResponse);
+        return ResponseEntity.ok(loginMessage);
     }
 
     @GetMapping()
