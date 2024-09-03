@@ -25,7 +25,8 @@
 		<module>service/game</module>
 		<module>service/user</module>
 		<module>service/identity</module>
-	</modules>
+        <module>service/event</module>
+    </modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
