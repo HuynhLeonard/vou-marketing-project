@@ -1,7 +1,7 @@
 package com.voufinal.user_service.service;
 
-import com.voufinal.user_service.model.Customer;
-import com.voufinal.user_service.repository.CustomerRepository;
+import com.voufinal.user_service.model.Player;
+import com.voufinal.user_service.repository.PlayerRepository;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
@@ -12,21 +12,21 @@ import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CustomerServiceImpl implements CustomerService{
-    private final CustomerRepository customerRepository;
+public class PlayerServiceImpl implements PlayerService {
+    private final PlayerRepository playerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public PlayerServiceImpl(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
     @Override
-    public List<Customer> findAllCustomer() {
-        return customerRepository.findAll();
+    public List<Player> findAllPlayer() {
+        return playerRepository.findAll();
     }
 
     @Override
-    public Customer findCustomerById(String customerId) {
-        Optional<Customer> customer = customerRepository.findById(customerId);
+    public Player findPlayerById(String customerId) {
+        Optional<Player> customer = playerRepository.findById(customerId);
 
         if (customer.isPresent()) {
             return customer.get();
@@ -37,29 +37,29 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     @Transactional
-    public void saveCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public void savePlayer(Player player) {
+        playerRepository.save(player);
     }
 
     @Override
     @Transactional
-    public void updateCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public void updatePlayer(Player player) {
+        playerRepository.save(player);
     }
 
     @Override
     @Transactional
-    public void deleteCustomerById(String customerId) {
-        customerRepository.deleteById(customerId);
+    public void deletePlayerById(String customerId) {
+        playerRepository.deleteById(customerId);
     }
 
     @Override
-    public Customer findCustomerByPhoneNumber(String phoneNumber) {
-        return customerRepository.findByPhoneNumber(phoneNumber);
+    public Player findPlayerByPhoneNumber(String phoneNumber) {
+        return playerRepository.findByPhoneNumber(phoneNumber);
     }
 
     @Override
-    public Customer findCustomerByEmail(String email) {
-        return customerRepository.findByEmail(email);
+    public Player findPlayerByEmail(String email) {
+        return playerRepository.findByEmail(email);
     }
 }

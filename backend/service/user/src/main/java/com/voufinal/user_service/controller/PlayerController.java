@@ -1,7 +1,7 @@
 package com.voufinal.user_service.controller;
 
-import com.voufinal.user_service.model.Customer;
-import com.voufinal.user_service.service.CustomerService;
+import com.voufinal.user_service.model.Player;
+import com.voufinal.user_service.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,50 +9,50 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
-public class CustomerController {
-    private CustomerService customerService;
+public class PlayerController {
+    private PlayerService playerService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
     @GetMapping("/getalls")
-    public List<Customer> getAllCustomers() {
-        return customerService.findAllCustomer();
+    public List<Player> getAllPlayer() {
+        return playerService.findAllPlayer();
     }
 
-    @GetMapping("/getbyId/{customerId}")
-    public Customer getCustomerById(@PathVariable("customerId") String customerId) {
-        return customerService.findCustomerById(customerId);
+    @GetMapping("/getbyId/{playerId}")
+    public Player getCustomerById(@PathVariable("playerId") String playerId) {
+        return playerService.findPlayerById(playerId);
     }
 
-    @PostMapping("/addcustomer")
-    public Customer addCustomer(@RequestBody Customer customer) {
-        customer.setId("0");
-        customerService.saveCustomer(customer);
-        return customer;
+    @PostMapping("/addplayer")
+    public Player addCustomer(@RequestBody Player player) {
+        player.setId("0");
+        playerService.savePlayer(player);
+        return player;
     }
 
     @PatchMapping("/update")
-    public Customer updateCustomer(@RequestBody Customer customer) {
-        customerService.updateCustomer(customer);
-        return customer;
+    public Player updatePlayer(@RequestBody Player player) {
+        playerService.updatePlayer(player);
+        return player;
     }
 
-    @DeleteMapping("/delete/{customerId}")
-    public String deleteCustomer(@PathVariable("customerId") String customerId) {
-        customerService.deleteCustomerById(customerId);
+    @DeleteMapping("/delete/{playerId}")
+    public String deleteCustomer(@PathVariable("playerId") String playerId) {
+        playerService.deletePlayerById(playerId);
         return "Customer deleted";
     }
 
     @GetMapping("/phonenumber/{phoneNumber}")
-    public Customer getCustomerByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
-        return customerService.findCustomerByPhoneNumber(phoneNumber);
+    public Player getPlayerByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
+        return playerService.findPlayerByPhoneNumber(phoneNumber);
     }
 
     @GetMapping("/email/{email}")
-    public Customer getCustomerByEmail(@PathVariable("email") String email) {
-        return customerService.findCustomerByEmail(email);
+    public Player getPlayerByEmail(@PathVariable("email") String email) {
+        return playerService.findPlayerByEmail(email);
     }
 }

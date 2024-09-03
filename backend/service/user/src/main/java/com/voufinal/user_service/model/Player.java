@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @DiscriminatorValue("customer")
-public class Customer extends User {
+public class Player extends User {
     @Column(name="gender")
     private String gender;
 
@@ -25,7 +25,7 @@ public class Customer extends User {
     @Column(name="avatar")
     private String avatar;
 
-    public Customer(String userName, String fullName, String accountId, String email, String phoneNumber, User_Role role, boolean status, String gender, String accountFacebook, String dayofBirth, String avatar) {
+    public Player(String userName, String fullName, String accountId, String email, String phoneNumber, User_Role role, boolean status, String gender, String accountFacebook, String dayofBirth, String avatar) {
         super(userName, fullName, accountId, email, phoneNumber, role, status);
         this.gender = gender;
         this.accountFacebook = accountFacebook;
@@ -33,7 +33,7 @@ public class Customer extends User {
         this.avatar = avatar;
     }
 
-    public Customer() {
+    public Player() {
 
     }
 

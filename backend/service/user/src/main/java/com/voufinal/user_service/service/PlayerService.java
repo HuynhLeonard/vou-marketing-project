@@ -1,21 +1,21 @@
 package com.voufinal.user_service.service;
 
-import com.voufinal.user_service.model.Customer;
+import com.voufinal.user_service.model.Player;
 
 import java.util.List;
 
-public interface CustomerService {
-    List<Customer> findAllCustomer();
+public interface PlayerService {
+    List<Player> findAllPlayer();
 
-    Customer findCustomerById(String customerId);
+    Player findPlayerById(String customerId);
 
-    void saveCustomer(Customer customer);
+    void savePlayer(Player player);
 
-    void updateCustomer(Customer customer);
+    void updatePlayer(Player player);
 
-    void deleteCustomerById(String customerId);
+    void deletePlayerById(String customerId);
 
-    Customer findCustomerByPhoneNumber(String phoneNumber);
+    Player findPlayerByPhoneNumber(String phoneNumber);
 
-    Customer findCustomerByEmail(String email);
+    Player findPlayerByEmail(String email);
 }
