@@ -35,10 +35,11 @@ public class BrandController {
         return brand;
     }
 
-    @PatchMapping("/update")
-    public String updateBrand(@RequestBody Brand brand) {
+    @PatchMapping("/update/{brandId}")
+    public String updateBrand(@PathVariable String brandId, @RequestBody Brand brand) {
+        brand.setId(brandId);
         brandService.updateBrand(brand);
-        return "Delete finish!";
+        return "Update finish!";
     }
 
     @DeleteMapping("/delete/{brandId}")
@@ -59,7 +60,7 @@ public class BrandController {
         return brand;
     }
 
-    @PostMapping("/public/emails")
+    @GetMapping("/public/emails")
     public List<Brand> getBrandsByEmails(@RequestBody List<String> emails) {
 
         if (emails == null || emails.isEmpty()) {

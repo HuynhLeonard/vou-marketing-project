@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/players")
 public class PlayerController {
     private PlayerService playerService;
 
@@ -17,33 +17,34 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/getalls")
+    @GetMapping("/getall")
     public List<Player> getAllPlayer() {
         return playerService.findAllPlayer();
     }
 
     @GetMapping("/getbyId/{playerId}")
-    public Player getCustomerById(@PathVariable("playerId") String playerId) {
+    public Player getPlayerById(@PathVariable("playerId") String playerId) {
         return playerService.findPlayerById(playerId);
     }
 
     @PostMapping("/addplayer")
-    public Player addCustomer(@RequestBody Player player) {
+    public Player addPlayer(@RequestBody Player player) {
         player.setId("0");
         playerService.savePlayer(player);
         return player;
     }
 
-    @PatchMapping("/update")
-    public Player updatePlayer(@RequestBody Player player) {
+    @PatchMapping("/update/{playerId}")
+    public Player updatePlayer(@PathVariable String playerId, @RequestBody Player player) {
+        player.setId(playerId);
         playerService.updatePlayer(player);
         return player;
     }
 
     @DeleteMapping("/delete/{playerId}")
-    public String deleteCustomer(@PathVariable("playerId") String playerId) {
+    public String deletePlayer(@PathVariable("playerId") String playerId) {
         playerService.deletePlayerById(playerId);
-        return "Customer deleted";
+        return "Player is deleted!";
     }
 
     @GetMapping("/phonenumber/{phoneNumber}")

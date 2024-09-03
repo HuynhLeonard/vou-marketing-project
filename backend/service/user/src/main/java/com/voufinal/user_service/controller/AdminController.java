@@ -34,8 +34,9 @@ public class AdminController {
         return admin;
     }
 
-    @PatchMapping("/update")
-    public Admin updateAdmin(@RequestBody Admin admin) {
+    @PatchMapping("/update/{adminId}")
+    public Admin updateAdmin(@PathVariable String adminId, @RequestBody Admin admin) {
+        admin.setId(adminId);
         adminService.updateAdmin(admin);
         return admin;
     }

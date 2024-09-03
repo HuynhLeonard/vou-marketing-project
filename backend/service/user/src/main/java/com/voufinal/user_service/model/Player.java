@@ -4,14 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+
 
 @Entity
-@Table(name="customers")
-@Getter
-@Setter
-@DiscriminatorValue("customer")
+@Table(name="players")
+
+@DiscriminatorValue("player")
 public class Player extends User {
     @Column(name="gender")
     private String gender;
@@ -27,6 +25,13 @@ public class Player extends User {
 
     public Player(String userName, String fullName, String accountId, String email, String phoneNumber, User_Role role, boolean status, String gender, String accountFacebook, String dayofBirth, String avatar) {
         super(userName, fullName, accountId, email, phoneNumber, role, status);
+        this.gender = gender;
+        this.accountFacebook = accountFacebook;
+        this.dayofBirth = dayofBirth;
+        this.avatar = avatar;
+    }
+
+    public Player(String gender, String accountFacebook, String dayofBirth, String avatar) {
         this.gender = gender;
         this.accountFacebook = accountFacebook;
         this.dayofBirth = dayofBirth;
@@ -71,7 +76,7 @@ public class Player extends User {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "Player{" +
                 "gender='" + gender + '\'' +
                 ", accountFacebook='" + accountFacebook + '\'' +
                 ", dayofBirth='" + dayofBirth + '\'' +
