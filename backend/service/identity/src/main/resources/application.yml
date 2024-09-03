@@ -10,7 +10,7 @@ spring:
     url: "jdbc:mysql://localhost:3306/identity-service?useSSL=false&serverTimezone=UTC"
     driverClassName: "com.mysql.cj.jdbc.Driver"
     username: root
-    password: root
+    password: thienhuu2003
   jpa:
     hibernate:
       ddl-auto: update

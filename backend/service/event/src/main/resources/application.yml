@@ -6,9 +6,9 @@ spring:
   application:
     name: events
   datasource:
-    url: jdbc:mysql://localhost:3300/events-service
+    url: jdbc:mysql://localhost:3306/event-service
     username: root
-    password: root
+    password: thienhuu2003
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
