@@ -21,8 +21,8 @@ public class UserFactory extends JsonDeserializer<User> {
             case admin:
                 user = new Admin();
                 break;
-            case customer:
-                user = new Customer();
+            case player:
+                user = new Player();
                 break;
             case brand:
                 user = new Brand();
@@ -38,12 +38,12 @@ public class UserFactory extends JsonDeserializer<User> {
         user.setRole(User_Role.valueOf(role));
         user.setStatus(node.get("status").asBoolean());
 
-        if(user instanceof Customer) {
-            Customer customer = (Customer) user;
-            customer.setGender(node.get("gender").asText());
-            customer.setAccountFacebook(node.get("accountFacebook").asText());
-            customer.setDayofBirth(node.get("dayofBirth").asText());
-            customer.setAvatar(node.get("avatar").asText());
+        if(user instanceof Player) {
+            Player player = (Player) user;
+            player.setGender(node.get("gender").asText());
+            player.setAccountFacebook(node.get("accountFacebook").asText());
+            player.setDayofBirth(node.get("dayofBirth").asText());
+            player.setAvatar(node.get("avatar").asText());
         }
         else if(user instanceof Brand) {
             Brand brand = (Brand) user;
