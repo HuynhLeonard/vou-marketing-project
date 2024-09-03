@@ -25,7 +25,12 @@ public class SecurityConfig {
         "/auth/refresh",
         "/actuator/health/*",
         "/actuator/*",
-        "/actuator"
+        "/actuator",
+            "/swagger-ui/index.html",
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/api-docs/**"
     };
 
     private final CustomJwtDecoder customJwtDecoder;
