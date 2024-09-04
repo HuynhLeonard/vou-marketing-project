@@ -27,6 +27,7 @@
 		<module>service/identity</module>
         <module>service/event</module>
         <module>service/discovery-server</module>
+        <module>service/api-gateway</module>
     </modules>
 	<scm>
 		<connection/>
