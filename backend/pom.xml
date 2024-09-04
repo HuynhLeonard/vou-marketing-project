@@ -26,6 +26,7 @@
 		<module>service/user</module>
 		<module>service/identity</module>
         <module>service/event</module>
+        <module>service/discovery-server</module>
     </modules>
 	<scm>
 		<connection/>
