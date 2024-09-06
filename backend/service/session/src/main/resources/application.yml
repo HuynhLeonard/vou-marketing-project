@@ -8,7 +8,7 @@ spring:
       username: voufinal
       password: hktl
     mongodb:
-      uri: mongodb+srv://huukhoituanlocduc:huukhoituanlocduc@vou-final.ldl0j.mongodb.net/?retryWrites=true&w=majority&appName=VOU-final
+      uri: mongodb+srv://huukhoituanlocduc:huukhoituanlocduc@vou-final.ldl0j.mongodb.net/session?retryWrites=true&w=majority&appName=VOU-final
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -19,7 +19,7 @@ spring:
       group-id: group_id
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: com.vou.sessions.kafka.deserializer.EventSessionInfoDeserializer
+      value-deserializer: com.voufinal.session_service.kafka.EventSessionInfoDeserializer
       enable-auto-commit: false
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
