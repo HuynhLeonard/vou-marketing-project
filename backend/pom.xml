@@ -29,6 +29,7 @@
         <module>service/discovery-server</module>
         <module>service/api-gateway</module>
         <module>service/session</module>
+        <module>service/notification</module>
     </modules>
 	<scm>
 		<connection/>
