@@ -8,7 +8,7 @@ import com.voufinal.session_service.entity.quizgame.QuizRecordEntity;
 import com.voufinal.session_service.exception.NotFoundException;
 import com.voufinal.session_service.mapper.RecordMapper;
 import com.voufinal.session_service.repository.SessionsRepository;
-import com.voufinal.session_service.texttospeech.AmazonPollyService;
+//import com.voufinal.session_service.texttospeech.AmazonPollyService;
 import com.voufinal.session_service.utils.Utils;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +23,17 @@ import java.util.*;
 public class QuizGameEngine extends GameEngine {
     private static final String QUIZ_RESPONSE_KEY = "QUIZ_RESPONSE";
     private HQTriviaFeignClient hqTriviaFeignClient;
-    private AmazonPollyService amazonPollyService;
+    //private AmazonPollyService amazonPollyService;
     private SessionsRepository sessionsRepository;
     private RecordMapper quizRecordMapper;
 
     @Autowired
-    QuizGameEngine(RedisTemplate<String, Object> redisTemplate, HQTriviaFeignClient triviaFeignClient,
-                   AmazonPollyService amazonPollyService, SessionsRepository sessionsRepository,
+    QuizGameEngine(RedisTemplate<String, Object> redisTemplate, HQTriviaFeignClient triviaFeignClient
+                   , SessionsRepository sessionsRepository,
                    RecordMapper quizRecordMapper) {
         this.redisTemplate = redisTemplate;
         this.hqTriviaFeignClient = triviaFeignClient;
-        this.amazonPollyService = amazonPollyService;
+        //this.amazonPollyService = amazonPollyService;
         this.sessionsRepository = sessionsRepository;
         this.quizRecordMapper = quizRecordMapper;
     }
