@@ -28,6 +28,7 @@
         <module>service/event</module>
         <module>service/discovery-server</module>
         <module>service/api-gateway</module>
+        <module>service/session</module>
     </modules>
 	<scm>
 		<connection/>
