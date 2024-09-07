@@ -41,6 +41,7 @@
       <module name="identity" options="-parameters -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring -Amapstruct.verbose=true" />
       <module name="notification" options="-parameters" />
       <module name="session" options="-parameters" />
+      <module name="turn-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
