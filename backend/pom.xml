@@ -30,6 +30,7 @@
         <module>service/api-gateway</module>
         <module>service/session</module>
         <module>service/notification</module>
+        <module>service/turn</module>
     </modules>
 	<scm>
 		<connection/>
