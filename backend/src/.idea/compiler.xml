@@ -10,6 +10,7 @@
         <module name="api-gateway" />
         <module name="auth-service" />
         <module name="user-service" />
+        <module name="turn-service" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>
@@ -19,6 +20,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="auth-service" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
+      <module name="turn-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
