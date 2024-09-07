@@ -3,6 +3,7 @@ package com.voufinal.userservice.controller;
 import com.voufinal.userservice.common.*;
 import com.voufinal.userservice.model.User;
 //import com.voufinal.userservice.service.StorageService;
+import com.voufinal.userservice.service.CloudinaryService;
 import com.voufinal.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -21,12 +22,12 @@ import java.util.Map;
 @CrossOrigin
 public class UserController {
     private final UserService userService;
-//    private final StorageService storageService;
+    private final CloudinaryService cloudinaryService;
 
     @Autowired
-    public UserController(UserService userService /*StorageService storageService*/) {
+    public UserController(UserService userService, CloudinaryService cloudinaryService) {
         this.userService = userService;
-//        this.storageService = storageService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @PutMapping("/{id_user}")
@@ -41,6 +42,7 @@ public class UserController {
         }
     }
 
+    // update upload hinh anh
     @PatchMapping ("/{id_user}/avatar")
     public ResponseEntity<?> updateAvatar(@PathVariable Long id_user, @RequestParam("avatar") MultipartFile avatarFile) {
         String contentType = avatarFile.getContentType();
@@ -49,7 +51,8 @@ public class UserController {
         }
         try {
 //            String avatarUrl = storageService.uploadImage(avatarFile);
-            String avatarUrl = "ahihi";
+            Map avatarInfo = cloudinaryService.uploadFile(avatarFile, "vouavatar");
+            String avatarUrl = (String) avatarInfo.get("url");
             if (avatarUrl == null) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("Error uploading", HttpStatus.INTERNAL_SERVER_ERROR, null));
             }
@@ -60,9 +63,9 @@ public class UserController {
             return ResponseEntity.ok(new SuccessResponse("Avatar updated successfully", HttpStatus.OK, avatarUrl));
         } catch (DataAccessException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("Database error", HttpStatus.INTERNAL_SERVER_ERROR, null));
-        } /*catch (IOException e) {
+        } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse("File upload error", HttpStatus.INTERNAL_SERVER_ERROR, null));
-        } */
+        }
     }
 
     @PostMapping("/")
