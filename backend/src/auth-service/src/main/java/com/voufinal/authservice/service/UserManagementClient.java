@@ -19,11 +19,16 @@ import java.util.Optional;
 public class UserManagementClient {
 
     private final RestTemplate restTemplate;
-    private final String userUrl = "http://user-service:8082/api/v1/users";
-    private final String playerUrl = "http://user-service:8082/api/v1/players";
+    //private final String userUrl = "http://user-service:8082/api/v1/users";
+    private final String userUrl = "http://localhost:8082/api/v1/users";
+    //private final String playerUrl = "http://user-service:8082/api/v1/players";
+    private final String playerUrl = "http://localhost:8082/api/v1/players";
+    //private final String brandUrl = "http://user-service:8082/api/v1/brands";
     private final String brandUrl = "http://user-service:8082/api/v1/brands";
-    private final String adminUrl = "http://user-service:8082/api/v1/admins";
-    private final String sessionUrl = "http://user-service:8082/api/v1/sessions";
+//    private final String adminUrl = "http://user-service:8082/api/v1/admins";
+    private final String adminUrl = "http://localhost:8082/api/v1/admins";
+    //private final String sessionUrl = "http://user-service:8082/api/v1/sessions";
+    private final String sessionUrl = "http://localhost:8082/api/v1/sessions";
 
 
     @Autowired
