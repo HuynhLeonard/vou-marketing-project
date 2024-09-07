@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/players")
+@RequestMapping(value = "/api/v1/players")
 @CrossOrigin
 public class PlayerController {
     private final UserService userService;
