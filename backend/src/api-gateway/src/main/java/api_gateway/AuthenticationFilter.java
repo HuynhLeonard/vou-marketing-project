@@ -32,7 +32,7 @@ public class AuthenticationFilter implements GatewayFilter, Ordered {
 
             return webClientBuilder.build()
                     .post()
-                    .uri("http://auth-service:8081/api/v1/auth/validate-token")
+                    .uri("http://localhost:8081/api/v1/auth/validate-token")
                     .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(Boolean.class)
