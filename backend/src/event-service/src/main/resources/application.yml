@@ -10,7 +10,7 @@ spring:
       enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/event-service
+    url: jdbc:postgresql://localhost:5434/eventdb
     username: admin
     password: admin
     driver-class-name: org.postgresql.Driver

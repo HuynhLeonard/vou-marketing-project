@@ -15,6 +15,7 @@
         <module>auth-service</module>
         <module>turn-service</module>
         <module>event-service</module>
+        <module>game-service</module>
     </modules>
 
 
