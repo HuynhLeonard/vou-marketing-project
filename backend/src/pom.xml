@@ -9,7 +9,7 @@
     <version>0.1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>user-service</module>
+        <module>discovery-service</module>
     </modules>
 
 
