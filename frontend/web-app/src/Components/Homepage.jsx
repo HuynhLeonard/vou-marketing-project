@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel } from "flowbite-react";
-
+import { useMutation } from 'react-query';
 import userManageImage from "../utils/images/userManage.png";
 import gameManageImage from "../utils/images/gameManage.png";
 import voucherManageImage from "../utils/images/voucherManage.png";
@@ -32,29 +32,18 @@ function Homepage({ setSelected }) {
         });
     };
 
-    const getApiData = async () => {
-        // prettier-ignore
-        var headers = {
-            "Authorization":
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0UGxheWVyIiwiaWF0IjoxNzI1ODI4MDU1LCJleHAiOjE3MjU4NjQwNTV9.IrNeOHtygxvfE1raxDWeZULSjq0VKVTx3L_LyjA2whI",
-            "Content-Type": "application/json",
-        };
+    const handleLogin = async () => {
 
-        const { data } = await api.post(
-            "auth/login",
-            {
-                // prettier-ignore
-                "username": "testPlayer",
-                // prettier-ignore
-                "password": "Thienhuu@2003",
-            },
-            headers
-        );
-        console.log(data);
-    };
+        await api.post("http://localhost:8081/api/v1/auth/login", {
+            username: "testplayer",
+            password: "Thienhuu@2003"
+        }).then(data => {
+            console.log(data);
+        })
+    }
+
 
     useEffect(() => {
-        getApiData();
         subPageTransition(0);
     }, []);
 
