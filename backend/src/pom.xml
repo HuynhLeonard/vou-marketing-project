@@ -17,6 +17,7 @@
         <module>event-service</module>
         <module>game-service</module>
         <module>gift-service</module>
+        <module>mc-service</module>
     </modules>
 
 

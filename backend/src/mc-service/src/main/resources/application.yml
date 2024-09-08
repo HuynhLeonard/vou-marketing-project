@@ -1,0 +1,30 @@
+server:
+  port: 8086
+socket-server:
+  port: 8085
+
+spring:
+  application:
+    name: mc-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5434/gamedb
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+    show-sql: true
+    generate-ddl: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
