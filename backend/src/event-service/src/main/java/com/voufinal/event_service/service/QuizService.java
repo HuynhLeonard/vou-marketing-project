@@ -17,7 +17,7 @@ public class QuizService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String QUIZ_SERVICE_URL = "http://streaming-service:8086/api/v1/game/quiz/create";
+    private final String QUIZ_SERVICE_URL = "http://localhost:8086/api/v1/game/quiz/create";
 
     public void createQuiz(GameInfoDto gameInfoDTO) {
         HttpHeaders headers = new HttpHeaders();

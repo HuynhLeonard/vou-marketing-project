@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class RewardService {
     private final RestTemplate restTemplate;
-    private final String ITEM_REPOS_URL = "http://inventory-and-reward-service:8087/api/v1/item-repos";
+    private final String ITEM_REPOS_URL = "http://localhost:8087/api/v1/item-repos";
 
     @Autowired
     public RewardService(RestTemplateBuilder restTemplateBuilder) {

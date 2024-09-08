@@ -11,8 +11,10 @@
         <module name="game-service" />
         <module name="event-service" />
         <module name="api-gateway" />
+        <module name="mc-service" />
         <module name="user-service" />
         <module name="turn-service" />
+        <module name="gift-service" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>
@@ -24,6 +26,8 @@
       <module name="discovery-service" options="-parameters" />
       <module name="event-service" options="-parameters" />
       <module name="game-service" options="-parameters" />
+      <module name="gift-service" options="-parameters" />
+      <module name="mc-service" options="-parameters" />
       <module name="turn-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>

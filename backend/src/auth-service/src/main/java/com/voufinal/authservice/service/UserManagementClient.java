@@ -3,6 +3,7 @@ package com.voufinal.authservice.service;
 import com.voufinal.authservice.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -24,7 +25,7 @@ public class UserManagementClient {
     //private final String playerUrl = "http://user-service:8082/api/v1/players";
     private final String playerUrl = "http://localhost:8082/api/v1/players";
     //private final String brandUrl = "http://user-service:8082/api/v1/brands";
-    private final String brandUrl = "http://user-service:8082/api/v1/brands";
+    private final String brandUrl = "http://localhost:8082/api/v1/brands";
 //    private final String adminUrl = "http://user-service:8082/api/v1/admins";
     private final String adminUrl = "http://localhost:8082/api/v1/admins";
     //private final String sessionUrl = "http://user-service:8082/api/v1/sessions";

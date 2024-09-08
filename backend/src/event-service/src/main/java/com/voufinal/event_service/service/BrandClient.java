@@ -13,8 +13,10 @@ import java.util.Optional;
 @Service
 public class BrandClient {
     private final RestTemplate restTemplate;
-    private final String userUrl = "http://user-service:8082/api/v1/users";
-    private final String brandUrl = "http://user-service:8082/api/v1/brands";
+//    private final String userUrl = "http://user-service:8082/api/v1/users";
+//    private final String brandUrl = "http://user-service:8082/api/v1/brands";
+    private final String userUrl = "http://localhost:8082/api/v1/users";
+    private final String brandUrl = "http://localhost:8082/api/v1/brands";
 
     @Autowired
     public BrandClient(RestTemplateBuilder restTemplateBuilder) {

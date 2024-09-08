@@ -17,7 +17,7 @@ public class EventService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String EVENTS_SERVICE_URL = "http://event-service:8083/api/v1/events";
+    private final String EVENTS_SERVICE_URL = "http://localhost:8083/api/v1/events";
 
     public HttpStatusCode decreaseRemainingVoucher(Long id_event) throws Exception {
         String url = EVENTS_SERVICE_URL + "/" + id_event + "/remaining-vouchers";

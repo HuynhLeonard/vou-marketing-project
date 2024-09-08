@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class PlayerService {
     private final RestTemplate restTemplate;
-    private final String USER_URL = "http://user-service:8082/api/v1/players";
+    private final String USER_URL = "http://localhost:8082/api/v1/players";
 
     public PlayerService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();

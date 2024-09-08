@@ -17,7 +17,7 @@ public class UserService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String PLAYERS_SERVICE_URL = "http://user-service:8082/api/v1/players";
+    private final String PLAYERS_SERVICE_URL = "http://localhost:8082/api/v1/players";
 
     public LinkedHashMap<String, Object> findPlayerByIdentifier(Object playerIdentifier, String type) throws Exception {
         try {
