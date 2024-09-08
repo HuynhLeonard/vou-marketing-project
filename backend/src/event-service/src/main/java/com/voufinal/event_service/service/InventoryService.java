@@ -44,7 +44,7 @@ public class InventoryService {
         }
     }
     public InventoryDetailDto getInventoryInfo(Long eventId) {
-        String url = "http://inventory-and-reward-service:8087/api/v1/vouchers/events/" + eventId;
+        String url = "http://localhost:8087/api/v1/vouchers/events/" + eventId;
 
         // Make the GET request
         ResponseEntity<InventoryDetailDto> response = restTemplate.getForEntity(url, InventoryDetailDto.class);
@@ -81,7 +81,7 @@ public class InventoryService {
         }
     }
     public boolean checkVoucherExists(String voucherCode) {
-        String url = "http://inventory-and-reward-service:8087/api/v1/vouchers/exists/" + voucherCode;
+        String url = "http://localhost:8087/api/v1/vouchers/exists/" + voucherCode;
 
         ResponseEntity<Boolean> response = restTemplate.exchange(
                 url,
@@ -93,7 +93,7 @@ public class InventoryService {
         return Boolean.TRUE.equals(response.getBody());
     }
     public InventoryDto updateInventory(InventoryDto inventoryDTO) {
-        String url = "http://inventory-and-reward-service:8087/api/v1/vouchers/info?code=" + inventoryDTO.getVoucher_code();
+        String url = "http://localhost:8087/api/v1/vouchers/info?code=" + inventoryDTO.getVoucher_code();
 
         // Make a PUT request to the updateGameInfo endpoint
         ResponseEntity<InventoryDto> response = restTemplate.exchange(
