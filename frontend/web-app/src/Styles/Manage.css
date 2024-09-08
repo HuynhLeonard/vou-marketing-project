@@ -5,3 +5,7 @@
 .layer-show {
     visibility: visible;
 }
+
+textarea {
+    resize: none;
+}

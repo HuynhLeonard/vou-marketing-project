@@ -1,15 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import userData from "../utils/jsonFiles/userData.json";
 import avatar from "../utils/images/ava.jpg";
-import "../Styles/UserManage.css";
+import "../Styles/Manage.css";
 
 function UserManage() {
     const [allProfileData, setAllProfileData] = useState([]);
     const [profileData, setProfileData] = useState([]);
     const [newProfileData, setNewProfileData] = useState([]);
     const [currentProfile, setCurrentProfile] = useState({});
-    const [updateData, setUpdateData] = useState(0);
-    const [smallUpdateData, setSmallUpdateData] = useState(0);
 
     const toTitleCase = (phrase) => {
         return phrase
@@ -19,7 +18,7 @@ function UserManage() {
             .join(" ");
     };
 
-    const showUserProfile = (profileIndex, status) => {
+    const showUserProfile = (profileIndex) => {
         const layerBlur = document.querySelectorAll(".layer-blur");
         const userProfile = document.querySelectorAll(".user-profile");
 
@@ -33,13 +32,9 @@ function UserManage() {
             layer.classList.add("layer-show");
         });
 
-        var count = -1;
-
-        allProfileData.forEach((item) => {
-            if (item.status === status.toString()) {
-                if (++count === profileIndex) {
-                    setCurrentProfile(item);
-                }
+        profileData.forEach((item, index) => {
+            if (index === profileIndex) {
+                setCurrentProfile(item);
             }
         });
     };
@@ -122,8 +117,6 @@ function UserManage() {
             var inputValue = document.querySelector(input);
             inputValue.value = "";
         });
-
-        var allGenderInputList = [];
     };
 
     const removeUserProfile = (profileIndex, status) => {
@@ -247,15 +240,66 @@ function UserManage() {
         }
     };
 
-    const radioClick = (titleName, titleInput, gender) => {
-        var titleValue = document.querySelector(titleName);
-        var inputValue = document.querySelector(titleInput);
+    const confirmSave = (buttonSize) => {
+        var valueList = [];
 
-        if (inputValue.placeholder !== gender) {
-            titleValue.style.color = "rgb(242, 82, 82)";
+        if (buttonSize === "large") {
+            const inputList = [
+                ".username-input",
+                ".name-input",
+                ".email-input",
+                ".facebook-input",
+                ".birth-input",
+            ];
+
+            inputList.forEach((input) => {
+                var inputValue = document.querySelector(input);
+                if (inputValue.value !== "") {
+                    valueList.push(inputValue.value);
+                } else {
+                    valueList.push(inputValue.placeholder);
+                }
+            });
         } else {
-            titleValue.style.color = "black";
+            const inputList = [
+                ".small-username-input",
+                ".small-name-input",
+                ".small-email-input",
+                ".small-phone-input",
+                ".small-gender-input",
+                ".small-facebook-input",
+                ".small-birth-input",
+            ];
+
+            inputList.forEach((input) => {
+                var inputValue = document.querySelector(input);
+                if (inputValue.value !== "") {
+                    valueList.push(inputValue.value);
+                } else {
+                    valueList.push(inputValue.placeholder);
+                }
+            });
         }
+
+        const titleList = [
+            ".name-title",
+            ".email-title",
+            ".phone-title",
+            ".gender-title",
+            ".facebook-title",
+            ".birth-title",
+            ".small-name-title",
+            ".small-email-title",
+            ".small-phone-title",
+            ".small-gender-title",
+            ".small-facebook-title",
+            ".small-birth-title",
+        ];
+
+        titleList.forEach((title) => {
+            var titleName = document.querySelector(title);
+            titleName.style.color = "black";
+        });
     };
 
     useEffect(() => {
@@ -265,7 +309,7 @@ function UserManage() {
 
         var keys = Object.keys(userData);
         keys.forEach(function (key) {
-            if (userData[key].status === "true") {
+            if (userData[key].status !== "Pending") {
                 userList.push(userData[key]);
             } else {
                 newUserList.push(userData[key]);
@@ -297,16 +341,29 @@ function UserManage() {
             }
         });
 
-        var genderTitle = document.querySelector(".gender-title");
-        if (genderTitle.style.color === "rgb(242, 82, 82)") {
+        var genderInput = document.querySelector(".gender-input");
+
+        if (genderInput.innerHTML !== (currentProfile.gender === "male" ? "Nam" : "Nữ")) {
+            document.querySelector(".gender-title").style.color = "rgb(242, 82, 82)";
             count += 1;
+        } else {
+            document.querySelector(".gender-title").style.color = "black";
         }
 
-        setUpdateData(count);
+        var statusInput = document.querySelector(".status-input");
+
+        if (
+            statusInput.innerHTML !== (currentProfile.gender === "Active" ? "Hoạt động" : "Bị khóa")
+        ) {
+            document.querySelector(".status-title").style.color = "rgb(242, 82, 82)";
+            count += 1;
+        } else {
+            document.querySelector(".status-title").style.color = "black";
+        }
 
         var saveButton = document.querySelector(".save-button");
 
-        if (updateData > 0) {
+        if (count > 0) {
             saveButton.classList.remove("btn-disabled");
         } else {
             saveButton.classList.add("btn-disabled");
@@ -332,23 +389,37 @@ function UserManage() {
             }
         });
 
-        var smallGenderTitle = document.querySelector(".small-gender-title");
-        if (smallGenderTitle.style.color === "rgb(242, 82, 82)") {
+        var smallGenderInput = document.querySelector(".small-gender-input");
+
+        if (smallGenderInput.innerHTML !== (currentProfile.gender === "male" ? "Nam" : "Nữ")) {
+            document.querySelector(".small-gender-title").style.color = "rgb(242, 82, 82)";
             smallCount += 1;
+        } else {
+            document.querySelector(".small-gender-title").style.color = "black";
         }
 
-        setSmallUpdateData(smallCount);
+        var smallStatusInput = document.querySelector(".small-status-input");
+
+        if (
+            smallStatusInput.innerHTML !==
+            (currentProfile.gender === "Active" ? "Hoạt động" : "Bị khóa")
+        ) {
+            document.querySelector(".small-status-title").style.color = "rgb(242, 82, 82)";
+            smallCount += 1;
+        } else {
+            document.querySelector(".small-status-title").style.color = "black";
+        }
 
         var smallSaveButton = document.querySelector(".small-save-button");
 
-        if (smallUpdateData > 0) {
+        if (smallCount > 0) {
             smallSaveButton.classList.remove("btn-disabled");
         } else {
             smallSaveButton.classList.add("btn-disabled");
         }
 
         return () => {};
-    }, [profileData, newProfileData, allProfileData, updateData, smallUpdateData, currentProfile]);
+    }, [profileData, newProfileData, allProfileData, currentProfile]);
 
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
@@ -369,13 +440,13 @@ function UserManage() {
                                             Tên tài khoản
                                         </th>
                                         <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base">
-                                            Họ và tên
-                                        </th>
-                                        <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base">
                                             Email
                                         </th>
                                         <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base">
                                             Vai trò
+                                        </th>
+                                        <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base">
+                                            Trạng thái
                                         </th>
                                         <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base text-center">
                                             Chỉnh sửa
@@ -388,14 +459,18 @@ function UserManage() {
                                             <tr
                                                 class="hover cursor-pointer"
                                                 onClick={() => {
-                                                    showUserProfile(index, true);
+                                                    showUserProfile(index);
                                                 }}
                                             >
                                                 <td>{index + 1}</td>
-                                                <td>{obj.userName}</td>
                                                 <td>{toTitleCase(obj.fullName)}</td>
                                                 <td>{obj.email}</td>
                                                 <td>{toTitleCase(obj.role)}</td>
+                                                <td>
+                                                    {obj.status === "Active"
+                                                        ? "Hoạt động"
+                                                        : "Bị khóa"}
+                                                </td>
                                                 <td class="text-center">
                                                     <button
                                                         class="btn btn-sm btn-square btn-info brightness-200 m-1"
@@ -481,7 +556,7 @@ function UserManage() {
                                             <tr
                                                 class="hover cursor-pointer"
                                                 onClick={() => {
-                                                    showUserProfile(index, false);
+                                                    showNewUserProfile(index);
                                                 }}
                                             >
                                                 <td>{index + 1}</td>
@@ -580,6 +655,63 @@ function UserManage() {
                             <div>Ngày sinh:&nbsp;</div>
                             <div>{currentProfile.dayOfBirth}</div>
                         </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Trạng thái:&nbsp;</div>
+                            <div>
+                                {currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa"}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card lg:card-side bg-base-200 shadow-2xl sm:w-[65%] xl:w-[55%] 2xl:w-[55%] absolute top-[20%] sm:left-[22%] xl:left-[24%] 2xl:left-[24%] z-20 new-user-profile layer-hidden">
+                    <figure class="w-1/2">
+                        <img class="object-cover" src={avatar} alt="Album" />
+                    </figure>
+                    <div class="card-body">
+                        <div class="flex flex-col items-center mb-5">
+                            <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-red-500">
+                                {currentProfile.userName}
+                            </div>
+                            <div class="badge badge-info">
+                                {currentProfile.role === undefined
+                                    ? ""
+                                    : toTitleCase(currentProfile.role)}
+                            </div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Họ và tên:&nbsp;</div>
+                            <div>
+                                {currentProfile.fullName === undefined
+                                    ? ""
+                                    : toTitleCase(currentProfile.fullName)}
+                            </div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Email:&nbsp;</div>
+                            <div>{currentProfile.email}</div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Điện thoại:&nbsp;</div>
+                            <div>{currentProfile.phoneNumber}</div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Giới tính:&nbsp;</div>
+                            <div>{currentProfile.gender === "male" ? "Nam" : "Nữ"}</div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Facebook:&nbsp;</div>
+                            <div>{currentProfile.accountFacebook}</div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Ngày sinh:&nbsp;</div>
+                            <div>{currentProfile.dayOfBirth}</div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div>Trạng thái:&nbsp;</div>
+                            <div>
+                                {currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa"}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card bg-base-200 shadow-2xl w-[25%] absolute top-[30%] left-[40%] z-20 remove-profile layer-hidden">
@@ -625,7 +757,12 @@ function UserManage() {
                     </div>
                 </div>
                 <div class="card lg:card-side bg-base-200 shadow-2xl sm:w-[65%] xl:w-[55%] 2xl:w-[55%] absolute top-[20%] sm:left-[22%] xl:left-[24%] 2xl:left-[24%] z-20 edit-profile layer-hidden">
-                    <button className="save-button btn btn-circle btn-success btn-disabled brightness-125 absolute sm:top-[83%] sm:left-[91%] xl:top-[84%%] xl:left-[92%] 2xl:top-[85%] 2xl:left-[93%]">
+                    <button
+                        className="save-button btn btn-circle btn-success btn-disabled brightness-125 absolute sm:top-[86%] sm:left-[93%] xl:top-[88%%] xl:left-[93%] 2xl:top-[88%] 2xl:left-[93%]"
+                        onClick={() => {
+                            confirmSave("large");
+                        }}
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="h-6 w-6"
@@ -700,89 +837,77 @@ function UserManage() {
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <div class="flex-none gender-title">Giới tính:&nbsp;</div>
-                            <div class="flex justify-around w-full">
-                                {currentProfile.gender === "male" ? (
-                                    <div class="flex justify-around w-full">
-                                        <label class="cursor-pointer">
-                                            <span class="label-text sm:text-base xl:text-lg 2xl:text-xl mr-3">
-                                                Nam
-                                            </span>
-                                            <input
-                                                type="radio"
-                                                name="radio-1"
-                                                class="gender-input-male-1 radio checked:bg-blue-500"
-                                                placeholder="male"
-                                                defaultChecked
-                                                onClick={() => {
-                                                    radioClick(
-                                                        ".gender-title",
-                                                        ".gender-input-male-1",
-                                                        "male"
-                                                    );
-                                                }}
-                                            />
-                                        </label>
-                                        <label class="cursor-pointer">
-                                            <span class="label-text sm:text-base xl:text-lg 2xl:text-xl mr-3">
-                                                Nữ
-                                            </span>
-                                            <input
-                                                type="radio"
-                                                name="radio-1"
-                                                placeholder="female"
-                                                class="gender-input-female-1 radio checked:bg-red-500"
-                                                onClick={() => {
-                                                    radioClick(
-                                                        ".gender-title",
-                                                        ".gender-input-female-1",
-                                                        "male"
-                                                    );
-                                                }}
-                                            />
-                                        </label>
-                                    </div>
-                                ) : (
-                                    <div class="flex justify-around w-full">
-                                        <label class="cursor-pointer">
-                                            <span class="label-text sm:text-base xl:text-lg 2xl:text-xl mr-3">
-                                                Nam
-                                            </span>
-                                            <input
-                                                type="radio"
-                                                name="radio-2"
-                                                class="gender-input-male-2 radio checked:bg-blue-500"
-                                                placeholder="male"
-                                                onClick={() => {
-                                                    radioClick(
-                                                        ".gender-title",
-                                                        ".gender-input-male-2",
-                                                        "female"
-                                                    );
-                                                }}
-                                            />
-                                        </label>
-                                        <label class="cursor-pointer">
-                                            <span class="label-text sm:text-base xl:text-lg 2xl:text-xl mr-3">
-                                                Nữ
-                                            </span>
-                                            <input
-                                                type="radio"
-                                                name="radio-2"
-                                                class="gender-input-female-2 radio checked:bg-red-500"
-                                                placeholder="female"
-                                                defaultChecked
-                                                onClick={() => {
-                                                    radioClick(
-                                                        ".gender-title",
-                                                        ".gender-input-female-2",
-                                                        "female"
-                                                    );
-                                                }}
-                                            />
-                                        </label>
-                                    </div>
-                                )}
+                            <div class="gender-title flex-none">Giới tính:&nbsp;</div>
+                            <div class="dropdown p-0 h-7">
+                                <div
+                                    tabindex="0"
+                                    role="button"
+                                    class="gender-input sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 h-7"
+                                >
+                                    {currentProfile.gender === "male" ? "Nam" : "Nữ"}
+                                </div>
+                                <ul
+                                    tabindex="0"
+                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                                >
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                document.querySelector(".gender-input").innerHTML =
+                                                    "Nam";
+                                            }}
+                                        >
+                                            Nam
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                document.querySelector(".gender-input").innerHTML =
+                                                    "Nữ";
+                                            }}
+                                        >
+                                            Nữ
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div class="status-title flex-none">Trạng thái:&nbsp;</div>
+                            <div class="dropdown p-0 h-7">
+                                <div
+                                    tabindex="0"
+                                    role="button"
+                                    class="status-input sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 h-7"
+                                >
+                                    {currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa"}
+                                </div>
+                                <ul
+                                    tabindex="0"
+                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                                >
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                document.querySelector(".status-input").innerHTML =
+                                                    "Hoạt động";
+                                            }}
+                                        >
+                                            Hoạt động
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                document.querySelector(".status-input").innerHTML =
+                                                    "Bị khóa";
+                                            }}
+                                        >
+                                            Bị khóa
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
@@ -1119,7 +1244,7 @@ function UserManage() {
                         </div>
                     </div>
                 </div>
-                <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] absolute top-[30%] sm:top-[25%] md:top-[15%] left-[20%] z-20 edit-profile layer-hidden">
+                <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] absolute top-[30%] sm:top-[25%] md:top-[25%] left-[20%] z-20 edit-profile layer-hidden">
                     <div class="card-body p-0">
                         <div class="flex w-full items-center">
                             <figure class="w-1/2">
@@ -1155,7 +1280,7 @@ function UserManage() {
                                             ? ""
                                             : toTitleCase(currentProfile.fullName)
                                     }
-                                    class="small-name-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black"
+                                    class="small-name-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-name-title", ".small-name-input");
                                     }}
@@ -1168,7 +1293,7 @@ function UserManage() {
                                 <input
                                     type="text"
                                     placeholder={currentProfile.email}
-                                    class="small-email-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black"
+                                    class="small-email-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-email-title", ".small-email-input");
                                     }}
@@ -1181,98 +1306,94 @@ function UserManage() {
                                 <input
                                     type="text"
                                     placeholder={currentProfile.phoneNumber}
-                                    class="small-phone-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black"
+                                    class="small-phone-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-phone-title", ".small-phone-input");
                                     }}
                                 />
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl">
-                                <div class="flex-none small-gender-title sm:text-lg md:text-xl">
+                                <div class="small-gender-title flex-none sm:text-lg md:text-xl">
                                     Giới tính:&nbsp;
                                 </div>
-                                <div class="flex justify-around w-full">
-                                    {currentProfile.gender === "male" ? (
-                                        <div class="flex justify-around w-full">
-                                            <label class="cursor-pointer">
-                                                <span class="label-text sm:text-lg md:text-xl mr-3">
-                                                    Nam
-                                                </span>
-                                                <input
-                                                    type="radio"
-                                                    name="radio-3"
-                                                    class="small-gender-input-male-1 radio checked:bg-blue-500"
-                                                    placeholder="male"
-                                                    defaultChecked
-                                                    onClick={() => {
-                                                        radioClick(
-                                                            ".small-gender-title",
-                                                            ".small-gender-input-male-1",
-                                                            "male"
-                                                        );
-                                                    }}
-                                                />
-                                            </label>
-                                            <label class="cursor-pointer">
-                                                <span class="label-text sm:text-lg md:text-xl mr-3">
-                                                    Nữ
-                                                </span>
-                                                <input
-                                                    type="radio"
-                                                    name="radio-3"
-                                                    placeholder="female"
-                                                    class="small-gender-input-female-1 radio checked:bg-red-500"
-                                                    onClick={() => {
-                                                        radioClick(
-                                                            ".small-gender-title",
-                                                            ".small-gender-input-female-1",
-                                                            "male"
-                                                        );
-                                                    }}
-                                                />
-                                            </label>
-                                        </div>
-                                    ) : (
-                                        <div class="flex justify-around w-full">
-                                            <label class="cursor-pointer">
-                                                <span class="label-text sm:text-lg md:text-xl mr-3">
-                                                    Nam
-                                                </span>
-                                                <input
-                                                    type="radio"
-                                                    name="radio-4"
-                                                    class="small-gender-input-male-2 radio checked:bg-blue-500"
-                                                    placeholder="male"
-                                                    onClick={() => {
-                                                        radioClick(
-                                                            ".small-gender-title",
-                                                            ".small-gender-input-male-2",
-                                                            "female"
-                                                        );
-                                                    }}
-                                                />
-                                            </label>
-                                            <label class="cursor-pointer">
-                                                <span class="label-text sm:text-lg md:text-xl mr-3">
-                                                    Nữ
-                                                </span>
-                                                <input
-                                                    type="radio"
-                                                    name="radio-4"
-                                                    class="small-gender-input-female-2 radio checked:bg-red-500"
-                                                    placeholder="female"
-                                                    defaultChecked
-                                                    onClick={() => {
-                                                        radioClick(
-                                                            ".small-gender-title",
-                                                            ".small-gender-input-female-2",
-                                                            "female"
-                                                        );
-                                                    }}
-                                                />
-                                            </label>
-                                        </div>
-                                    )}
+                                <div class="dropdown p-0 h-6">
+                                    <div
+                                        tabindex="0"
+                                        role="button"
+                                        class="small-gender-input text-base sm:text-lg md:text-xl font-normal p-0 h-6"
+                                    >
+                                        {currentProfile.gender === "male" ? "Nam" : "Nữ"}
+                                    </div>
+                                    <ul
+                                        tabindex="0"
+                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+                                    >
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    document.querySelector(
+                                                        ".small-gender-input"
+                                                    ).innerHTML = "Nam";
+                                                }}
+                                            >
+                                                Nam
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    document.querySelector(
+                                                        ".small-gender-input"
+                                                    ).innerHTML = "Nữ";
+                                                }}
+                                            >
+                                                Nữ
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="flex text-base sm:text-lg md:text-xl">
+                                <div class="small-status-title flex-none sm:text-lg md:text-xl">
+                                    Trạng thái:&nbsp;
+                                </div>
+                                <div class="dropdown p-0 h-6">
+                                    <div
+                                        tabindex="0"
+                                        role="button"
+                                        class="small-status-input text-base sm:text-lg md:text-xl font-normal p-0 h-6"
+                                    >
+                                        {currentProfile.status === "Active"
+                                            ? "Hoạt động"
+                                            : "Bị khóa"}
+                                    </div>
+                                    <ul
+                                        tabindex="0"
+                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+                                    >
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    document.querySelector(
+                                                        ".small-status-input"
+                                                    ).innerHTML = "Hoạt động";
+                                                }}
+                                            >
+                                                Hoạt động
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    document.querySelector(
+                                                        ".small-status-input"
+                                                    ).innerHTML = "Bị khóa";
+                                                }}
+                                            >
+                                                Bị khóa
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl">
@@ -1295,14 +1416,19 @@ function UserManage() {
                                 <input
                                     type="text"
                                     placeholder={currentProfile.dayOfBirth}
-                                    class="small-birth-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black"
+                                    class="small-birth-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-birth-title", ".small-birth-input");
                                     }}
                                 />
                             </div>
                         </div>
-                        <button className="small-save-button btn btn-success btn-disabled brightness-125">
+                        <button
+                            className="small-save-button btn btn-success btn-disabled brightness-125"
+                            onClick={() => {
+                                confirmSave("small");
+                            }}
+                        >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 class="h-6 w-6"

@@ -38,7 +38,7 @@ function Homepage({ setSelected }) {
             <div class="lg:block hidden">
                 <div class="flex w-full p-5">
                     <div class="flex flex-col mr-2 items-center w-2/3">
-                        <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-info mb-5">
+                        <div class="font-bold text-lg sm:text-xl text-info mb-5">
                             THÔNG BÁO NGÀY HÔM NAY
                         </div>
                         <div class="stats shadow mb-5 w-full">
@@ -195,7 +195,7 @@ function Homepage({ setSelected }) {
             <div class="lg:hidden">
                 <div class="flex flex-col p-5">
                     <div class="flex flex-col items-center w-full">
-                        <div class="font-bold text-xl sm:text-2xl text-info mb-5">
+                        <div class="font-bold text-lg sm:text-xl text-info mb-5">
                             THÔNG BÁO NGÀY HÔM NAY
                         </div>
                         <div class="stats shadow mb-5 w-full text-sm">

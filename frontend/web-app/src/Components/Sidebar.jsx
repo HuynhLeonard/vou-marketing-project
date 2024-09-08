@@ -230,7 +230,7 @@ function Sidebar({ setSelected }) {
                                         setSelected(3);
                                     }}
                                 >
-                                    QUẢN LÝ VOUCHER
+                                    VOUCHER VÀ EVENT
                                 </a>
                             </li>
                             <li class="hover:text-black">
@@ -292,7 +292,7 @@ function Sidebar({ setSelected }) {
                                 setSelected(3);
                             }}
                         >
-                            QUẢN LÝ VOUCHER
+                            VOUCHER VÀ EVENT
                         </a>
                     </li>
                     <li class="hover:text-black">

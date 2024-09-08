@@ -1,0 +1,27 @@
+[{
+    "code": "voucher1",
+    "qrCode": "123",
+    "voucherName": "Voucher 1",
+    "voucherPrice": 150000,
+    "imageUrl": "123",
+    "expirationDate": "30/09/2024",
+    "description": "Voucher chỉ áp dụng cho một số mặt hàng mẹ và bé"
+}, 
+{
+    "code": "voucher2",
+    "qrCode": "456",
+    "voucherName": "Voucher 2",
+    "voucherPrice": 750000,
+    "imageUrl": "123",
+    "expirationDate": "30/09/2024",
+    "description": "Voucher chỉ áp dụng cho một số mặt hàng điện tử"
+}, 
+{
+    "code": "voucher3",
+    "qrCode": "789",
+    "voucherName": "Voucher 3",
+    "voucherPrice": 350000,
+    "imageUrl": "123",
+    "expirationDate": "30/09/2024",
+    "description": "Voucher chỉ áp dụng cho tất cả mặt hàng"
+}]

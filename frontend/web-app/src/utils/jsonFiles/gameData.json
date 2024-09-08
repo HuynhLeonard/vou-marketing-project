@@ -1,0 +1,15 @@
+[{
+    "id": "123456",
+    "name": "Quiz Game", 
+    "image": "", "type": "Best game", 
+    "itemSwap": true, 
+    "instruction": "Để chơi trò chơi câu đố, người dẫn sẽ đưa ra các câu hỏi đố vui, câu hỏi logic hoặc hình ảnh, và người chơi phải trả lời trong thời gian quy định. Mỗi câu trả lời đúng sẽ được tính điểm, và người có nhiều điểm nhất sẽ chiến thắng. Hãy tập trung vào chi tiết của câu đố, suy luận kỹ lưỡng và đừng phức tạp hóa vấn đề vì câu trả lời thường đơn giản và bất ngờ."
+}, 
+{
+    "id": "123123",
+    "name": "Shake Game", 
+    "image": "", 
+    "type": "Best game", 
+    "itemSwap": true, 
+    "instruction": "Lắc Xì là trò chơi may mắn, trong đó người chơi lắc điện thoại để nhận các vật phẩm như thẻ, bao lì xì hoặc quà tặng. Mỗi lần lắc sẽ tiêu tốn lượt chơi, và bạn có thể nhận thêm lượt qua các nhiệm vụ hằng ngày hoặc chia sẻ với bạn bè. Mục tiêu là thu thập đủ bộ thẻ để đổi các phần thưởng hấp dẫn hoặc săn cơ hội trúng quà lớn. Hãy tận dụng các sự kiện và chơi mỗi ngày để tăng cơ hội trúng thưởng!"
+}]
