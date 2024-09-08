@@ -13,8 +13,8 @@
         <module name="api-gateway" />
         <module name="mc-service" />
         <module name="user-service" />
-        <module name="turn-service" />
         <module name="gift-service" />
+        <module name="turn-service" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>

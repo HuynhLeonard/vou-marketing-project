@@ -14,6 +14,9 @@ import voucherIcon from "../utils/icons/voucher.png";
 import newIcon from "../utils/icons/new.png";
 import profitIcon from "../utils/icons/profit.png";
 
+import api from "../service/api";
+import axios from "axios";
+
 function Homepage({ setSelected }) {
     const subPageTransition = (selectedIndex) => {
         setSelected(selectedIndex);
@@ -29,7 +32,29 @@ function Homepage({ setSelected }) {
         });
     };
 
+    const getApiData = async () => {
+        // prettier-ignore
+        var headers = {
+            "Authorization":
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0UGxheWVyIiwiaWF0IjoxNzI1ODI4MDU1LCJleHAiOjE3MjU4NjQwNTV9.IrNeOHtygxvfE1raxDWeZULSjq0VKVTx3L_LyjA2whI",
+            "Content-Type": "application/json",
+        };
+
+        const { data } = await api.post(
+            "auth/login",
+            {
+                // prettier-ignore
+                "username": "testPlayer",
+                // prettier-ignore
+                "password": "Thienhuu@2003",
+            },
+            headers
+        );
+        console.log(data);
+    };
+
     useEffect(() => {
+        getApiData();
         subPageTransition(0);
     }, []);
 
@@ -38,7 +63,7 @@ function Homepage({ setSelected }) {
             <div class="lg:block hidden">
                 <div class="flex w-full p-5">
                     <div class="flex flex-col mr-2 items-center w-2/3">
-                        <div class="font-bold text-lg sm:text-xl text-info mb-5">
+                        <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-info mb-5">
                             THÔNG BÁO NGÀY HÔM NAY
                         </div>
                         <div class="stats shadow mb-5 w-full">
