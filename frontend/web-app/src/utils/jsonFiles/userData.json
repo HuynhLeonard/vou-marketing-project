@@ -1,0 +1,63 @@
+[{
+    "userName": "YuLockii",
+    "fullName": "võ tấn lộc",
+    "accountId": "123456",
+    "email": "votanloc1106@gmai.com",
+    "phoneNumber": "0123456789",
+    "role": "customer",
+    "status": "Blocked",
+    "gender": "male",
+    "accountFacebook": "",
+    "dayOfBirth": "11/06/2003",
+    "avatar": ""
+},
+{
+    "userName": "Leonarda",
+    "fullName": "Huỳnh Thiện Hữu",
+    "accountId": "123123",
+    "email": "aaa@gmail.com",
+    "phoneNumber": "0123456789",
+    "role": "admin",
+    "status": "Active",
+    "gender": "female",
+    "accountFacebook": "",
+    "dayOfBirth": "29/07/2003",
+    "avatar": ""
+},{
+    "userName": "Tuấn pro",
+    "fullName": "lê Tự Anh Tuấn",
+    "accountId": "123321",
+    "email": "bbb1106@gmai.com",
+    "phoneNumber": "0123456789",
+    "role": "brand",
+    "status": "Blocked",
+    "gender": "male",
+    "accountFacebook": "",
+    "dayOfBirth": "03/02/2003",
+    "avatar": ""
+},
+{
+    "userName": "Khôi lừa đảo",
+    "fullName": "Nguyễn Vũ Minh khôi",
+    "accountId": "111111",
+    "email": "ccc@gmail.com",
+    "phoneNumber": "0123456789",
+    "role": "customer",
+    "status": "Pending",
+    "gender": "male",
+    "accountFacebook": "",
+    "dayOfBirth": "20/04/2003",
+    "avatar": ""
+},{
+    "userName": "minh đùi",
+    "fullName": "Bùi Minh Đức",
+    "accountId": "2222222",
+    "email": "ddd@gmail.com",
+    "phoneNumber": "0123456789",
+    "role": "customer",
+    "status": "Pending",
+    "gender": "female",
+    "accountFacebook": "",
+    "dayOfBirth": "29/12/2003",
+    "avatar": ""
+}]
