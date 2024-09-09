@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b5596df-943c-4292-9064-9a77a11aa618" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/api_gateway/ApiGatewayConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/api_gateway/ApiGatewayConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/web-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/web-app/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +48,7 @@
     &quot;Spring Boot.GameServiceApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.GiftServiceApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.McServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.StatisticServiceApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.TurnserviceApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;backend-v2&quot;,
@@ -71,7 +72,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
+  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="api_gateway.ApiGatewayApplication" />
@@ -117,6 +118,13 @@
     <configuration name="McServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="mc-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.voufinal.mc_service.McServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StatisticServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="statistic-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.voufinal.statistic_service.StatisticServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
