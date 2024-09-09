@@ -33,17 +33,6 @@ function Homepage() {
         });
     };
 
-    const handleLogin = async () => {
-
-        await api.post("http://localhost:8081/api/v1/auth/login", {
-            username: "testplayer",
-            password: "Thienhuu@2003"
-        }).then(data => {
-            console.log(data);
-        })
-    }
-
-
     useEffect(() => {
         subPageTransition(0);
     }, []);
