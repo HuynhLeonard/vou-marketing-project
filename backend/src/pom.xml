@@ -18,6 +18,7 @@
         <module>game-service</module>
         <module>gift-service</module>
         <module>mc-service</module>
+        <module>statistic-service</module>
     </modules>
 
 
