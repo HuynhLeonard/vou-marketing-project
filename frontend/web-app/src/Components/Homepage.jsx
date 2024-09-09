@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from "flowbite-react";
-import { useMutation } from 'react-query';
+import { useMutation } from "react-query";
 import userManageImage from "../utils/images/userManage.png";
 import gameManageImage from "../utils/images/gameManage.png";
 import voucherManageImage from "../utils/images/voucherManage.png";
@@ -17,26 +17,9 @@ import profitIcon from "../utils/icons/profit.png";
 import api from "../service/api";
 import axios from "axios";
 
+import { Link } from "react-router-dom";
+
 function Homepage() {
-    const [selectedIndex, setSelected] = useState(0);
-    const subPageTransition = (selectedIndex) => {
-        //setSelected(selectedIndex);
-
-        const menuItems = document.querySelectorAll(".menu-item");
-
-        menuItems.forEach((item, index) => {
-            if (index === selectedIndex || index === selectedIndex + 5) {
-                item.classList.add("selected");
-            } else {
-                item.classList.remove("selected");
-            }
-        });
-    };
-
-    useEffect(() => {
-        subPageTransition(0);
-    }, []);
-
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
             <div class="lg:block hidden">
@@ -103,14 +86,12 @@ function Homepage() {
                                     </div>
                                 </div>
                                 <div class="stat-actions">
-                                    <button
+                                    <Link
+                                        to="/admin/userManagement"
                                         class="btn bg-info text-white w-full"
-                                        onClick={() => {
-                                            subPageTransition(1);
-                                        }}
                                     >
                                         Duyệt ngay
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
 
@@ -125,14 +106,12 @@ function Homepage() {
                                     </div>
                                 </div>
                                 <div class="stat-actions">
-                                    <button
+                                    <Link
+                                        to="/admin/statistic"
                                         class="btn bg-info text-white w-full"
-                                        onClick={() => {
-                                            subPageTransition(4);
-                                        }}
                                     >
                                         Xem thống kê
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -148,50 +127,34 @@ function Homepage() {
                             rightControl=" "
                             indicators="false"
                         >
-                            <button
-                                onClick={() => {
-                                    subPageTransition(1);
-                                }}
-                            >
+                            <Link to="/admin/userManagement">
                                 <img
                                     src={userManageImage}
                                     alt="User Management"
                                     className="bg-info-content"
                                 />
-                            </button>
-                            <button
-                                onClick={() => {
-                                    subPageTransition(2);
-                                }}
-                            >
+                            </Link>
+                            <Link to="/admin/gameManagement">
                                 <img
                                     src={gameManageImage}
                                     alt="Game Management"
                                     className="bg-red-400"
                                 />
-                            </button>
-                            <button
-                                onClick={() => {
-                                    subPageTransition(3);
-                                }}
-                            >
+                            </Link>
+                            <Link to="/admin/eventManagement">
                                 <img
                                     src={voucherManageImage}
                                     alt="Voucher Management"
                                     className="bg-info-content"
                                 />
-                            </button>
-                            <button
-                                onClick={() => {
-                                    subPageTransition(4);
-                                }}
-                            >
+                            </Link>
+                            <Link to="/admin/statistic">
                                 <img
                                     src={statisticManageImage}
                                     alt="Statistic Management"
                                     className="bg-red-400"
                                 />
-                            </button>
+                            </Link>
                         </Carousel>
                     </div>
                 </div>
@@ -240,31 +203,26 @@ function Homepage() {
                                     <div class="stat-value text-red-400">5.6K</div>
                                 </div>
                                 <div class="stat-actions">
-                                    <button
+                                    <Link
+                                        to="/admin/userManagement"
                                         class="btn btn-sm bg-info text-white w-full"
-                                        onClick={() => {
-                                            subPageTransition(1);
-                                        }}
                                     >
                                         Duyệt ngay
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
-
                             <div class="stat">
                                 <div>
                                     <div class="stat-title text-black">Tổng doanh thu</div>
                                     <div class="stat-value text-red-400">$15.400K</div>
                                 </div>
                                 <div class="stat-actions">
-                                    <button
+                                    <Link
+                                        to="/admin/statistic"
                                         class="btn btn-sm bg-info text-white w-full"
-                                        onClick={() => {
-                                            subPageTransition(4);
-                                        }}
                                     >
                                         Xem thống kê
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -280,50 +238,34 @@ function Homepage() {
                             rightControl=" "
                             indicators={false}
                         >
-                            <button
-                                onClick={() => {
-                                    subPageTransition(1);
-                                }}
-                            >
+                            <Link to="/admin/userManagement">
                                 <img
                                     src={userManageImage}
                                     alt="User Management"
                                     className="bg-info-content"
                                 />
-                            </button>
-                            <button
-                                onClick={() => {
-                                    subPageTransition(2);
-                                }}
-                            >
+                            </Link>
+                            <Link to="/admin/gameManagement">
                                 <img
                                     src={gameManageImage}
                                     alt="Game Management"
                                     className="bg-red-400"
                                 />
-                            </button>
-                            <button
-                                onClick={() => {
-                                    subPageTransition(3);
-                                }}
-                            >
+                            </Link>
+                            <Link to="/admin/eventManagement">
                                 <img
                                     src={voucherManageImage}
                                     alt="Voucher Management"
                                     className="bg-info-content"
                                 />
-                            </button>
-                            <button
-                                onClick={() => {
-                                    subPageTransition(4);
-                                }}
-                            >
+                            </Link>
+                            <Link to="/admin/statistic">
                                 <img
                                     src={statisticManageImage}
                                     alt="Statistic Management"
-                                    className="bg-red-400 h-full"
+                                    className="bg-red-400"
                                 />
-                            </button>
+                            </Link>
                         </Carousel>
                     </div>
                 </div>

@@ -1,41 +1,43 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { React, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../Styles/Sidebar.css";
 
-function Sidebar({ setSelected }) {
-    const [pageName, setPageName] = useState("TRANG CHỦ");
-
-    const pageTransition = () => {
-        const selectedItems = document.querySelector(".selected");
-        setPageName(selectedItems.innerHTML);
-    };
-
+function Sidebar({ selectedIndexPage }) {
     useEffect(() => {
-        const menuItems = document.querySelectorAll(".menu-item");
-
-        menuItems.forEach((item) => {
-            item.addEventListener("click", () => {
-                document.querySelector(".selected")?.classList.remove("selected");
-                item.classList.add("selected");
-            });
-        });
-
-        return () => {};
-    }, []);
-
-    useEffect(() => {
-        const menuItems = document.querySelectorAll(".menu-item");
-
-        menuItems.forEach((item) => {
-            if (item.innerHTML === pageName) {
-                item.classList.add("selected");
-            } else {
-                item.classList.remove("selected");
-            }
-        });
-
-        return () => {};
-    }, [pageName]);
+        switch (selectedIndexPage) {
+            case 0:
+                document.querySelectorAll(".homepage-title").forEach((title) => {
+                    title.classList.add("selected");
+                });
+                break;
+            case 1:
+                document.querySelectorAll(".userManagement-title").forEach((title) => {
+                    title.classList.add("selected");
+                });
+                break;
+            case 2:
+                document.querySelectorAll(".gameManagement-title").forEach((title) => {
+                    title.classList.add("selected");
+                });
+                break;
+            case 3:
+                document.querySelectorAll(".voucherAndEvent-title").forEach((title) => {
+                    title.classList.add("selected");
+                });
+                break;
+            case 4:
+                document.querySelectorAll(".statistic-title").forEach((title) => {
+                    title.classList.add("selected");
+                });
+                break;
+            default:
+                document.querySelectorAll(".homepage-title").forEach((title) => {
+                    title.classList.add("selected");
+                });
+                break;
+        }
+    }, [selectedIndexPage]);
 
     return (
         <div class="drawer font-Kanit z-50" data-theme="retro">
@@ -190,59 +192,29 @@ function Sidebar({ setSelected }) {
                     <div class="hidden flex-none lg:block">
                         <ul class="menu menu-horizontal text-lg text-red-500">
                             <li class="hover:text-black">
-                                <a
-                                    class="menu-item selected"
-                                    onClick={() => {
-                                        pageTransition();
-                                        setSelected(0);
-                                    }}
-                                >
+                                <Link to="/admin/" class="homepage-title">
                                     TRANG CHỦ
-                                </a>
+                                </Link>
                             </li>
                             <li class="hover:text-black">
-                                <a
-                                    class="menu-item"
-                                    onClick={() => {
-                                        pageTransition();
-                                        setSelected(1);
-                                    }}
-                                >
+                                <Link to="/admin/userManagement" class="userManagement-title">
                                     QUẢN LÝ NGƯỜI DÙNG
-                                </a>
+                                </Link>
                             </li>
                             <li class="hover:text-black">
-                                <a
-                                    class="menu-item"
-                                    onClick={() => {
-                                        pageTransition();
-                                        setSelected(2);
-                                    }}
-                                >
+                                <Link to="/admin/gameManagement" class="gameManagement-title">
                                     QUẢN LÝ TRÒ CHƠI
-                                </a>
+                                </Link>
                             </li>
                             <li class="hover:text-black">
-                                <a
-                                    class="menu-item"
-                                    onClick={() => {
-                                        pageTransition();
-                                        setSelected(3);
-                                    }}
-                                >
+                                <Link to="/admin/eventManagement" class="voucherAndEvent-title">
                                     VOUCHER VÀ EVENT
-                                </a>
+                                </Link>
                             </li>
                             <li class="hover:text-black">
-                                <a
-                                    class="menu-item"
-                                    onClick={() => {
-                                        pageTransition();
-                                        setSelected(4);
-                                    }}
-                                >
+                                <Link to="/admin/statistic" class="statistic-title">
                                     THỐNG KÊ
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -252,59 +224,29 @@ function Sidebar({ setSelected }) {
                 <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
                 <ul class="menu bg-base-100 min-h-full w-1/2 p-4 text-lg text-red-500">
                     <li class="hover:text-black">
-                        <a
-                            class="menu-item"
-                            onClick={() => {
-                                pageTransition();
-                                setSelected(0);
-                            }}
-                        >
+                        <Link to="/admin/" class="homepage-title">
                             TRANG CHỦ
-                        </a>
+                        </Link>
                     </li>
                     <li class="hover:text-black">
-                        <a
-                            class="menu-item"
-                            onClick={() => {
-                                pageTransition();
-                                setSelected(1);
-                            }}
-                        >
+                        <Link to="/admin/userManagement" class="userManagement-title">
                             QUẢN LÝ NGƯỜI DÙNG
-                        </a>
+                        </Link>
                     </li>
                     <li class="hover:text-black">
-                        <a
-                            class="menu-item"
-                            onClick={() => {
-                                pageTransition();
-                                setSelected(2);
-                            }}
-                        >
+                        <Link to="/admin/gameManagement" class="gameManagement-title">
                             QUẢN LÝ TRÒ CHƠI
-                        </a>
+                        </Link>
                     </li>
                     <li class="hover:text-black">
-                        <a
-                            class="menu-item"
-                            onClick={() => {
-                                pageTransition();
-                                setSelected(3);
-                            }}
-                        >
+                        <Link to="/admin/eventManagement" class="voucherAndEvent-title">
                             VOUCHER VÀ EVENT
-                        </a>
+                        </Link>
                     </li>
                     <li class="hover:text-black">
-                        <a
-                            class="menu-item"
-                            onClick={() => {
-                                pageTransition();
-                                setSelected(4);
-                            }}
-                        >
+                        <Link to="/admin/statistic" class="statistic-title">
                             THỐNG KÊ
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
