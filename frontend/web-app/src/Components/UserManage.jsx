@@ -117,6 +117,20 @@ function UserManage() {
             var inputValue = document.querySelector(input);
             inputValue.value = "";
         });
+
+        var genderInput = document.querySelector(".gender-input");
+        genderInput.innerHTML = currentProfile.gender === "male" ? "Nam" : "Nữ";
+        var statusInput = document.querySelector(".status-input");
+        statusInput.innerHTML = currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa";
+        var roleInput = document.querySelector(".role-input");
+        roleInput.innerHTML = toTitleCase(currentProfile.role);
+
+        var smallGenderInput = document.querySelector(".small-gender-input");
+        smallGenderInput.innerHTML = currentProfile.gender === "male" ? "Nam" : "Nữ";
+        var smallStatusInput = document.querySelector(".small-status-input");
+        smallStatusInput.innerHTML = currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa";
+        var smallRoleInput = document.querySelector(".small-role-input");
+        smallRoleInput.innerHTML = toTitleCase(currentProfile.role);
     };
 
     const removeUserProfile = (profileIndex, status) => {
@@ -203,12 +217,14 @@ function UserManage() {
         });
 
         const titleList = [
+            ".username-title",
             ".name-title",
             ".email-title",
             ".phone-title",
             ".gender-title",
             ".facebook-title",
             ".birth-title",
+            ".small-username-title",
             ".small-name-title",
             ".small-email-title",
             ".small-phone-title",
@@ -246,10 +262,15 @@ function UserManage() {
         if (buttonSize === "large") {
             const inputList = [
                 ".username-input",
+                ".role-input",
                 ".name-input",
                 ".email-input",
+                ".phone-input",
+                ".gender-input",
+                ".status-input",
                 ".facebook-input",
                 ".birth-input",
+                ".ava-input",
             ];
 
             inputList.forEach((input) => {
@@ -263,12 +284,15 @@ function UserManage() {
         } else {
             const inputList = [
                 ".small-username-input",
+                ".small-role-input",
                 ".small-name-input",
                 ".small-email-input",
                 ".small-phone-input",
                 ".small-gender-input",
+                ".small-status-input",
                 ".small-facebook-input",
                 ".small-birth-input",
+                ".small-ava-input",
             ];
 
             inputList.forEach((input) => {
@@ -282,12 +306,16 @@ function UserManage() {
         }
 
         const titleList = [
+            ".username-title",
+            ".role-title",
             ".name-title",
             ".email-title",
             ".phone-title",
             ".gender-title",
             ".facebook-title",
             ".birth-title",
+            ".small-username-title",
+            ".small-role-title",
             ".small-name-title",
             ".small-email-title",
             ".small-phone-title",
@@ -301,6 +329,29 @@ function UserManage() {
             titleName.style.color = "black";
         });
     };
+
+    function loadXHR(url) {
+        return new Promise(function (resolve, reject) {
+            try {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url);
+                xhr.responseType = "blob";
+                xhr.onerror = function () {
+                    reject("Network error.");
+                };
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        resolve(xhr.response);
+                    } else {
+                        reject("Loading error:" + xhr.statusText);
+                    }
+                };
+                xhr.send();
+            } catch (err) {
+                reject(err.message);
+            }
+        });
+    }
 
     useEffect(() => {
         var allUserList = [];
@@ -328,6 +379,7 @@ function UserManage() {
             ".phone-input",
             ".facebook-input",
             ".birth-input",
+            ".ava-input",
         ];
 
         var count = 0;
@@ -337,6 +389,24 @@ function UserManage() {
             if (inputValue.value !== "") {
                 if (inputValue.placeholder !== inputValue.value) {
                     count += 1;
+                }
+                if (input === ".ava-input") {
+                    if (inputValue.value !== currentProfile.avatar) {
+                        var fReader = new FileReader();
+                        loadXHR("https://cdn-icons-png.flaticon.com/512/4383/4383956.png").then(
+                            function (blob) {
+                                fReader.readAsDataURL(blob);
+                                fReader.onloadend = function (event) {
+                                    if (
+                                        document.querySelector(".ava-image").src !==
+                                        event.target.result
+                                    ) {
+                                        count += 1;
+                                    }
+                                };
+                            }
+                        );
+                    }
                 }
             }
         });
@@ -353,12 +423,21 @@ function UserManage() {
         var statusInput = document.querySelector(".status-input");
 
         if (
-            statusInput.innerHTML !== (currentProfile.gender === "Active" ? "Hoạt động" : "Bị khóa")
+            statusInput.innerHTML !== (currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa")
         ) {
             document.querySelector(".status-title").style.color = "rgb(242, 82, 82)";
             count += 1;
         } else {
             document.querySelector(".status-title").style.color = "black";
+        }
+
+        var roleInput = document.querySelector(".role-input");
+
+        if (roleInput.innerHTML.toLowerCase() !== currentProfile.role) {
+            document.querySelector(".role-title").style.color = "rgb(242, 82, 82)";
+            count += 1;
+        } else {
+            document.querySelector(".role-title").style.color = "black";
         }
 
         var saveButton = document.querySelector(".save-button");
@@ -376,6 +455,7 @@ function UserManage() {
             ".small-phone-input",
             ".small-facebook-input",
             ".small-birth-input",
+            ".small-ava-input",
         ];
 
         var smallCount = 0;
@@ -385,6 +465,24 @@ function UserManage() {
             if (inputValue.value !== "") {
                 if (inputValue.placeholder !== inputValue.value) {
                     smallCount += 1;
+                }
+                if (input === ".small-ava-input") {
+                    if (inputValue.value !== currentProfile.avatar) {
+                        var fReader = new FileReader();
+                        loadXHR("https://cdn-icons-png.flaticon.com/512/4383/4383956.png").then(
+                            function (blob) {
+                                fReader.readAsDataURL(blob);
+                                fReader.onloadend = function (event) {
+                                    if (
+                                        document.querySelector(".small-ava-image").src !==
+                                        event.target.result
+                                    ) {
+                                        count += 1;
+                                    }
+                                };
+                            }
+                        );
+                    }
                 }
             }
         });
@@ -410,12 +508,39 @@ function UserManage() {
             document.querySelector(".small-status-title").style.color = "black";
         }
 
+        var smallRoleInput = document.querySelector(".small-role-input");
+
+        if (smallRoleInput.innerHTML.toLowerCase() !== currentProfile.role) {
+            document.querySelector(".small-role-title").style.color = "rgb(242, 82, 82)";
+            smallCount += 1;
+        } else {
+            document.querySelector(".small-role-title").style.color = "black";
+        }
+
         var smallSaveButton = document.querySelector(".small-save-button");
 
         if (smallCount > 0) {
             smallSaveButton.classList.remove("btn-disabled");
         } else {
             smallSaveButton.classList.add("btn-disabled");
+        }
+
+        if (document.querySelector(".ava-input").value !== "") {
+            var input = document.querySelector(".ava-input");
+            var fReader = new FileReader();
+            fReader.readAsDataURL(input.files[0]);
+            fReader.onloadend = function (event) {
+                document.querySelector(".ava-image").src = event.target.result;
+            };
+        }
+
+        if (document.querySelector(".small-ava-input").value !== "") {
+            var smallInput = document.querySelector(".small-ava-input");
+            var smallfReader = new FileReader();
+            smallfReader.readAsDataURL(smallInput.files[0]);
+            smallfReader.onloadend = function (event) {
+                document.querySelector(".small-ava-image").src = event.target.result;
+            };
         }
 
         return () => {};
@@ -758,7 +883,7 @@ function UserManage() {
                 </div>
                 <div class="card lg:card-side bg-base-200 shadow-2xl sm:w-[65%] xl:w-[55%] 2xl:w-[55%] absolute top-[20%] sm:left-[22%] xl:left-[24%] 2xl:left-[24%] z-20 edit-profile layer-hidden">
                     <button
-                        className="save-button btn btn-circle btn-success btn-disabled brightness-125 absolute sm:top-[86%] sm:left-[93%] xl:top-[88%%] xl:left-[93%] 2xl:top-[88%] 2xl:left-[93%]"
+                        className="save-button btn btn-circle btn-success btn-disabled brightness-125 absolute sm:top-[86%] sm:left-[93%] xl:top-[88%%] xl:left-[93%] 2xl:top-[86%] 2xl:left-[93%]"
                         onClick={() => {
                             confirmSave("large");
                         }}
@@ -779,28 +904,79 @@ function UserManage() {
                         </svg>
                     </button>
                     <figure class="w-1/2">
-                        <img class="object-cover" src={avatar} alt="Album" />
+                        <img
+                            class="object-cover ava-image cursor-pointer"
+                            alt="Album"
+                            src={avatar}
+                            onClick={() => {
+                                document.querySelector(".ava-input").click();
+                            }}
+                        />
+                        <input type="file" class="ava-input hidden" accept=".jpg,.jpeg,.png" />
                     </figure>
                     <div class="card-body">
-                        <div class="flex flex-col items-center mb-5">
-                            <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-red-500">
-                                <input
-                                    type="text"
-                                    placeholder={currentProfile.userName}
-                                    class="username-input input input-ghost text-center font-bold sm:text-lg xl:text-xl 2xl:text-2xl placeholder-red-500"
-                                    onKeyUp={() => {
-                                        inputFill("", ".username-input");
-                                    }}
-                                />
-                            </div>
-                            <div class="badge badge-info">
-                                {currentProfile.role === undefined
-                                    ? ""
-                                    : toTitleCase(currentProfile.role)}
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div class="username-title flex-none">Tên tài khoản:&nbsp;</div>
+                            <input
+                                type="text"
+                                placeholder={currentProfile.userName}
+                                class="username-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
+                                onKeyUp={() => {
+                                    inputFill(".username-title", ".username-input");
+                                }}
+                            />
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div class="role-title flex-none">Vai trò:&nbsp;</div>
+                            <div class="dropdown p-0 h-7 w-full">
+                                <div
+                                    tabindex="0"
+                                    role="button"
+                                    class="role-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
+                                >
+                                    {currentProfile.role === undefined
+                                        ? ""
+                                        : toTitleCase(currentProfile.role)}
+                                </div>
+                                <ul
+                                    tabindex="0"
+                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
+                                >
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                document.querySelector(".role-input").innerHTML =
+                                                    "Brand";
+                                            }}
+                                        >
+                                            Brand
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                document.querySelector(".role-input").innerHTML =
+                                                    "Customer";
+                                            }}
+                                        >
+                                            Customer
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={() => {
+                                                document.querySelector(".role-input").innerHTML =
+                                                    "Admin";
+                                            }}
+                                        >
+                                            Admin
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <div class="name-title">Họ và tên:&nbsp;</div>
+                            <div class="name-title flex-none">Họ và tên:&nbsp;</div>
                             <input
                                 type="text"
                                 placeholder={
@@ -808,29 +984,29 @@ function UserManage() {
                                         ? ""
                                         : toTitleCase(currentProfile.fullName)
                                 }
-                                class="name-input input input-ghost sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap p-0 h-7 placeholder-black"
+                                class="name-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                                 onKeyUp={() => {
                                     inputFill(".name-title", ".name-input");
                                 }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <div class="email-title">Email:&nbsp;</div>
+                            <div class="email-title flex-none">Email:&nbsp;</div>
                             <input
                                 type="text"
                                 placeholder={currentProfile.email}
-                                class="email-input input input-ghost sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap p-0 h-7 placeholder-black"
+                                class="email-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                                 onKeyUp={() => {
                                     inputFill(".email-title", ".email-input");
                                 }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <div class="phone-title">Điện thoại:&nbsp;</div>
+                            <div class="phone-title flex-none">Điện thoại:&nbsp;</div>
                             <input
                                 type="text"
                                 placeholder={currentProfile.phoneNumber}
-                                class="phone-input input input-ghost sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap p-0 h-7 placeholder-black"
+                                class="phone-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                                 onKeyUp={() => {
                                     inputFill(".phone-title", ".phone-input");
                                 }}
@@ -838,17 +1014,17 @@ function UserManage() {
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="gender-title flex-none">Giới tính:&nbsp;</div>
-                            <div class="dropdown p-0 h-7">
+                            <div class="dropdown p-0 h-7 w-full">
                                 <div
                                     tabindex="0"
                                     role="button"
-                                    class="gender-input sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 h-7"
+                                    class="gender-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
                                 >
                                     {currentProfile.gender === "male" ? "Nam" : "Nữ"}
                                 </div>
                                 <ul
                                     tabindex="0"
-                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
                                 >
                                     <li>
                                         <a
@@ -875,17 +1051,17 @@ function UserManage() {
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="status-title flex-none">Trạng thái:&nbsp;</div>
-                            <div class="dropdown p-0 h-7">
+                            <div class="dropdown p-0 h-7 w-full">
                                 <div
                                     tabindex="0"
                                     role="button"
-                                    class="status-input sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 h-7"
+                                    class="status-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
                                 >
                                     {currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa"}
                                 </div>
                                 <ul
                                     tabindex="0"
-                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
                                 >
                                     <li>
                                         <a
@@ -915,18 +1091,18 @@ function UserManage() {
                             <input
                                 type="text"
                                 placeholder={currentProfile.accountFacebook}
-                                class="facebook-input input input-ghost w-full sm:text-base xl:text-lg 2xl:text-xl p-0 h-7 placeholder-black"
+                                class="facebook-input input w-full sm:text-base xl:text-lg 2xl:text-xl p-0 h-7 placeholder-black"
                                 onKeyUp={() => {
                                     inputFill(".facebook-title", ".facebook-input");
                                 }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <div class="birth-title">Ngày sinh:&nbsp;</div>
+                            <div class="birth-title flex-none">Ngày sinh:&nbsp;</div>
                             <input
                                 type="text"
                                 placeholder={currentProfile.dayOfBirth}
-                                class="birth-input input input-ghost sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap p-0 h-7 placeholder-black"
+                                class="birth-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap p-0 h-7 placeholder-black w-full"
                                 onKeyUp={() => {
                                     inputFill(".birth-title", ".birth-input");
                                 }}
@@ -1244,32 +1420,115 @@ function UserManage() {
                         </div>
                     </div>
                 </div>
-                <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] absolute top-[30%] sm:top-[25%] md:top-[25%] left-[20%] z-20 edit-profile layer-hidden">
+                <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] absolute top-[28%] sm:top-[23%] md:top-[18%] left-[20%] z-20 edit-profile layer-hidden">
                     <div class="card-body p-0">
-                        <div class="flex w-full items-center">
+                        <div class="flex w-full items-center justify-between">
                             <figure class="w-1/2">
-                                <img class="object-cover" src={avatar} alt="Album" />
+                                <img
+                                    class="object-cover small-ava-image cursor-pointer"
+                                    alt="Album"
+                                    src={avatar}
+                                    onClick={() => {
+                                        document.querySelector(".small-ava-input").click();
+                                    }}
+                                />
+                                <input
+                                    type="file"
+                                    class="small-ava-input hidden"
+                                    accept=".jpg,.jpeg,.png"
+                                />
                             </figure>
-                            <div class="flex flex-col items-center w-1/2 mx-2">
-                                <div class="font-bold text-lg sm:text-xl md:text-2xl text-red-500">
-                                    <input
-                                        type="text"
-                                        placeholder={currentProfile.userName}
-                                        class="small-username-input input w-full input-ghost text-center font-bold text-lg sm:text-xl md:text-2xl placeholder-red-500"
-                                        onKeyUp={() => {
-                                            inputFill("", ".small-username-input");
-                                        }}
-                                    />
-                                </div>
-                                <div class="badge badge-info">
-                                    {currentProfile.role === undefined
-                                        ? ""
-                                        : toTitleCase(currentProfile.role)}
-                                </div>
-                            </div>
+                            <button
+                                className="small-save-button btn btn-success btn-circle btn-disabled brightness-125 w-1/2 mx-1"
+                                onClick={() => {
+                                    confirmSave("small");
+                                }}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#ffffff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                            </button>
                         </div>
                         <div class="p-4 flex flex-col">
-                            <div class="flex text-base sm:text-lg md:text-xl">
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
+                                <div class="small-username-title flex-none sm:text-lg md:text-xl">
+                                    Tên tài khoản:&nbsp;
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder={currentProfile.userName}
+                                    class="small-username-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
+                                    onKeyUp={() => {
+                                        inputFill(".small-username-title", ".small-username-input");
+                                    }}
+                                />
+                            </div>
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
+                                <div class="small-role-title sm:text-lg md:text-xl flex-none">
+                                    Vai trò:&nbsp;
+                                </div>
+                                <div class="dropdown p-0 h-6 w-full">
+                                    <div
+                                        tabindex="0"
+                                        role="button"
+                                        class="small-role-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
+                                    >
+                                        {currentProfile.role === undefined
+                                            ? ""
+                                            : toTitleCase(currentProfile.role)}
+                                    </div>
+                                    <ul
+                                        tabindex="0"
+                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
+                                    >
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    document.querySelector(
+                                                        ".small-role-input"
+                                                    ).innerHTML = "Brand";
+                                                }}
+                                            >
+                                                Brand
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    document.querySelector(
+                                                        ".small-role-input"
+                                                    ).innerHTML = "Customer";
+                                                }}
+                                            >
+                                                Customer
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                onClick={() => {
+                                                    document.querySelector(
+                                                        ".small-role-input"
+                                                    ).innerHTML = "Admin";
+                                                }}
+                                            >
+                                                Admin
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-name-title flex-none sm:text-lg md:text-xl">
                                     Họ và tên:&nbsp;
                                 </div>
@@ -1280,53 +1539,53 @@ function UserManage() {
                                             ? ""
                                             : toTitleCase(currentProfile.fullName)
                                     }
-                                    class="small-name-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
+                                    class="small-name-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-name-title", ".small-name-input");
                                     }}
                                 />
                             </div>
-                            <div class="flex text-base sm:text-lg md:text-xl">
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-email-title flex-none sm:text-lg md:text-xl">
                                     Email:&nbsp;
                                 </div>
                                 <input
                                     type="text"
                                     placeholder={currentProfile.email}
-                                    class="small-email-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
+                                    class="small-email-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-email-title", ".small-email-input");
                                     }}
                                 />
                             </div>
-                            <div class="flex text-base sm:text-lg md:text-xl">
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-phone-title flex-none sm:text-lg md:text-xl">
                                     Điện thoại:&nbsp;
                                 </div>
                                 <input
                                     type="text"
                                     placeholder={currentProfile.phoneNumber}
-                                    class="small-phone-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
+                                    class="small-phone-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-phone-title", ".small-phone-input");
                                     }}
                                 />
                             </div>
-                            <div class="flex text-base sm:text-lg md:text-xl">
-                                <div class="small-gender-title flex-none sm:text-lg md:text-xl">
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
+                                <div class="small-gender-title sm:text-lg md:text-xl flex-none">
                                     Giới tính:&nbsp;
                                 </div>
-                                <div class="dropdown p-0 h-6">
+                                <div class="dropdown p-0 h-6 w-full">
                                     <div
                                         tabindex="0"
                                         role="button"
-                                        class="small-gender-input text-base sm:text-lg md:text-xl font-normal p-0 h-6"
+                                        class="small-gender-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
                                     >
                                         {currentProfile.gender === "male" ? "Nam" : "Nữ"}
                                     </div>
                                     <ul
                                         tabindex="0"
-                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
                                     >
                                         <li>
                                             <a
@@ -1353,15 +1612,15 @@ function UserManage() {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="flex text-base sm:text-lg md:text-xl">
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-status-title flex-none sm:text-lg md:text-xl">
                                     Trạng thái:&nbsp;
                                 </div>
-                                <div class="dropdown p-0 h-6">
+                                <div class="dropdown p-0 h-6 w-full">
                                     <div
                                         tabindex="0"
                                         role="button"
-                                        class="small-status-input text-base sm:text-lg md:text-xl font-normal p-0 h-6"
+                                        class="small-status-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
                                     >
                                         {currentProfile.status === "Active"
                                             ? "Hoạt động"
@@ -1369,7 +1628,7 @@ function UserManage() {
                                     </div>
                                     <ul
                                         tabindex="0"
-                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow"
+                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
                                     >
                                         <li>
                                             <a
@@ -1396,14 +1655,14 @@ function UserManage() {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="flex text-base sm:text-lg md:text-xl">
+                            <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="flex-none small-facebook-title sm:text-lg md:text-xl">
                                     Facebook:&nbsp;
                                 </div>
                                 <input
                                     type="text"
                                     placeholder={currentProfile.accountFacebook}
-                                    class="small-facebook-input input input-ghost w-full sm:text-lg md:text-xl p-0 h-6 placeholder-black"
+                                    class="small-facebook-input input w-full sm:text-lg md:text-xl pl-1 h-6 placeholder-black"
                                     onKeyUp={() => {
                                         inputFill(".small-facebook-title", ".small-facebook-input");
                                     }}
@@ -1416,34 +1675,13 @@ function UserManage() {
                                 <input
                                     type="text"
                                     placeholder={currentProfile.dayOfBirth}
-                                    class="small-birth-input input input-ghost sm:text-lg md:text-xl whitespace-nowrap p-0 h-6 placeholder-black w-full"
+                                    class="small-birth-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
                                     onKeyUp={() => {
                                         inputFill(".small-birth-title", ".small-birth-input");
                                     }}
                                 />
                             </div>
                         </div>
-                        <button
-                            className="small-save-button btn btn-success btn-disabled brightness-125"
-                            onClick={() => {
-                                confirmSave("small");
-                            }}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="#ffffff"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                <polyline points="7 3 7 8 15 8"></polyline>
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </div>
