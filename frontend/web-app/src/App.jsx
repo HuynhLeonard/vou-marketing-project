@@ -11,16 +11,18 @@ import TestLogin from "./pages/TestLogin.jsx";
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/admin" element={<AdminHomePage/>} />
-                <Route path="/admin/userManagement" element={<UserManagementPage/>} />
-                <Route path="/admin/eventManagement" element={<EventManagement/>} />
-                <Route path="/admin/gameManagement" element={<GameManagementPage/>} />
-                <Route path="/admin/statistic" element={<StatisticPage />} />
-                <Route path="/" element={<TestLogin />} />
-            </Routes>
-        </BrowserRouter>
+        <div class="bg-white h-screen">
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/admin" element={<AdminHomePage />} />
+                    <Route path="/admin/userManagement" element={<UserManagementPage />} />
+                    <Route path="/admin/eventManagement" element={<EventManagement />} />
+                    <Route path="/admin/gameManagement" element={<GameManagementPage />} />
+                    <Route path="/admin/statistic" element={<StatisticPage />} />
+                    <Route path="/" element={<TestLogin />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
     );
 }
 
