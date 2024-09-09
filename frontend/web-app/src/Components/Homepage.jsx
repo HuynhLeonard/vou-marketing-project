@@ -17,9 +17,10 @@ import profitIcon from "../utils/icons/profit.png";
 import api from "../service/api";
 import axios from "axios";
 
-function Homepage({ setSelected }) {
+function Homepage() {
+    const [selectedIndex, setSelected] = useState(0);
     const subPageTransition = (selectedIndex) => {
-        setSelected(selectedIndex);
+        //setSelected(selectedIndex);
 
         const menuItems = document.querySelectorAll(".menu-item");
 
