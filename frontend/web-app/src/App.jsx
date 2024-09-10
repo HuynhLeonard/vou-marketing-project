@@ -10,6 +10,7 @@ import EventManagement from "./pages/EventManagement.jsx";
 import TestLogin from "./pages/TestLogin.jsx";
 import SignInPage from "./pages/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
+import EditAdminPage from "./pages/EditAdminPage.jsx";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/admin/statistic" element={<StatisticPage />} />
                     <Route path="/" element={<SignInPage />} />
                     <Route path="/signUp" element={<SignUpPage />} />
+                    <Route path="/admin/editProfile" element={<EditAdminPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

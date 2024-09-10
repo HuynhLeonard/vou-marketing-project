@@ -112,12 +112,15 @@ function Sidebar({ selectedIndexPage }) {
                                         />
                                     </div>
                                     <div class="flex">
-                                        <button class="btn btn-outline btn-error m-1">
+                                        <Link to="/" class="btn btn-outline btn-error m-1">
                                             Đăng xuất
-                                        </button>
-                                        <button class="btn btn-outline btn-info m-1">
+                                        </Link>
+                                        <Link
+                                            to="/admin/editProfile"
+                                            class="btn btn-outline btn-info m-1"
+                                        >
                                             Lưu thông tin
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -174,12 +177,15 @@ function Sidebar({ selectedIndexPage }) {
                                         />
                                     </div>
                                     <div class="flex">
-                                        <button class="btn btn-outline btn-error m-2">
+                                        <Link to="/" class="btn btn-outline btn-error m-2">
                                             Đăng xuất
-                                        </button>
-                                        <button class="btn btn-outline btn-info m-2">
+                                        </Link>
+                                        <Link
+                                            to="/admin/editProfile"
+                                            class="btn btn-outline btn-info m-2"
+                                        >
                                             Lưu thông tin
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
