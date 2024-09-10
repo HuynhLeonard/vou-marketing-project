@@ -122,7 +122,7 @@ function Homepage() {
                         </div>
                         <Carousel
                             pauseOnHover
-                            class="w-full h-full"
+                            class="w-full h-full z-10"
                             leftControl=" "
                             rightControl=" "
                             indicators="false"
@@ -233,7 +233,7 @@ function Homepage() {
                         </div>
                         <Carousel
                             pauseOnHover
-                            class="w-full h-[450px] sm:w-1/2"
+                            class="w-full h-[450px] sm:w-1/2 z-10"
                             leftControl=" "
                             rightControl=" "
                             indicators={false}

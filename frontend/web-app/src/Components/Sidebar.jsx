@@ -32,9 +32,6 @@ function Sidebar({ selectedIndexPage }) {
                 });
                 break;
             default:
-                document.querySelectorAll(".homepage-title").forEach((title) => {
-                    title.classList.add("selected");
-                });
                 break;
         }
     }, [selectedIndexPage]);
@@ -119,7 +116,7 @@ function Sidebar({ selectedIndexPage }) {
                                             to="/admin/editProfile"
                                             class="btn btn-outline btn-info m-1"
                                         >
-                                            Lưu thông tin
+                                            Chỉnh sửa thông tin
                                         </Link>
                                     </div>
                                 </div>
@@ -184,7 +181,7 @@ function Sidebar({ selectedIndexPage }) {
                                             to="/admin/editProfile"
                                             class="btn btn-outline btn-info m-2"
                                         >
-                                            Lưu thông tin
+                                            Chỉnh sửa thông tin
                                         </Link>
                                     </div>
                                 </div>
