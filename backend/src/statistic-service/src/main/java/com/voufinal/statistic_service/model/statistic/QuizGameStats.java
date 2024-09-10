@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "quiz_game_stats")
-public class QuizGameStatistic {
+public class QuizGameStats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_quiz_game_stat")
@@ -17,9 +17,15 @@ public class QuizGameStatistic {
     @Column(name = "id_event")
     private Long idEvent;
 
-    @Column(name = "id_game")
-    private Long idGame;
-
     @Column(name = "number_of_participants")
     private Long numberOfParticipants;
+
+    public QuizGameStats(Long idEvent, Long numberOfParticipants) {
+        this.idEvent = idEvent;
+        this.numberOfParticipants = numberOfParticipants;
+    }
+
+    public QuizGameStats() {
+
+    }
 }

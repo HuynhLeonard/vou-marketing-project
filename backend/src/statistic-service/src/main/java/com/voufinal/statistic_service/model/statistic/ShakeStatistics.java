@@ -1,16 +1,16 @@
 package com.voufinal.statistic_service.model.statistic;
 
-import com.voufinal.statistic_service.model.StatisticResponse;
+import com.voufinal.statistic_service.model.StatisticsResponse;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class ShakeStatistic extends StatisticResponse {
+public class ShakeStatistics extends StatisticsResponse {
     private Long remainingVouchers;
     private Long givenVouchers;
     private Long shareCount;
-    public ShakeStatistic(Long participants) {
+    public ShakeStatistics(Long participants) {
         super(participants);
     }
 }

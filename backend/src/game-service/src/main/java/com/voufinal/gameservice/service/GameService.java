@@ -17,4 +17,8 @@ public class GameService {
             return null;
         }
     }
+
+    public Game findGameByIdEvent(Long idEvent) {
+        return gameRepository.findByIdEvent(idEvent);
+    }
 }

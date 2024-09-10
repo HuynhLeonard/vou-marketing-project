@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/v1/game")
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 public class NotificationController {
     @Autowired
     NotificationConsumerService notificationConsumerService;
-
+    private final Logger logger = LoggerFactory.getLogger(NotificationConsumerService.class);
     @Autowired
     SocketModule socketModule;
     @GetMapping("/notification")
@@ -43,6 +44,7 @@ public class NotificationController {
         response.put("receiver", receiver);
         response.put("message",message);
         socketModule.sendNotification(message, sender, receiver, "turn_notification");
+        logger.info("sender"+ message+"cua"+ receiver);
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse("Đã gửi thông báo xin lượt!", HttpStatus.OK, response));
     }
 }

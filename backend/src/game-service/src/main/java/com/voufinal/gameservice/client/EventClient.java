@@ -1,9 +1,9 @@
-package com.voufinal.statistic_service.service;
+package com.voufinal.gameservice.client;
 
-import com.voufinal.statistic_service.model.User;
+import com.voufinal.gameservice.dto.RewardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,22 +13,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserClient {
+public class EventClient {
+    // For increasing share count
     private final RestTemplate restTemplate;
-    private final String USER_URL = "http://localhost:8082/api/v1/users";
 
     @Autowired
-    public UserClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public EventClient(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
     }
 
-    public Optional<List<User>> getUsers(List<String> usernames) {
+    private final String EVENTS_URL = "http://localhost:8083/api/v1/events";
+
+    public Optional<Integer> increaseShareCount(Long id_event) {
         try {
-            HttpEntity<List<String>> requestEntity = new HttpEntity<>(usernames);
-            ResponseEntity<List<User>> response = restTemplate.exchange(
-                    USER_URL + "/statistics/users",
-                    HttpMethod.POST,
-                    requestEntity,
+            ResponseEntity<Integer> response = restTemplate.exchange(
+                    EVENTS_URL + "/event-statistics/" + id_event,
+                    HttpMethod.PUT,
+                    null,
                     new ParameterizedTypeReference<>() {}
             );
             if (response.getStatusCode().is2xxSuccessful()) {
@@ -36,7 +37,7 @@ public class UserClient {
             }
             return Optional.empty();
         } catch (Exception e) {
-            System.err.println("Error user client in statistics: " + e.getMessage());
+            System.err.println("Error event client in streaming: " + e.getMessage());
             return Optional.empty();
         }
     }
