@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { useMutation } from "react-query";
+import { callApiSignUp } from "../service/user";
+import { text } from "@fortawesome/fontawesome-svg-core";
 
 const SignUp = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -12,12 +15,79 @@ const SignUp = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Phone Number:", phoneNumber);
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Confirm Password:", confirmPassword);
+        console.log(account);
     };
+
+    const [showNoti, setShowNoti] = useState(false)
+    const [error, setError] = useState("");
+    const [account, setAccount] = useState({
+        fullName: "",
+        username: "",
+        password: "",
+        email: "",
+        phoneNumber: "",
+        role: "BRAND",
+    });
+
+    const setInfo = (e) => {
+        const fullName = account.username;
+        setAccount((prev) => {
+                return {
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                    fullName : fullName,
+                }
+            }
+        )
+
+    }
+
+    const signUpMutation = useMutation(
+        (account) => callApiSignUp(account),
+        {
+            onSuccess: (data) => {
+                console.log(data);
+                if(data.success){
+                    window.location.href = 'http://localhost:3000';
+                } else {
+                    console.log("Sign up failed");
+                }
+            },
+            onError: (error) =>{
+                const msgErr = error.response.data.message;
+                setError(msgErr);
+                setShowNoti(true);               
+            } 
+        }
+    )
+
+    const submitHandler = async (e) => {
+        console.log("Submit: ", account);
+        if(account.username === "" || account.email === "" || account.password === "" || account.phoneNumber === ""){
+            setError("Vui lòng điền đầy đủ các ô nhập liệu");
+            setShowNoti(true);
+            return;
+        }
+
+        const accountRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+
+        if (!accountRegex.test(account.password)) {
+            setError("Mật khẩu bao gồm 8 ký tự trở lên bao gồm chữ hoa, chữ thường, số, ký hiệu (ví dụ: !@#$)");
+            setShowNoti(true);
+            return;
+        }
+        if (account.password.length < 8) {
+            setError("Mật khẩu phải lớn hơn 8 kí tự");
+            setShowNoti(true);
+            return;
+        }
+
+        signUpMutation.mutate(account);
+    }
+
+    const closeNoti = () => {
+        setShowNoti(false)
+    }
 
     return (
         <div
@@ -37,20 +107,18 @@ const SignUp = () => {
                             <h2 className="card-title text-center text-red-500 text-[30px] mb-4">
                                 Sign Up
                             </h2>
-                            <div onSubmit={handleSubmit} className="w-full">
-                                {}
+                            <div className="w-full">
                                 <div className="mb-4">
                                     <label
                                         className="block mb-2 text-lg font-bold text-red-500"
                                         htmlFor="phoneNumber"
                                     >
-                                        Phone Number
+                                        Username
                                     </label>
                                     <input
-                                        type="tel"
-                                        id="phoneNumber"
-                                        value={phoneNumber}
-                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        type="text"
+                                        name="username"
+                                        onChange={setInfo}
                                         className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:ring focus:ring-blue-300"
                                         required
                                     />
@@ -61,13 +129,27 @@ const SignUp = () => {
                                         className="block mb-2 text-lg font-bold text-red-500"
                                         htmlFor="email"
                                     >
+                                        Full Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="fullName"
+                                        onChange={setInfo}
+                                        className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:ring focus:ring-blue-300"
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label
+                                        className="block mb-2 text-lg font-bold text-red-500"
+                                        htmlFor="email"
+                                    >
                                         Email
                                     </label>
                                     <input
-                                        type="email"
-                                        id="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        type="text"
+                                        name="email"
+                                        onChange={setInfo}
                                         className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:ring focus:ring-blue-300"
                                         required
                                     />
@@ -83,9 +165,8 @@ const SignUp = () => {
                                     <div className="relative">
                                         <input
                                             type={showPassword ? "text" : "password"}
-                                            id="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
+                                            name="password"
+                                            onChange={setInfo}
                                             className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:ring focus:ring-blue-300"
                                             required
                                         />
@@ -106,28 +187,16 @@ const SignUp = () => {
                                         className="block mb-2 text-lg font-bold text-red-500"
                                         htmlFor="confirmPassword"
                                     >
-                                        Confirm Password
+                                        Phone Number
                                     </label>
                                     <div className="relative">
                                         <input
-                                            type={showConfirmPassword ? "text" : "password"}
-                                            id="confirmPassword"
-                                            value={confirmPassword}
-                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            type="text"
+                                            name="phoneNumber"
+                                            onChange={setInfo}
                                             className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:ring focus:ring-blue-300"
                                             required
                                         />
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setShowConfirmPassword(!showConfirmPassword)
-                                            }
-                                            className="absolute inset-y-0 right-3 flex items-center justify-center text-sm focus:outline-none"
-                                        >
-                                            <FontAwesomeIcon
-                                                icon={showConfirmPassword ? faEyeSlash : faEye}
-                                            />
-                                        </button>
                                     </div>
                                 </div>
                                 {/* Submit Button */}
@@ -135,6 +204,7 @@ const SignUp = () => {
                                     <button
                                         type="submit"
                                         className="btn btn-primary w-full text-white"
+                                        onClick={submitHandler}
                                     >
                                         Sign Up
                                     </button>

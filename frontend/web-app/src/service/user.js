@@ -6,7 +6,7 @@ export const callApiSignIn = async (userData) => {
 };
 
 export const callApiSignUp = async (userData) => {
-    const { data } = await api.post("/auth/register", userData);
+    const { data } = await api.post("http://localhost:8081/api/v1/auth/register", userData);
     return data;
 };
 
