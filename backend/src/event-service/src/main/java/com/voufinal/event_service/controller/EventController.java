@@ -113,10 +113,11 @@ public class EventController {
         try {
 
             Event event = eventRepository.findByIdEvent(id_event);
-
+            System.out.println(event);
             if (event == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new NotFoundResponse("Không tìm thấy sự kiện"));
             }
+            System.out.println(event);
 
             String brandLogo = brandClient.getBrandLogo(event.getCreatedBy()).orElse(null);
 

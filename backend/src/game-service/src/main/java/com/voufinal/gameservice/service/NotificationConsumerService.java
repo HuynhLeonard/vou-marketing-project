@@ -39,7 +39,7 @@ public class NotificationConsumerService {
 
 
     public List<Notification> getEventNotification(String username) {
-        String url = "http://event-service:8083/api/v1/favourite-events/notification-event?username=" + username;
+        String url = "http://localhost:8083/api/v1/favourite-events/notification-event?username=" + username;
 
         EventDTO[] eventsArray = restTemplate.getForObject(url, EventDTO[].class);
 

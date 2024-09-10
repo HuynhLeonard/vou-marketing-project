@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class InventoryClient {
     private final RestTemplate restTemplate;
-    private final String INVENTORY_URL = "http://inventory-and-reward-service:8087/api/v1/item-repos";
+    private final String INVENTORY_URL = "http://localhost:8087/api/v1/item-repos";
 
     @Autowired
     public InventoryClient(RestTemplateBuilder restTemplateBuilder) {

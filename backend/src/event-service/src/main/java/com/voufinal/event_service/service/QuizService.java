@@ -42,7 +42,7 @@ public class QuizService {
         }
     }
     public GameInfoDto getGameInfo(Long eventId) {
-        String url = "http://streaming-service:8086/api/v1/game/game-info?eventId=" + eventId;
+        String url = "http://localhost:8086/api/v1/game/game-info?eventId=" + eventId;
 
         // Make the GET request
         ResponseEntity<GameInfoDto> response = restTemplate.getForEntity(url, GameInfoDto.class);
@@ -51,7 +51,7 @@ public class QuizService {
         return response.getBody();
     }
     public GameInfoDto updateGameInfo(GameInfoDto gameInfoDTO) {
-        String url = "http://streaming-service:8086/api/v1/game/game-info?eventId=" + gameInfoDTO.getEventId();
+        String url = "http://localhost:8086/api/v1/game/game-info?eventId=" + gameInfoDTO.getEventId();
 
         // Make a PUT request to the updateGameInfo endpoint
         ResponseEntity<GameInfoDto> response = restTemplate.exchange(
@@ -65,7 +65,7 @@ public class QuizService {
     }
 
     public Integer getTurns(Long idPlayer, Long idGame) {
-        String url = "http://streaming-service:8086/api/v1/game/" + idGame + "/players/" + idPlayer + "/turns";
+        String url = "http://localhost:8086/api/v1/game/" + idGame + "/players/" + idPlayer + "/turns";
 
         ResponseEntity<Integer> response = restTemplate.getForEntity(url, Integer.class);
         if (response.getStatusCode() == HttpStatus.OK) {
