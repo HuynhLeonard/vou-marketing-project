@@ -74,7 +74,11 @@ public class EventProducer {
         }
     }
     public void sendMessage(String message) {
-        logger.info(String.format("#### -> Producing message -> %s", message));
-        this.kafkaTemplate.send(TOPIC, message);
+        try {
+            logger.info(String.format("#### -> Producing message -> %s", message));
+            this.kafkaTemplate.send(TOPIC, message);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        }
     }
 }
