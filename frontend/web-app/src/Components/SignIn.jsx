@@ -124,7 +124,7 @@ const SignIn = () => {
                             <h2 className="card-title text-center text-red-500 text-[30px] mb-4">
                                 Login
                             </h2>
-                            <div onSubmit={submitHandler} className="w-full">
+                            <div className="w-full">
                                 <div className="mb-4">
                                     <label
                                         className="block mb-2 text-lg font-bold text-red-500"
@@ -193,6 +193,7 @@ const SignIn = () => {
                                     <button
                                         type="submit"
                                         className="btn btn-primary w-full text-white"
+                                        onClick={submitHandler}
                                     >
                                         Login
                                     </button>
