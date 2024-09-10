@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -56,7 +58,7 @@ public class CreateVoucherRequest {
         this.qrCode = qrCode;
         this.voucherName = voucherName;
         this.imageUrl = imageUrl;
-        this.expirationDate = expirationDate;
+        this.expirationDate = subtractSevenHours(expirationDate);
         this.description = description;
         this.voucherPrice = voucherPrice;
         this.type = type;
@@ -72,15 +74,33 @@ public class CreateVoucherRequest {
         }
     }
 
-    public CreateVoucherRequest(String code, String qrCode, String voucherName, String imageUrl, Timestamp expirationDate, Long voucherPrice, String description, String type, Long idEvent) {
+    public CreateVoucherRequest(
+            String code,
+            String qrCode,
+            String voucherName,
+            String imageUrl,
+            Timestamp expirationDate,
+            Long voucherPrice,
+            String description,
+            String type,
+            Long idEvent
+    ) {
         this.code = code;
         this.qrCode = qrCode;
         this.voucherName = voucherName;
         this.imageUrl = imageUrl;
-        this.expirationDate = expirationDate;
+        this.expirationDate = subtractSevenHours(expirationDate);
         this.voucherPrice=voucherPrice;
         this.description = description;
         this.type = type;
         this.idEvent = idEvent;
+    }
+
+    public static Timestamp subtractSevenHours(Timestamp timestamp) {
+        if (timestamp == null) {
+            return null;
+        }
+        LocalDateTime localDateTime = timestamp.toLocalDateTime().minusHours(7);
+        return Timestamp.valueOf(localDateTime);
     }
 }
