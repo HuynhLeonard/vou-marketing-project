@@ -115,7 +115,19 @@ function EditAdminForm() {
                                 document.querySelector(".ava-input").click();
                             }}
                         />
-                        <input type="file" class="ava-input hidden" accept=".jpg,.jpeg,.png" />
+                        <input
+                            type="file"
+                            class="ava-input hidden"
+                            accept=".jpg,.jpeg,.png"
+                            onChange={() => {
+                                var input = document.querySelector(".ava-input");
+                                var fReader = new FileReader();
+                                fReader.readAsDataURL(input.files[0]);
+                                fReader.onloadend = function (event) {
+                                    document.querySelector(".ava-image").src = event.target.result;
+                                };
+                            }}
+                        />
                     </div>
                     <div class="p-5 visible lg:invisible lg:h-0">
                         <button
