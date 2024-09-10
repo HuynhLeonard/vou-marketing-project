@@ -1,12 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import userData from "../utils/jsonFiles/userData.json";
+
+import ViewUserForm from "./ViewUserForm";
+import ViewNewUserForm from "./ViewNewUserForm";
+import RemoveUserForm from "./RemoveUserForm";
+import RemoveNewUserForm from "./RemoveNewUserForm";
+import EditUserForm from "./EditUserForm";
 
 function UserManage() {
     const [allProfileData, setAllProfileData] = useState([]);
     const [profileData, setProfileData] = useState([]);
     const [newProfileData, setNewProfileData] = useState([]);
+
+    const [isOpenViewUser, setIsOpenViewUser] = useState(false);
+    const [isOpenViewNewUser, setIsOpenViewNewUser] = useState(false);
+    const [isOpenRemoveUser, setIsOpenRemoveUser] = useState(false);
+    const [isOpenRemoveNewUser, setIsOpenRemoveNewUser] = useState(false);
+    const [isOpenEditUser, setIsOpenEditUser] = useState(false);
 
     const toTitleCase = (phrase) => {
         return phrase
@@ -41,6 +52,31 @@ function UserManage() {
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
             <div class="lg:block hidden">
+                {(isOpenViewUser ||
+                    isOpenViewNewUser ||
+                    isOpenRemoveUser ||
+                    isOpenRemoveNewUser ||
+                    isOpenEditUser) && (
+                    <div>
+                        <div
+                            class="backdrop-blur-sm w-full h-full absolute top-0 z-20 cursor-pointer"
+                            onClick={() => {
+                                setIsOpenViewUser(false);
+                                setIsOpenViewNewUser(false);
+                                setIsOpenRemoveUser(false);
+                                setIsOpenRemoveNewUser(false);
+                                setIsOpenEditUser(false);
+                            }}
+                        ></div>
+                    </div>
+                )}
+
+                {isOpenViewUser && <ViewUserForm />}
+                {isOpenViewNewUser && <ViewNewUserForm />}
+                {isOpenRemoveUser && <RemoveUserForm />}
+                {isOpenRemoveNewUser && <RemoveNewUserForm />}
+                {isOpenEditUser && <EditUserForm />}
+
                 <div class="flex w-full p-5 sm:p-1 sm:pt-5">
                     <div class="flex flex-col mr-2 items-center w-2/3 sm:mr-1">
                         <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-info mb-5">
@@ -84,9 +120,11 @@ function UserManage() {
                                                         : "Bị khóa"}
                                                 </td>
                                                 <td class="text-center">
-                                                    <Link
-                                                        to="/admin/userManagement/profile"
+                                                    <button
                                                         class="btn btn-sm btn-square btn-info brightness-125 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenViewUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -112,10 +150,12 @@ function UserManage() {
                                                                 y2="8"
                                                             ></line>
                                                         </svg>
-                                                    </Link>
-                                                    <Link
-                                                        to="/admin/userManagement/editProfile"
+                                                    </button>
+                                                    <button
                                                         class="btn btn-sm btn-square btn-info brightness-200 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenEditUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -135,10 +175,12 @@ function UserManage() {
                                                                 y2="22"
                                                             ></line>
                                                         </svg>
-                                                    </Link>
-                                                    <Link
-                                                        to="/admin/userManagement/removeProfile"
+                                                    </button>
+                                                    <button
                                                         class="btn btn-sm btn-square btn-error brightness-105 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenRemoveUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +196,7 @@ function UserManage() {
                                                                 d="M6 18L18 6M6 6l12 12"
                                                             />
                                                         </svg>
-                                                    </Link>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         );
@@ -193,9 +235,11 @@ function UserManage() {
                                                 <td>{obj.userName}</td>
                                                 <td>{toTitleCase(obj.role)}</td>
                                                 <td class="text-center">
-                                                    <Link
-                                                        to="/admin/userManagement/newProfile"
+                                                    <button
                                                         class="btn btn-sm btn-square btn-info brightness-125 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenViewNewUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +265,7 @@ function UserManage() {
                                                                 y2="8"
                                                             ></line>
                                                         </svg>
-                                                    </Link>
+                                                    </button>
                                                     <button class="btn btn-sm btn-square btn-success brightness-125 m-1">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -236,9 +280,11 @@ function UserManage() {
                                                             <polyline points="20 6 9 17 4 12"></polyline>
                                                         </svg>
                                                     </button>
-                                                    <Link
-                                                        to="/admin/userManagement/removeNewProfile"
+                                                    <button
                                                         class="btn btn-sm btn-square btn-error brightness-105 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenRemoveNewUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -254,7 +300,7 @@ function UserManage() {
                                                                 d="M6 18L18 6M6 6l12 12"
                                                             />
                                                         </svg>
-                                                    </Link>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         );
@@ -266,6 +312,31 @@ function UserManage() {
                 </div>
             </div>
             <div class="lg:hidden">
+                {(isOpenViewUser ||
+                    isOpenViewNewUser ||
+                    isOpenRemoveUser ||
+                    isOpenRemoveNewUser ||
+                    isOpenEditUser) && (
+                    <div>
+                        <div
+                            class="backdrop-blur-sm w-full h-[1000px] absolute top-0 z-20 cursor-pointer"
+                            onClick={() => {
+                                setIsOpenViewUser(false);
+                                setIsOpenViewNewUser(false);
+                                setIsOpenRemoveUser(false);
+                                setIsOpenRemoveNewUser(false);
+                                setIsOpenEditUser(false);
+                            }}
+                        ></div>
+                    </div>
+                )}
+
+                {isOpenViewUser && <ViewUserForm />}
+                {isOpenViewNewUser && <ViewNewUserForm />}
+                {isOpenRemoveUser && <RemoveUserForm />}
+                {isOpenRemoveNewUser && <RemoveNewUserForm />}
+                {isOpenEditUser && <EditUserForm />}
+
                 <div class="flex flex-col w-full p-5">
                     <div class="flex flex-col items-center">
                         <div class="font-bold text-lg sm:text-xl text-info mb-5">
@@ -293,9 +364,11 @@ function UserManage() {
                                                 <td class="text-sm">{obj.userName}</td>
                                                 <td class="text-sm">{toTitleCase(obj.role)}</td>
                                                 <td class="text-center">
-                                                    <Link
-                                                        to="/admin/userManagement/profile"
+                                                    <button
                                                         class="btn btn-xs btn-square btn-info brightness-125 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenViewUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -321,10 +394,12 @@ function UserManage() {
                                                                 y2="8"
                                                             ></line>
                                                         </svg>
-                                                    </Link>
-                                                    <Link
-                                                        to="/admin/userManagement/editProfile"
+                                                    </button>
+                                                    <button
                                                         class="btn btn-xs btn-square btn-info brightness-200 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenEditUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -344,10 +419,12 @@ function UserManage() {
                                                                 y2="22"
                                                             ></line>
                                                         </svg>
-                                                    </Link>
-                                                    <Link
-                                                        to="/admin/userManagement/removeProfile"
+                                                    </button>
+                                                    <button
                                                         class="btn btn-xs btn-square btn-error brightness-105 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenRemoveUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -363,7 +440,7 @@ function UserManage() {
                                                                 d="M6 18L18 6M6 6l12 12"
                                                             />
                                                         </svg>
-                                                    </Link>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         );
@@ -398,9 +475,11 @@ function UserManage() {
                                                 <td class="text-sm">{obj.userName}</td>
                                                 <td class="text-sm">{toTitleCase(obj.role)}</td>
                                                 <td class="text-center">
-                                                    <Link
-                                                        to="/admin/userManagement/newProfile"
+                                                    <button
                                                         class="btn btn-xs btn-square btn-info brightness-125 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenViewNewUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -426,7 +505,7 @@ function UserManage() {
                                                                 y2="8"
                                                             ></line>
                                                         </svg>
-                                                    </Link>
+                                                    </button>
                                                     <button class="btn btn-xs btn-square btn-success brightness-125 m-1">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -441,9 +520,11 @@ function UserManage() {
                                                             <polyline points="20 6 9 17 4 12"></polyline>
                                                         </svg>
                                                     </button>
-                                                    <Link
-                                                        to="/admin/userManagement/removeNewProfile"
+                                                    <button
                                                         class="btn btn-xs btn-square btn-error brightness-105 m-1"
+                                                        onClick={() => {
+                                                            setIsOpenRemoveNewUser(true);
+                                                        }}
                                                     >
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
@@ -459,7 +540,7 @@ function UserManage() {
                                                                 d="M6 18L18 6M6 6l12 12"
                                                             />
                                                         </svg>
-                                                    </Link>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         );

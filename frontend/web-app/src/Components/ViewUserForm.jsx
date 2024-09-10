@@ -1,15 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import avatar from "../utils/images/ava.jpg";
 
 function ViewUserForm() {
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
             <div class="lg:block hidden">
-                <Link
-                    to="/admin/userManagement"
-                    class="backdrop-blur-sm w-full h-full absolute top-0 z-20 cursor-pointer"
-                ></Link>
                 <div class="card lg:card-side bg-base-200 shadow-2xl sm:w-[65%] xl:w-[55%] 2xl:w-[55%] absolute top-[20%] sm:left-[22%] xl:left-[24%] 2xl:left-[24%] z-20">
                     <figure class="w-1/2">
                         <img class="object-cover" src={avatar} alt="Album" />
@@ -45,10 +40,6 @@ function ViewUserForm() {
                 </div>
             </div>
             <div class="lg:hidden">
-                <Link
-                    to="/admin/userManagement"
-                    class="backdrop-blur-sm w-full h-[1000px] absolute top-0 z-20 cursor-pointer"
-                ></Link>
                 <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] absolute top-[35%] sm:top-[30%] md:top-[28%] left-[20%] z-20">
                     <div class="card-body p-0">
                         <div class="flex w-full items-center">
