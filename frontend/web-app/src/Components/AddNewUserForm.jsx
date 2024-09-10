@@ -1,174 +1,68 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import avatar from "../utils/images/ava.jpg";
 
-function EditUserForm({ currentProfile }) {
-    const confirmSave = (buttonSize) => {
-        var valueList = [];
-
-        if (buttonSize === "large") {
-            const inputList = [
-                ".username-input",
-                ".role-input",
-                ".name-input",
-                ".email-input",
-                ".phone-input",
-                ".gender-input",
-                ".status-input",
-                ".facebook-input",
-                ".birth-input",
-                ".ava-input",
-            ];
-
-            inputList.forEach((input) => {
-                var inputValue = document.querySelector(input);
-                if (inputValue.value !== "") {
-                    valueList.push(inputValue.value);
-                } else {
-                    valueList.push(inputValue.placeholder);
-                }
-            });
-        } else {
-            const inputList = [
-                ".small-username-input",
-                ".small-role-input",
-                ".small-name-input",
-                ".small-email-input",
-                ".small-phone-input",
-                ".small-gender-input",
-                ".small-status-input",
-                ".small-facebook-input",
-                ".small-birth-input",
-                ".small-ava-input",
-            ];
-
-            inputList.forEach((input) => {
-                var inputValue = document.querySelector(input);
-                if (inputValue.value !== "") {
-                    valueList.push(inputValue.value);
-                } else {
-                    valueList.push(inputValue.placeholder);
-                }
-            });
-        }
-
-        const titleList = [
-            ".username-title",
-            ".role-title",
-            ".name-title",
-            ".email-title",
-            ".phone-title",
-            ".gender-title",
-            ".facebook-title",
-            ".birth-title",
-            ".small-username-title",
-            ".small-role-title",
-            ".small-name-title",
-            ".small-email-title",
-            ".small-phone-title",
-            ".small-gender-title",
-            ".small-facebook-title",
-            ".small-birth-title",
-        ];
-
-        titleList.forEach((title) => {
-            var titleName = document.querySelector(title);
-            titleName.style.color = "black";
-        });
-    };
-
-    const toTitleCase = (phrase) => {
-        return phrase
-            .toLowerCase()
-            .split(" ")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
-    };
-
-    const inputFill = (titleName, titleInput) => {
-        var titleValue = document.querySelector(titleName);
-        var inputValue = document.querySelector(titleInput);
-
-        if (inputValue.value !== "") {
-            if (inputValue.placeholder !== inputValue.value) {
-                titleValue.style.color = "rgb(242, 82, 82)";
-            } else {
-                titleValue.style.color = "black";
-            }
-        } else {
-            titleValue.style.color = "black";
-        }
-    };
-
-    const dropdownClick = (titleName, titleInput, type) => {
-        var titleValue = document.querySelector(titleName);
-
-        if (type === "gender") {
-            if (
-                document.querySelector(titleInput).innerHTML !==
-                (currentProfile.gender === "male" ? "Nam" : "Nữ")
-            ) {
-                titleValue.style.color = "rgb(242, 82, 82)";
-            } else {
-                titleValue.style.color = "black";
-            }
-        }
-        if (type === "status") {
-            if (
-                document.querySelector(titleInput).innerHTML !==
-                (currentProfile.status === "Active" ? "Hoạt động" : "Bị khóa")
-            ) {
-                titleValue.style.color = "rgb(242, 82, 82)";
-            } else {
-                titleValue.style.color = "black";
-            }
-        }
-        if (type === "role") {
-            if (document.querySelector(titleInput).innerHTML !== toTitleCase(currentProfile.role)) {
-                titleValue.style.color = "rgb(242, 82, 82)";
-            } else {
-                titleValue.style.color = "black";
-            }
-        }
-    };
-
+function AddNewUserForm() {
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
             <div class="lg:block hidden">
                 <div class="card lg:card-side bg-base-200 shadow-2xl sm:w-[65%] xl:w-[55%] 2xl:w-[55%] absolute top-[20%] sm:left-[22%] xl:left-[24%] 2xl:left-[24%] z-20">
                     <figure class="w-1/2">
                         <img
-                            class="object-cover ava-image cursor-pointer"
+                            class="object-cover add-ava-image hidden cursor-pointer"
                             alt="Album"
-                            src={avatar}
                             onClick={() => {
-                                document.querySelector(".ava-input").click();
+                                document.querySelector(".add-ava-input").click();
                             }}
                         />
-                        <input
-                            type="file"
-                            class="ava-input hidden"
-                            accept=".jpg,.jpeg,.png"
-                            onChange={() => {
-                                var input = document.querySelector(".ava-input");
-                                var fReader = new FileReader();
-                                fReader.readAsDataURL(input.files[0]);
-                                fReader.onloadend = function (event) {
-                                    document.querySelector(".ava-image").src = event.target.result;
-                                };
+                        <button
+                            class="add-ava-button btn btn-circle border-black w-1/2 h-1/2"
+                            onClick={() => {
+                                document.querySelector(".add-ava-input").click();
                             }}
-                        />
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-10 w-10"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#000000"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path d="M20.4 14.5L16 10 4 20" />
+                            </svg>
+                            <input
+                                type="file"
+                                class="add-ava-input hidden"
+                                accept=".jpg,.jpeg,.png"
+                                onChange={() => {
+                                    var input = document.querySelector(".add-ava-input");
+                                    var fReader = new FileReader();
+                                    fReader.readAsDataURL(input.files[0]);
+                                    fReader.onloadend = function (event) {
+                                        document.querySelector(".add-ava-image").src =
+                                            event.target.result;
+                                    };
+
+                                    document
+                                        .querySelector(".add-ava-image")
+                                        .classList.remove("hidden");
+                                    document
+                                        .querySelector(".add-ava-button")
+                                        .classList.add("hidden");
+                                }}
+                            />
+                        </button>
                     </figure>
                     <div class="card-body p-5">
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="username-title flex-none">Tên tài khoản:&nbsp;</div>
                             <input
                                 type="text"
-                                placeholder={currentProfile === null ? "" : currentProfile.userName}
                                 class="username-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
-                                onKeyUp={() => {
-                                    inputFill(".username-title", ".username-input");
-                                }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
@@ -178,11 +72,7 @@ function EditUserForm({ currentProfile }) {
                                     tabindex="0"
                                     role="button"
                                     class="role-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
-                                >
-                                    {currentProfile === null
-                                        ? ""
-                                        : toTitleCase(currentProfile.role)}
-                                </div>
+                                ></div>
                                 <ul
                                     tabindex="0"
                                     class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
@@ -192,7 +82,6 @@ function EditUserForm({ currentProfile }) {
                                             onClick={() => {
                                                 document.querySelector(".role-input").innerHTML =
                                                     "Brand";
-                                                dropdownClick(".role-title", ".role-input", "role");
                                             }}
                                         >
                                             Brand
@@ -203,7 +92,6 @@ function EditUserForm({ currentProfile }) {
                                             onClick={() => {
                                                 document.querySelector(".role-input").innerHTML =
                                                     "Customer";
-                                                dropdownClick(".role-title", ".role-input", "role");
                                             }}
                                         >
                                             Customer
@@ -214,7 +102,6 @@ function EditUserForm({ currentProfile }) {
                                             onClick={() => {
                                                 document.querySelector(".role-input").innerHTML =
                                                     "Admin";
-                                                dropdownClick(".role-title", ".role-input", "role");
                                             }}
                                         >
                                             Admin
@@ -227,39 +114,21 @@ function EditUserForm({ currentProfile }) {
                             <div class="name-title flex-none">Họ và tên:&nbsp;</div>
                             <input
                                 type="text"
-                                placeholder={
-                                    currentProfile === null
-                                        ? ""
-                                        : toTitleCase(currentProfile.fullName)
-                                }
                                 class="name-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
-                                onKeyUp={() => {
-                                    inputFill(".name-title", ".name-input");
-                                }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="email-title flex-none">Email:&nbsp;</div>
                             <input
                                 type="text"
-                                placeholder={currentProfile === null ? "" : currentProfile.email}
                                 class="email-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
-                                onKeyUp={() => {
-                                    inputFill(".email-title", ".email-input");
-                                }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="phone-title flex-none">Điện thoại:&nbsp;</div>
                             <input
                                 type="text"
-                                placeholder={
-                                    currentProfile === null ? "" : currentProfile.phoneNumber
-                                }
                                 class="phone-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
-                                onKeyUp={() => {
-                                    inputFill(".phone-title", ".phone-input");
-                                }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
@@ -269,13 +138,7 @@ function EditUserForm({ currentProfile }) {
                                     tabindex="0"
                                     role="button"
                                     class="gender-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
-                                >
-                                    {currentProfile === null
-                                        ? ""
-                                        : currentProfile.gender === "male"
-                                        ? "Nam"
-                                        : "Nữ"}
-                                </div>
+                                ></div>
                                 <ul
                                     tabindex="0"
                                     class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
@@ -285,11 +148,6 @@ function EditUserForm({ currentProfile }) {
                                             onClick={() => {
                                                 document.querySelector(".gender-input").innerHTML =
                                                     "Nam";
-                                                dropdownClick(
-                                                    ".gender-title",
-                                                    ".gender-input",
-                                                    "gender"
-                                                );
                                             }}
                                         >
                                             Nam
@@ -300,11 +158,6 @@ function EditUserForm({ currentProfile }) {
                                             onClick={() => {
                                                 document.querySelector(".gender-input").innerHTML =
                                                     "Nữ";
-                                                dropdownClick(
-                                                    ".gender-title",
-                                                    ".gender-input",
-                                                    "gender"
-                                                );
                                             }}
                                         >
                                             Nữ
@@ -320,13 +173,7 @@ function EditUserForm({ currentProfile }) {
                                     tabindex="0"
                                     role="button"
                                     class="status-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
-                                >
-                                    {currentProfile === null
-                                        ? ""
-                                        : currentProfile.gender === "Active"
-                                        ? "Hoạt động"
-                                        : "Bị khóa"}
-                                </div>
+                                ></div>
                                 <ul
                                     tabindex="0"
                                     class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
@@ -336,11 +183,6 @@ function EditUserForm({ currentProfile }) {
                                             onClick={() => {
                                                 document.querySelector(".status-input").innerHTML =
                                                     "Hoạt động";
-                                                dropdownClick(
-                                                    ".status-title",
-                                                    ".status-input",
-                                                    "status"
-                                                );
                                             }}
                                         >
                                             Hoạt động
@@ -351,11 +193,6 @@ function EditUserForm({ currentProfile }) {
                                             onClick={() => {
                                                 document.querySelector(".status-input").innerHTML =
                                                     "Bị khóa";
-                                                dropdownClick(
-                                                    ".status-title",
-                                                    ".status-input",
-                                                    "status"
-                                                );
                                             }}
                                         >
                                             Bị khóa
@@ -368,32 +205,20 @@ function EditUserForm({ currentProfile }) {
                             <div class="flex-none facebook-title">Facebook:&nbsp;</div>
                             <input
                                 type="text"
-                                placeholder={
-                                    currentProfile === null ? "" : currentProfile.accountFacebook
-                                }
                                 class="facebook-input input w-full sm:text-base xl:text-lg 2xl:text-xl p-0 h-7 placeholder-black"
-                                onKeyUp={() => {
-                                    inputFill(".facebook-title", ".facebook-input");
-                                }}
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl mb-2">
                             <div class="birth-title flex-none">Ngày sinh:&nbsp;</div>
                             <input
                                 type="text"
-                                placeholder={
-                                    currentProfile === null ? "" : currentProfile.dayOfBirth
-                                }
                                 class="birth-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap p-0 h-7 placeholder-black w-full"
-                                onKeyUp={() => {
-                                    inputFill(".birth-title", ".birth-input");
-                                }}
                             />
                         </div>
                         <button
                             className="save-button btn btn-success brightness-125 w-full"
                             onClick={() => {
-                                confirmSave("large");
+                                //confirmSave("large");
                             }}
                         >
                             <svg
@@ -417,28 +242,58 @@ function EditUserForm({ currentProfile }) {
             <div class="lg:hidden">
                 <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] h-[60%] overflow-y-scroll no-scrollbar absolute top-[28%] sm:top-[30%] md:top-[30%] left-[20%] z-20">
                     <div class="card-body p-0">
-                        <img
-                            class="object-fill small-ava-image cursor-pointer"
-                            alt="Album"
-                            src={avatar}
-                            onClick={() => {
-                                document.querySelector(".small-ava-input").click();
-                            }}
-                        />
-                        <input
-                            type="file"
-                            class="small-ava-input hidden"
-                            accept=".jpg,.jpeg,.png"
-                            onChange={() => {
-                                var smallInput = document.querySelector(".small-ava-input");
-                                var smallfReader = new FileReader();
-                                smallfReader.readAsDataURL(smallInput.files[0]);
-                                smallfReader.onloadend = function (event) {
-                                    document.querySelector(".small-ava-image").src =
-                                        event.target.result;
-                                };
-                            }}
-                        />
+                        <figure class="w-full">
+                            <img
+                                class="object-cover small-add-ava-image hidden cursor-pointer"
+                                alt="Album"
+                                onClick={() => {
+                                    document.querySelector(".small-add-ava-input").click();
+                                }}
+                            />
+                            <button
+                                class="small-add-ava-button btn btn-circle border-black mt-3"
+                                onClick={() => {
+                                    document.querySelector(".small-add-ava-input").click();
+                                }}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-8 w-8"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#000000"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                    <path d="M20.4 14.5L16 10 4 20" />
+                                </svg>
+                                <input
+                                    type="file"
+                                    class="small-add-ava-input hidden"
+                                    accept=".jpg,.jpeg,.png"
+                                    onChange={() => {
+                                        var smallInput =
+                                            document.querySelector(".small-add-ava-input");
+                                        var smallfReader = new FileReader();
+                                        smallfReader.readAsDataURL(smallInput.files[0]);
+                                        smallfReader.onloadend = function (event) {
+                                            document.querySelector(".small-add-ava-image").src =
+                                                event.target.result;
+                                        };
+
+                                        document
+                                            .querySelector(".small-add-ava-image")
+                                            .classList.remove("hidden");
+                                        document
+                                            .querySelector(".small-add-ava-button")
+                                            .classList.add("hidden");
+                                    }}
+                                />
+                            </button>
+                        </figure>
                         <div class="p-4 flex flex-col">
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-username-title flex-none sm:text-lg md:text-xl">
@@ -446,13 +301,7 @@ function EditUserForm({ currentProfile }) {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={
-                                        currentProfile === null ? "" : currentProfile.userName
-                                    }
                                     class="small-username-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
-                                    onKeyUp={() => {
-                                        inputFill(".small-username-title", ".small-username-input");
-                                    }}
                                 />
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
@@ -464,11 +313,7 @@ function EditUserForm({ currentProfile }) {
                                         tabindex="0"
                                         role="button"
                                         class="small-role-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
-                                    >
-                                        {currentProfile === null
-                                            ? ""
-                                            : toTitleCase(currentProfile.role)}
-                                    </div>
+                                    ></div>
                                     <ul
                                         tabindex="0"
                                         class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
@@ -479,11 +324,6 @@ function EditUserForm({ currentProfile }) {
                                                     document.querySelector(
                                                         ".small-role-input"
                                                     ).innerHTML = "Brand";
-                                                    dropdownClick(
-                                                        ".small-role-title",
-                                                        ".small-role-input",
-                                                        "role"
-                                                    );
                                                 }}
                                             >
                                                 Brand
@@ -495,11 +335,6 @@ function EditUserForm({ currentProfile }) {
                                                     document.querySelector(
                                                         ".small-role-input"
                                                     ).innerHTML = "Customer";
-                                                    dropdownClick(
-                                                        ".small-role-title",
-                                                        ".small-role-input",
-                                                        "role"
-                                                    );
                                                 }}
                                             >
                                                 Customer
@@ -511,11 +346,6 @@ function EditUserForm({ currentProfile }) {
                                                     document.querySelector(
                                                         ".small-role-input"
                                                     ).innerHTML = "Admin";
-                                                    dropdownClick(
-                                                        ".small-role-title",
-                                                        ".small-role-input",
-                                                        "role"
-                                                    );
                                                 }}
                                             >
                                                 Admin
@@ -530,15 +360,7 @@ function EditUserForm({ currentProfile }) {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={
-                                        currentProfile === null
-                                            ? ""
-                                            : toTitleCase(currentProfile.fullName)
-                                    }
                                     class="small-name-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
-                                    onKeyUp={() => {
-                                        inputFill(".small-name-title", ".small-name-input");
-                                    }}
                                 />
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
@@ -547,13 +369,7 @@ function EditUserForm({ currentProfile }) {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={
-                                        currentProfile === null ? "" : currentProfile.email
-                                    }
                                     class="small-email-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
-                                    onKeyUp={() => {
-                                        inputFill(".small-email-title", ".small-email-input");
-                                    }}
                                 />
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
@@ -562,13 +378,7 @@ function EditUserForm({ currentProfile }) {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={
-                                        currentProfile === null ? "" : currentProfile.phoneNumber
-                                    }
                                     class="small-phone-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
-                                    onKeyUp={() => {
-                                        inputFill(".small-phone-title", ".small-phone-input");
-                                    }}
                                 />
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
@@ -580,13 +390,7 @@ function EditUserForm({ currentProfile }) {
                                         tabindex="0"
                                         role="button"
                                         class="small-gender-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
-                                    >
-                                        {currentProfile === null
-                                            ? ""
-                                            : currentProfile.gender === "male"
-                                            ? "Nam"
-                                            : "Nữ"}
-                                    </div>
+                                    ></div>
                                     <ul
                                         tabindex="0"
                                         class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
@@ -597,11 +401,6 @@ function EditUserForm({ currentProfile }) {
                                                     document.querySelector(
                                                         ".small-gender-input"
                                                     ).innerHTML = "Nam";
-                                                    dropdownClick(
-                                                        ".small-gender-title",
-                                                        ".small-gender-input",
-                                                        "gender"
-                                                    );
                                                 }}
                                             >
                                                 Nam
@@ -613,11 +412,6 @@ function EditUserForm({ currentProfile }) {
                                                     document.querySelector(
                                                         ".small-gender-input"
                                                     ).innerHTML = "Nữ";
-                                                    dropdownClick(
-                                                        ".small-gender-title",
-                                                        ".small-gender-input",
-                                                        "gender"
-                                                    );
                                                 }}
                                             >
                                                 Nữ
@@ -635,13 +429,7 @@ function EditUserForm({ currentProfile }) {
                                         tabindex="0"
                                         role="button"
                                         class="small-status-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
-                                    >
-                                        {currentProfile === null
-                                            ? ""
-                                            : currentProfile.gender === "Active"
-                                            ? "Hoạt động"
-                                            : "Bị khóa"}
-                                    </div>
+                                    ></div>
                                     <ul
                                         tabindex="0"
                                         class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
@@ -652,11 +440,6 @@ function EditUserForm({ currentProfile }) {
                                                     document.querySelector(
                                                         ".small-status-input"
                                                     ).innerHTML = "Hoạt động";
-                                                    dropdownClick(
-                                                        ".small-status-title",
-                                                        ".small-status-input",
-                                                        "status"
-                                                    );
                                                 }}
                                             >
                                                 Hoạt động
@@ -668,11 +451,6 @@ function EditUserForm({ currentProfile }) {
                                                     document.querySelector(
                                                         ".small-status-input"
                                                     ).innerHTML = "Bị khóa";
-                                                    dropdownClick(
-                                                        ".small-status-title",
-                                                        ".small-status-input",
-                                                        "status"
-                                                    );
                                                 }}
                                             >
                                                 Bị khóa
@@ -687,15 +465,7 @@ function EditUserForm({ currentProfile }) {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={
-                                        currentProfile === null
-                                            ? ""
-                                            : currentProfile.accountFacebook
-                                    }
                                     class="small-facebook-input input w-full sm:text-lg md:text-xl pl-1 h-6 placeholder-black"
-                                    onKeyUp={() => {
-                                        inputFill(".small-facebook-title", ".small-facebook-input");
-                                    }}
                                 />
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-2">
@@ -704,19 +474,13 @@ function EditUserForm({ currentProfile }) {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder={
-                                        currentProfile === null ? "" : currentProfile.dayOfBirth
-                                    }
                                     class="small-birth-input input sm:text-lg md:text-xl whitespace-nowrap pl-1 h-6 placeholder-black w-full"
-                                    onKeyUp={() => {
-                                        inputFill(".small-birth-title", ".small-birth-input");
-                                    }}
                                 />
                             </div>
                             <button
                                 className="small-save-button btn btn-success brightness-125 w-full"
                                 onClick={() => {
-                                    confirmSave("small");
+                                    //confirmSave("small");
                                 }}
                             >
                                 <svg
@@ -742,4 +506,4 @@ function EditUserForm({ currentProfile }) {
     );
 }
 
-export default EditUserForm;
+export default AddNewUserForm;

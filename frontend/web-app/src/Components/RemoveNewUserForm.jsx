@@ -1,6 +1,6 @@
 import React from "react";
 
-function RemoveNewUserForm() {
+function RemoveNewUserForm({ currentProfile }) {
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
             <div class="lg:block hidden">
