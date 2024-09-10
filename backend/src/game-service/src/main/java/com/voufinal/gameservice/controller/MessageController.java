@@ -176,6 +176,7 @@ public class MessageController {
                 Optional<Quiz> existingQuizOpt = quizRepository.findById(quizDTO.getQuizId());
                 if (existingQuizOpt.isPresent()) {
                     Quiz existingQuiz = existingQuizOpt.get();
+                    existingQuiz.setQuestion(quizDTO.getQuestion());
                     existingQuiz.setAns1(quizDTO.getAns1());
                     existingQuiz.setAns2(quizDTO.getAns2());
                     existingQuiz.setAns3(quizDTO.getAns3());
@@ -199,7 +200,7 @@ public class MessageController {
     @GetMapping("/{idGame}/players/{idPlayer}/turns")
     public ResponseEntity<?> getTurns(@PathVariable Long idGame, @PathVariable Long idPlayer) {
         try {
-            PlaySession playSession = playSessionService.findPlaySessionByIdGameAndIdPlayer(idGame, idPlayer);
+            PlaySession playSession = playSessionService.findOrCreatePlaySession(idGame, idPlayer);
             if (playSession == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new NotFoundResponse("Không tìm thấy lượt chơi"));
             }

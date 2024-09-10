@@ -1,15 +1,17 @@
 package com.voufinal.authservice.service;
 
 import com.voufinal.authservice.model.*;
+import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,16 +22,11 @@ import java.util.Optional;
 public class UserManagementClient {
 
     private final RestTemplate restTemplate;
-    //private final String userUrl = "http://user-service:8082/api/v1/users";
-    private final String userUrl = "http://localhost:8082/api/v1/users";
-    //private final String playerUrl = "http://user-service:8082/api/v1/players";
-    private final String playerUrl = "http://localhost:8082/api/v1/players";
-    //private final String brandUrl = "http://user-service:8082/api/v1/brands";
-    private final String brandUrl = "http://localhost:8082/api/v1/brands";
-//    private final String adminUrl = "http://user-service:8082/api/v1/admins";
-    private final String adminUrl = "http://localhost:8082/api/v1/admins";
-    //private final String sessionUrl = "http://user-service:8082/api/v1/sessions";
-    private final String sessionUrl = "http://localhost:8082/api/v1/sessions";
+    private final String userUrl = "http://user-service:8082/api/v1/users";
+    private final String playerUrl = "http://user-service:8082/api/v1/players";
+    private final String brandUrl = "http://user-service:8082/api/v1/brands";
+    private final String adminUrl = "http://user-service:8082/api/v1/admins";
+    private final String sessionUrl = "http://user-service:8082/api/v1/sessions";
 
 
     @Autowired
@@ -86,6 +83,7 @@ public class UserManagementClient {
         }
     }
 
+    //TODO: re-handle for it 13-8-2024
     public User updateUserInternal(User user) {
         try {
             HttpEntity<User> requestEntity = new HttpEntity<>(user);
@@ -217,16 +215,28 @@ public class UserManagementClient {
         }
     }
 
-    public Optional<User> getUserByUsernameAndEmail(String username, String email){
+    public Optional<User> getUserByUsernameAndEmail(String username, String email) throws Exception {
         try {
-            ResponseEntity<User> response = restTemplate.getForEntity(userUrl + "/query" +"?username=" + username + "&email=" + email, User.class);
+            ResponseEntity<User> response = restTemplate.getForEntity(userUrl + "/query" + "?username=" + username + "&email=" + email, User.class);
             if (response.getStatusCode() == HttpStatus.OK) {
                 return Optional.ofNullable(response.getBody());
+            } else if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
+                return Optional.empty();
+            } else {
+                System.out.println("Unexpected status received: " + response.getStatusCode());
+                return Optional.empty();
             }
+        } catch (HttpClientErrorException.NotFound e) {
             return Optional.empty();
+        } catch (HttpClientErrorException ex) {
+            System.out.println("Client error: " + ex.getStatusCode());
+            throw new RuntimeException(ex);
+        } catch (HttpServerErrorException ex) {
+            System.out.println("Server error: " + ex.getStatusCode());
+            throw new RuntimeException(ex);
         } catch (Exception e) {
             System.out.println("Error in getUserByUsernameAndEmail: " + e.getMessage());
-            return Optional.empty();
+            throw new RuntimeException("Error retrieving user by username and email", e);
         }
     }
 }

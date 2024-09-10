@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class EventClient {
     private final RestTemplate restTemplate;
-    private final String EVENTS_URL = "http://event-service:8083/api/v1/events";
+    private final String EVENTS_URL = "http://localhost:8083/api/v1/events";
 
     @Autowired
     public EventClient(RestTemplate restTemplate) {

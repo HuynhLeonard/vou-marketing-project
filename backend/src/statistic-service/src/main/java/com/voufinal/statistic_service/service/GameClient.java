@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class GameClient {
     private final RestTemplate restTemplate;
-    private final String GAME_URL = "http://streaming-service:8086/api/v1/game";
+    private final String GAME_URL = "http://localhost:8086/api/v1/game";
 
     @Autowired
     public GameClient(RestTemplate restTemplate) {

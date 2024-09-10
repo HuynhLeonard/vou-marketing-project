@@ -17,10 +17,15 @@ public class BrandRegistration implements IRegistration {
 
     @Override
     public byte register(User user) {
-        User existUser = client.getUserByUsernameAndEmail(user.getUsername(), user.getEmail()).orElse(null);
-        if (existUser != null) {
-            return 0;
+        try {
+            User existUser = client.getUserByUsernameAndEmail(user.getUsername(), user.getEmail()).orElse(null);
+            if (existUser != null) {
+                return 0;
+            }
+        } catch (Exception e) {
+            return 2;
         }
+
         String password = passwordEncoder.encode(user.getPassword());
         Brand brand = new Brand(user, password);
         try {
@@ -29,7 +34,7 @@ public class BrandRegistration implements IRegistration {
             }
             return 2;
         } catch (Exception e) {
-            System.err.println("Failed to create admin: " + e.getMessage());
+            System.err.println("Failed to create Brand: " + e.getMessage());
             return 2;
         }
     }

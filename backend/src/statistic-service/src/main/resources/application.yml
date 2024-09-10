@@ -1,12 +1,12 @@
 server:
-  port: 8015
+  port: 8012
 
 spring:
   application:
     name: statistic-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5436/statistics
+    url: jdbc:postgresql://localhost:5437/statistics
     username: admin
     password: admin
     driver-class-name: org.postgresql.Driver
