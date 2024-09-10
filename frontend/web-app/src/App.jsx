@@ -9,6 +9,7 @@ import UserManagementPage from "./pages/UserManagementPage.jsx";
 import EventManagement from "./pages/EventManagement.jsx";
 import TestLogin from "./pages/TestLogin.jsx";
 import SignUp from "./pages/SignUp.jsx";
+import SignIn from "./pages/SignIn.jsx"
 
 function App() {
     return (
@@ -20,7 +21,9 @@ function App() {
                     <Route path="/admin/eventManagement" element={<EventManagement />} />
                     <Route path="/admin/gameManagement" element={<GameManagementPage />} />
                     <Route path="/admin/statistic" element={<StatisticPage />} />
-                    <Route path="/" element={<SignUp />} />
+                    <Route path="/" element={<SignIn />} />
+                    <Route path="/signUp" element={<SignUp />} />
+
                 </Routes>
             </BrowserRouter>
         </div>

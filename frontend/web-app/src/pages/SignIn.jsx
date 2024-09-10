@@ -3,19 +3,113 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { useMutation } from 'react-query';
+import { callApiSignIn } from '../service/user';
+import { loginSuccess } from '../redux/auth';
+import Notification from '../Components/Notification';
+import { useDispatch } from 'react-redux';
 
 const SignIn = () => {
+    const dispatch = useDispatch()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
+    const [showNoti, setShowNoti] = useState(false)
+    const [isError, setIsError] = useState(false);
+    const [notiMsg, setNotiMsg] = useState('');
+
+    const [account, setAccount] = useState({
+        username: '',
+        password: '',
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Remember Me:", rememberMe);
+        console.log(account);
     };
+
+    const setInfo = (e) => {
+        setAccount((prev) => {
+                return {
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                }
+            }
+        )
+    }
+
+    const loginMutation = useMutation(
+        (account) => callApiSignIn(account),
+        {
+            onSuccess: (data) => {
+                console.log(data);
+                if (data.success) {        
+                    const { token, account } = data.metadata;
+                    // console.log(account);
+                    localStorage.setItem('accessToken', token);
+                    localStorage.setItem('idUser', account.idUser);
+                    localStorage.setItem('avatarUrl', account.avatarUrl);
+                    localStorage.setItem('username', account.username);
+                    localStorage.setItem('currentTab', "Trang chủ");
+                    // localStorage.setItem('fullName', account.fullName);
+                    // localStorage.setItem('email', account.email);
+                    // localStorage.setItem('phoneNumber', account.phoneNumber);
+                    // localStorage.setItem('address', account.address);
+                    // localStorage.setItem('lockedDate', account.lockedDate);
+                    // localStorage.setItem('role', account.role);
+                    // localStorage.setItem('status', account.status);
+                    // localStorage.setItem('field', account.field);
+                    // localStorage.setItem('longitude', account.longitude);
+                    // localStorage.setItem('latitude', account.latitude);
+                    
+
+                    const userInfo = {
+                        accessToken: token, 
+                        idUser: account.idUser,
+                        avatarUrl: account.avatarUrl,
+                        username: account.username,
+                        fullName: account.fullName,
+                        email: account.email,
+                        phoneNumber: account.phoneNumber,
+                        address: account.address,
+                        status: account.status,
+                        lockedDate: account.lockedDate,
+                        role: account.role, 
+                        expiresIn: '10h', 
+                        field: account.field || '',
+                        longitude: account.longitude || '',
+                        latitude: account.latitude || '',
+                    }
+                    dispatch(loginSuccess(userInfo))
+                    
+                    if(account.role === 'BRAND') {
+                        window.location.href = "http://localhost:3000/brand";
+                    } else {
+                        window.location.href = "http://localhost:3000/admin";
+                    }
+                } else {
+                    console.log("Login failed")
+                }
+            },
+            onError: (error) => {
+                const msgErr = error.response.data.message;
+                setIsError(true);
+                setShowNoti(true);
+                setNotiMsg(msgErr);
+            }
+        }
+    )
+    const submitHandler = async (e) => {
+        console.log("Submit: ", account);
+        if(account.username === '' || account.password === ''){
+            setIsError(true);
+            setShowNoti(true);
+            setNotiMsg("Some fields are missing")
+        }
+
+        loginMutation.mutate(account);
+    }
 
     return (
         <div
@@ -35,19 +129,19 @@ const SignIn = () => {
                             <h2 className="card-title text-center text-red-500 text-[30px] mb-4">
                                 Login
                             </h2>
-                            <form onSubmit={handleSubmit} className="w-full">
+                            <form onSubmit={submitHandler} className="w-full">
                                 <div className="mb-4">
                                     <label
                                         className="block mb-2 text-lg font-bold text-red-500"
                                         htmlFor="email"
                                     >
-                                        Email
+                                        Username
                                     </label>
                                     <input
-                                        type="email"
-                                        id="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        type="text"
+                                        id="username"
+                                        name="username"
+                                        onChange={setInfo}
                                         className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:ring focus:ring-blue-300"
                                         required
                                     />
@@ -63,8 +157,8 @@ const SignIn = () => {
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             id="password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
+                                            name="password"
+                                            onChange={setInfo}
                                             className="w-full px-3 py-2 border rounded bg-white text-black focus:outline-none focus:ring focus:ring-blue-300"
                                             required
                                         />
