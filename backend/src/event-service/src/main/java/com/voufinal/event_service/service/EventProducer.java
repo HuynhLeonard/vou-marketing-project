@@ -1,5 +1,8 @@
 package com.voufinal.event_service.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.voufinal.event_service.dto.MessageData;
 import com.voufinal.event_service.model.Event;
 import com.voufinal.event_service.model.FavouriteEvent;
 import com.voufinal.event_service.repository.EventRepository;
@@ -7,6 +10,7 @@ import com.voufinal.event_service.repository.FavouriteEventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -20,7 +24,7 @@ import java.util.stream.Collectors;
 public class EventProducer {
     private static final Logger logger = LoggerFactory.getLogger(EventProducer.class);
     private static final String TOPIC = "events";
-
+    private final ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
@@ -46,16 +50,31 @@ public class EventProducer {
         // Gửi thông báo cho mỗi sự kiện
         for (Event event : upcomingEvents) {
             List<FavouriteEvent> favouriteEvents = favouriteEventRepository.findAllByIdEvent(event.getIdEvent());
-            List<Long> playerIds = favouriteEvents.stream()
-                    .map(FavouriteEvent::getIdPlayer) // Lấy idUser từ mỗi FavouriteEvent
+            List<String> usernames = favouriteEvents.stream()
+                    .map(FavouriteEvent::getUsername) // Lấy idUser từ mỗi FavouriteEvent
                     .collect(Collectors.toList());
-            for (Long idPlayer: playerIds) {
-                String message = idPlayer+"-Event " + event.getEventName() + " is starting soon!";
-                sendMessage(message);
+            long days = (event.getStartDate().getTime() - System.currentTimeMillis()) / (1000 * 60 * 60 * 24);
+            for (String username: usernames) {
+                MessageData messageData = new MessageData(
+                        event.getIdEvent(),
+                        event.getImageUrl(),
+                        "Sự kiện " + event.getEventName() + " sẽ sớm được bắt đầu!",
+                        (int)days
+                );
+                String messageJson = username+ "--"+convertToJsonString(messageData);
+
+                sendMessage(messageJson);
             }
         }
     }
-
+    private String convertToJsonString(Object object) {
+        try {
+            return objectMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "{}";
+        }
+    }
     public void sendMessage(String message) {
         logger.info(String.format("#### -> Producing message -> %s", message));
         this.kafkaTemplate.send(TOPIC, message);

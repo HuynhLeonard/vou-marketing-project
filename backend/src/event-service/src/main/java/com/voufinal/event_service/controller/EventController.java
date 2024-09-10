@@ -47,8 +47,6 @@ public class EventController {
     @Autowired
     private BrandClient brandClient;
     @Autowired
-    private EventProducer eventProducer;
-    @Autowired
     private GameClient gameClient;
 
 

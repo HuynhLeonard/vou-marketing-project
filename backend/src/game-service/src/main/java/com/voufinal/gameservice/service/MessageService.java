@@ -1,5 +1,6 @@
 package com.voufinal.gameservice.service;
 
+import com.voufinal.gameservice.model.QuizRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,14 @@ import java.util.stream.Collectors;
 
 // key: username
 // value: score
+
+
+
+
+
+
+
+
 @Service
 @Slf4j
 public class MessageService {
@@ -63,11 +72,6 @@ public class MessageService {
         log.info("Key: [{}] ", key);
         this.redisCache.set(key, message);
         return message;
-    }
-
-    public void addUserToRoom(String key) {
-//        String key = USER_LIST_PREFIX + room;
-        redisCache.set(key, "0");
     }
 
     public void sendUserListUpdate(String room) {
@@ -108,23 +112,9 @@ public class MessageService {
                 .collect(Collectors.toList());
 
         saveQuizzes(quizz);
-        List<Quiz> questions = getQuizzes();
         Instant instant = startedAt.toInstant();
         ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of("Asia/Ho_Chi_Minh"));
-//        System.out.println("Question1231: " + zonedDateTime.toLocalDateTime());
-//
-////        ZonedDateTime zonedDateTime2 = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"));
-//        ZonedDateTime newTimePlus1 = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusSeconds(10);
-//
-//        System.out.println("Scheduling task to run at: " + newTimePlus1);
-//        eventSchedulerService.scheduleJob(newTimePlus1.toLocalDateTime(), () -> {
-//            try {
-//                System.out.println("Task executed at: " + LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
-//                // Task logic here
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        });
+
         System.out.println("Scheduling task to run at: " + zonedDateTime);
         eventSchedulerService.scheduleJob(zonedDateTime.toLocalDateTime(),()->{
             System.out.println("START GAME QUIZZZZZZ");
@@ -137,11 +127,39 @@ public class MessageService {
         });
         return startedAt.toString();
     }
-    public void saveQuizzes(List<Quiz> quizzes) {
+    public void saveQuizzeRedis(List<QuizRedis> quizzes) {
         try {
+            log.info("Quiz with saveQuizzeRedis",quizzes.toString());
             String quizzesJson = objectMapper.writeValueAsString(quizzes);
             log.info("Quzzzzz: {}", quizzesJson );
 
+            redisCache.set("quizzes", quizzesJson);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+    public void saveQuizzes(List<Quiz> quizzes) {
+        try {
+            List<QuizRedis> quizRedis = new ArrayList<>();
+            for (Quiz item : quizzes) {
+                TextToSpeechService text = new TextToSpeechService();
+
+                String radioUrl =text.convertTextToSpeech(item.getQuestion(), item.getAns1(), item.getAns2(), item.getAns3());
+                log.info("Radio convert: ", radioUrl);
+                QuizRedis newItem = new QuizRedis(
+                        item.getQuestion(),
+                        item.getAns1(),
+                        item.getAns2(),
+                        item.getAns3(),
+                        item.getIdGame(),
+                        item.getCorrectAnswerIndex(),
+                        radioUrl
+                );
+                quizRedis.add(newItem);
+            }
+            log.info("Quiz with radios: {}", quizRedis);
+            String quizzesJson = objectMapper.writeValueAsString(quizRedis);
+            log.info("Quzzzzz: {}", quizzesJson );
 
             redisCache.set("quizzes", quizzesJson);
         } catch (JsonProcessingException e) {
@@ -149,11 +167,11 @@ public class MessageService {
         }
     }
 
-    public List<Quiz> getQuizzes() {
+    public List<QuizRedis> getQuizzes() {
         String quizzesJson = redisCache.get("quizzes");
         if (quizzesJson != null) {
             try {
-                List<Quiz> quizzes = objectMapper.readValue(quizzesJson, new TypeReference<List<Quiz>>() {});
+                List<QuizRedis> quizzes = objectMapper.readValue(quizzesJson, new TypeReference<List<QuizRedis>>() {});
                 return quizzes;
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
@@ -163,13 +181,11 @@ public class MessageService {
     }
 
     private void sendNextQuestion(String room) {
-        List<Quiz> quizzes = getQuizzes();
+        List<QuizRedis> quizzes = getQuizzes();
         if (quizzes.isEmpty()) {
-//            sendMessage(room, "Game has ended", "SERVER", null, "game_end");
-//            sendMessage(room, results.toString() , "SERVER", null, "results");
             return;
         }
-        Quiz currentQuiz = quizzes.get(0);
+        QuizRedis currentQuiz = quizzes.get(0);
         System.out.println("Question: " + currentQuiz.toString());
         sendMessage(room, currentQuiz.toString(), "SERVER", null, "question");
 
@@ -181,14 +197,14 @@ public class MessageService {
         });
     }
     private void handleQuestionTimeout(String room) {
-        List<Quiz> quizzes = getQuizzes();
+        List<QuizRedis> quizzes = getQuizzes();
         List<UserResult> results = calculateResults(room);
         quizzes.remove(0);
         if (quizzes.isEmpty()) {
 //            sendMessage(room, "Game has ended", "SERVER", null, "game_end");
 //            ZonedDateTime sendResultsTime = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusSeconds(2);
 //            eventSchedulerService.scheduleJob(sendResultsTime.toLocalDateTime(), () -> {
-                sendMessage(room, results.toString() , "SERVER", null, "results");
+            sendMessage(room, results.toString() , "SERVER", null, "results");
 //            });
             return;
         }
@@ -211,7 +227,7 @@ public class MessageService {
 
 
 
-        saveQuizzes(quizzes);
+        saveQuizzeRedis(quizzes);
         // Schedule sending question after 5 seconds
         ZonedDateTime sendResultsTime = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusSeconds(5);
         eventSchedulerService.scheduleJob(sendResultsTime.toLocalDateTime(), () -> {
