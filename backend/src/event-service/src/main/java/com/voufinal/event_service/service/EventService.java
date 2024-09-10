@@ -1,10 +1,13 @@
 package com.voufinal.event_service.service;
 
+import com.voufinal.event_service.common.NotFoundException;
+import com.voufinal.event_service.dto.EventDetailDto;
+import com.voufinal.event_service.dto.GameInfoDto;
+import com.voufinal.event_service.dto.InventoryDetailDto;
 import com.voufinal.event_service.dto.ListEventDto;
 import com.voufinal.event_service.entity.CreateRequestEvent;
-import com.voufinal.event_service.exception.NotFoundException;
-import com.voufinal.event_service.model.Event;
 import com.voufinal.event_service.model.BrandsCooperation;
+import com.voufinal.event_service.model.Event;
 import com.voufinal.event_service.model.FavouriteEvent;
 import com.voufinal.event_service.repository.BrandsCooperationRepository;
 import com.voufinal.event_service.repository.EventRepository;
@@ -14,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -167,6 +172,19 @@ public class EventService {
     public int updateRemainingVouchers(Long eventId) throws Exception {
         try {
             return eventRepository.decreaseEventRemainingVoucherByIdEvent(eventId);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    public List<Event> findEventStartByUserName(String username) throws Exception {
+        try {
+            LocalDateTime now = LocalDateTime.now();
+
+            LocalDateTime threeDaysBefore = now.plusDays(3);
+
+            Timestamp currentDate = Timestamp.valueOf(now);
+            Timestamp startDateCheck = Timestamp.valueOf(threeDaysBefore);
+            return eventRepository.findEventStartingInThreeDaysUserName(username,currentDate,startDateCheck);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

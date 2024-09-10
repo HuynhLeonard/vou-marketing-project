@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 // key: username
 // value: score
+
 @Service
 @Slf4j
 public class MessageService {
@@ -188,7 +189,7 @@ public class MessageService {
 //            sendMessage(room, "Game has ended", "SERVER", null, "game_end");
 //            ZonedDateTime sendResultsTime = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusSeconds(2);
 //            eventSchedulerService.scheduleJob(sendResultsTime.toLocalDateTime(), () -> {
-                sendMessage(room, results.toString() , "SERVER", null, "results");
+            sendMessage(room, results.toString() , "SERVER", null, "results");
 //            });
             return;
         }

@@ -1,9 +1,14 @@
 package com.voufinal.gameservice.socket;
 
+import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +42,6 @@ public class SocketService {
                     });
         }
     }
-
 
 
 }
