@@ -1,5 +1,10 @@
 package com.voufinal.gameservice.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class PlayerResult {
     private Long idEvent;
     private String playerUsername;

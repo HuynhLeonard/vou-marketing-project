@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/game")
 @RequiredArgsConstructor
-public class MessageController {
+public class MessageController{
 
     private final MessageService messageService;
     private RedisCache redisCache;
@@ -82,7 +82,7 @@ public class MessageController {
         System.out.println(game);
         gameRepository.save(game);
         if (gameInfoDTO.getGameType().equals("shake-game")){
-            ShakingGame shakeGame = new ShakingGame();
+            ShakeGame shakeGame = new ShakeGame();
             shakeGame.setGame(game);
             shakeGameRepository.save(shakeGame);
             return ResponseEntity.ok("Save successfully");
@@ -148,7 +148,7 @@ public class MessageController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new InternalServerError("Changing password failed by server!"));
         }
     }
-    
+
     @GetMapping("/game-info")
     public ResponseEntity<GameInfoDTO>  getDetailGameInfo(@RequestParam Long eventId){
         Game game = gameRepository.findByIdEvent(eventId);
@@ -233,7 +233,7 @@ public class MessageController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new NotFoundResponse("Không tìm thấy người dùng hoặc có lỗi khi tìm kiếm người dùng"));
             }
             int turns = giftTurnRequest.getTurns();
-            PlaySession playSession = playSessionService.findPlaySessionByIdGameAndIdPlayer(giftTurnRequest.getIdGame(), giftTurnRequest.getSenderId());
+            PlaySession playSession = playSessionService.findOrCreatePlaySession(giftTurnRequest.getIdGame(), giftTurnRequest.getSenderId());
             if (playSession == null) {
                 return ResponseEntity.internalServerError().body(new InternalServerError("Lỗi hệ thống khi cố truy cập thông tin lượt chơi của người tặng!"));
             }
@@ -271,8 +271,11 @@ public class MessageController {
         }
         try {
             playSessionService.shareToGetTurns(idGame, idUser);
+            // Call api share count
+            Game game = gameService.findGameByIdGame(idGame);
+            eventClient.increaseShareCount(game.getIdEvent());
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body(new InternalServerError("Lỗi hệ thống khi share lượt"));
+            return ResponseEntity.internalServerError().body(new InternalServerError("Lỗi hệ thống khi share lượt: " + e.getMessage()));
         }
         playSession.setTurns(playSession.getTurns() + 1);
         return ResponseEntity.ok(new SuccessResponse("Chúc mừng bạn đã nhận được 1 lượt", HttpStatus.OK, playSession));

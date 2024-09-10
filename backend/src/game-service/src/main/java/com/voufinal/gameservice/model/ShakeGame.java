@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class ShakingGame {
+public class ShakeGame {
     @Id
     private Long id_game;
 
@@ -14,6 +14,6 @@ public class ShakingGame {
     @JoinColumn(name = "id_game")
     private Game game;
 
-    public ShakingGame() {
+    public ShakeGame() {
     }
 }
