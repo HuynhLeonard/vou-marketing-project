@@ -308,4 +308,8 @@ public class UserService {
     public List<User> findUsersByUserIds(List<Long> userIds) {
         return userRepository.findUsersByIdUserIsIn(userIds);
     }
+
+    public List<User> findUsersByUsernames(List<String> usernames) {
+        return userRepository.findUsersByUsernameIsIn(usernames);
+    }
 }
