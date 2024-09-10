@@ -7,17 +7,21 @@ import ViewNewUserForm from "./ViewNewUserForm";
 import RemoveUserForm from "./RemoveUserForm";
 import RemoveNewUserForm from "./RemoveNewUserForm";
 import EditUserForm from "./EditUserForm";
+import ConfirmNewUserForm from "./ConfirmNewUserForm";
+import AddNewUserForm from "./AddNewUserForm";
 
 function UserManage() {
-    const [allProfileData, setAllProfileData] = useState([]);
     const [profileData, setProfileData] = useState([]);
     const [newProfileData, setNewProfileData] = useState([]);
+    const [currentProfile, setCurretProfile] = useState({});
 
     const [isOpenViewUser, setIsOpenViewUser] = useState(false);
     const [isOpenViewNewUser, setIsOpenViewNewUser] = useState(false);
     const [isOpenRemoveUser, setIsOpenRemoveUser] = useState(false);
     const [isOpenRemoveNewUser, setIsOpenRemoveNewUser] = useState(false);
     const [isOpenEditUser, setIsOpenEditUser] = useState(false);
+    const [isOpenConfirmNewUser, setIsOpenConfirmNewUser] = useState(false);
+    const [isOpenAddNewUser, setIsOpenAddNewUser] = useState(false);
 
     const toTitleCase = (phrase) => {
         return phrase
@@ -28,7 +32,6 @@ function UserManage() {
     };
 
     useEffect(() => {
-        var allUserList = [];
         var userList = [];
         var newUserList = [];
 
@@ -39,15 +42,13 @@ function UserManage() {
             } else {
                 newUserList.push(userData[key]);
             }
-            allUserList.push(userData[key]);
         });
 
         setProfileData(userList);
         setNewProfileData(newUserList);
-        setAllProfileData(allUserList);
 
         return () => {};
-    }, [profileData, newProfileData, allProfileData]);
+    }, [profileData, newProfileData, currentProfile]);
 
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
@@ -56,7 +57,9 @@ function UserManage() {
                     isOpenViewNewUser ||
                     isOpenRemoveUser ||
                     isOpenRemoveNewUser ||
-                    isOpenEditUser) && (
+                    isOpenEditUser ||
+                    isOpenConfirmNewUser ||
+                    isOpenAddNewUser) && (
                     <div>
                         <div
                             class="backdrop-blur-sm w-full h-full absolute top-0 z-20 cursor-pointer"
@@ -66,16 +69,20 @@ function UserManage() {
                                 setIsOpenRemoveUser(false);
                                 setIsOpenRemoveNewUser(false);
                                 setIsOpenEditUser(false);
+                                setIsOpenConfirmNewUser(false);
+                                setIsOpenAddNewUser(false);
                             }}
                         ></div>
                     </div>
                 )}
 
-                {isOpenViewUser && <ViewUserForm />}
-                {isOpenViewNewUser && <ViewNewUserForm />}
-                {isOpenRemoveUser && <RemoveUserForm />}
-                {isOpenRemoveNewUser && <RemoveNewUserForm />}
-                {isOpenEditUser && <EditUserForm />}
+                {isOpenViewUser && <ViewUserForm currentProfile={currentProfile} />}
+                {isOpenViewNewUser && <ViewNewUserForm currentProfile={currentProfile} />}
+                {isOpenRemoveUser && <RemoveUserForm currentProfile={currentProfile} />}
+                {isOpenRemoveNewUser && <RemoveNewUserForm currentProfile={currentProfile} />}
+                {isOpenEditUser && <EditUserForm currentProfile={currentProfile} />}
+                {isOpenConfirmNewUser && <ConfirmNewUserForm currentProfile={currentProfile} />}
+                {isOpenAddNewUser && <AddNewUserForm />}
 
                 <div class="flex w-full p-5 sm:p-1 sm:pt-5">
                     <div class="flex flex-col mr-2 items-center w-2/3 sm:mr-1">
@@ -109,7 +116,13 @@ function UserManage() {
                                 <tbody>
                                     {profileData.map((obj, index) => {
                                         return (
-                                            <tr class="hover">
+                                            <tr
+                                                class="hover cursor-pointer"
+                                                onClick={() => {
+                                                    setCurretProfile(profileData[index]);
+                                                    setIsOpenViewUser(true);
+                                                }}
+                                            >
                                                 <td>{index + 1}</td>
                                                 <td>{toTitleCase(obj.userName)}</td>
                                                 <td>{obj.email}</td>
@@ -121,40 +134,11 @@ function UserManage() {
                                                 </td>
                                                 <td class="text-center">
                                                     <button
-                                                        class="btn btn-sm btn-square btn-info brightness-125 m-1"
-                                                        onClick={() => {
-                                                            setIsOpenViewUser(true);
-                                                        }}
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-5 w-5"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#ffffff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                        >
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <line
-                                                                x1="12"
-                                                                y1="16"
-                                                                x2="12"
-                                                                y2="12"
-                                                            ></line>
-                                                            <line
-                                                                x1="12"
-                                                                y1="8"
-                                                                x2="12.01"
-                                                                y2="8"
-                                                            ></line>
-                                                        </svg>
-                                                    </button>
-                                                    <button
                                                         class="btn btn-sm btn-square btn-info brightness-200 m-1"
-                                                        onClick={() => {
+                                                        onClick={(e) => {
+                                                            setCurretProfile(profileData[index]);
                                                             setIsOpenEditUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
                                                         <svg
@@ -178,8 +162,10 @@ function UserManage() {
                                                     </button>
                                                     <button
                                                         class="btn btn-sm btn-square btn-error brightness-105 m-1"
-                                                        onClick={() => {
+                                                        onClick={(e) => {
+                                                            setCurretProfile(profileData[index]);
                                                             setIsOpenRemoveUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
                                                         <svg
@@ -201,6 +187,35 @@ function UserManage() {
                                             </tr>
                                         );
                                     })}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-success brightness-125 w-[50%]"
+                                                onClick={() => {
+                                                    setIsOpenAddNewUser(true);
+                                                }}
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="w-10 h-10"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="#ffffff"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -230,43 +245,25 @@ function UserManage() {
                                 <tbody>
                                     {newProfileData.map((obj, index) => {
                                         return (
-                                            <tr class="hover">
+                                            <tr
+                                                class="hover cursor-pointer"
+                                                onClick={() => {
+                                                    setCurretProfile(newProfileData[index]);
+                                                    setIsOpenViewNewUser(true);
+                                                }}
+                                            >
                                                 <td>{index + 1}</td>
                                                 <td>{obj.userName}</td>
                                                 <td>{toTitleCase(obj.role)}</td>
                                                 <td class="text-center">
                                                     <button
-                                                        class="btn btn-sm btn-square btn-info brightness-125 m-1"
-                                                        onClick={() => {
-                                                            setIsOpenViewNewUser(true);
+                                                        class="btn btn-sm btn-square btn-success brightness-125 m-1"
+                                                        onClick={(e) => {
+                                                            setCurretProfile(newProfileData[index]);
+                                                            setIsOpenConfirmNewUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-5 w-5"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#ffffff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                        >
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <line
-                                                                x1="12"
-                                                                y1="16"
-                                                                x2="12"
-                                                                y2="12"
-                                                            ></line>
-                                                            <line
-                                                                x1="12"
-                                                                y1="8"
-                                                                x2="12.01"
-                                                                y2="8"
-                                                            ></line>
-                                                        </svg>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-square btn-success brightness-125 m-1">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             class="h-5 w-5"
@@ -282,8 +279,10 @@ function UserManage() {
                                                     </button>
                                                     <button
                                                         class="btn btn-sm btn-square btn-error brightness-105 m-1"
-                                                        onClick={() => {
+                                                        onClick={(e) => {
+                                                            setCurretProfile(newProfileData[index]);
                                                             setIsOpenRemoveNewUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
                                                         <svg
@@ -316,7 +315,9 @@ function UserManage() {
                     isOpenViewNewUser ||
                     isOpenRemoveUser ||
                     isOpenRemoveNewUser ||
-                    isOpenEditUser) && (
+                    isOpenEditUser ||
+                    isOpenConfirmNewUser ||
+                    isOpenAddNewUser) && (
                     <div>
                         <div
                             class="backdrop-blur-sm w-full h-[1000px] absolute top-0 z-20 cursor-pointer"
@@ -326,16 +327,20 @@ function UserManage() {
                                 setIsOpenRemoveUser(false);
                                 setIsOpenRemoveNewUser(false);
                                 setIsOpenEditUser(false);
+                                setIsOpenConfirmNewUser(false);
+                                setIsOpenAddNewUser(false);
                             }}
                         ></div>
                     </div>
                 )}
 
-                {isOpenViewUser && <ViewUserForm />}
-                {isOpenViewNewUser && <ViewNewUserForm />}
-                {isOpenRemoveUser && <RemoveUserForm />}
-                {isOpenRemoveNewUser && <RemoveNewUserForm />}
-                {isOpenEditUser && <EditUserForm />}
+                {isOpenViewUser && <ViewUserForm currentProfile={currentProfile} />}
+                {isOpenViewNewUser && <ViewNewUserForm currentProfile={currentProfile} />}
+                {isOpenRemoveUser && <RemoveUserForm currentProfile={currentProfile} />}
+                {isOpenRemoveNewUser && <RemoveNewUserForm currentProfile={currentProfile} />}
+                {isOpenEditUser && <EditUserForm currentProfile={currentProfile} />}
+                {isOpenConfirmNewUser && <ConfirmNewUserForm currentProfile={currentProfile} />}
+                {isOpenAddNewUser && <AddNewUserForm />}
 
                 <div class="flex flex-col w-full p-5">
                     <div class="flex flex-col items-center">
@@ -359,46 +364,23 @@ function UserManage() {
                                 <tbody>
                                     {profileData.map((obj, index) => {
                                         return (
-                                            <tr class="hover">
+                                            <tr
+                                                class="hover cursor-pointer"
+                                                onClick={() => {
+                                                    setCurretProfile(profileData[index]);
+                                                    setIsOpenViewUser(true);
+                                                }}
+                                            >
                                                 <td class="text-sm">{index + 1}</td>
                                                 <td class="text-sm">{obj.userName}</td>
                                                 <td class="text-sm">{toTitleCase(obj.role)}</td>
                                                 <td class="text-center">
                                                     <button
-                                                        class="btn btn-xs btn-square btn-info brightness-125 m-1"
-                                                        onClick={() => {
-                                                            setIsOpenViewUser(true);
-                                                        }}
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-4 w-4"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#ffffff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                        >
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <line
-                                                                x1="12"
-                                                                y1="16"
-                                                                x2="12"
-                                                                y2="12"
-                                                            ></line>
-                                                            <line
-                                                                x1="12"
-                                                                y1="8"
-                                                                x2="12.01"
-                                                                y2="8"
-                                                            ></line>
-                                                        </svg>
-                                                    </button>
-                                                    <button
                                                         class="btn btn-xs btn-square btn-info brightness-200 m-1"
-                                                        onClick={() => {
+                                                        onClick={(e) => {
+                                                            setCurretProfile(profileData[index]);
                                                             setIsOpenEditUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
                                                         <svg
@@ -422,8 +404,10 @@ function UserManage() {
                                                     </button>
                                                     <button
                                                         class="btn btn-xs btn-square btn-error brightness-105 m-1"
-                                                        onClick={() => {
+                                                        onClick={(e) => {
+                                                            setCurretProfile(profileData[index]);
                                                             setIsOpenRemoveUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
                                                         <svg
@@ -445,6 +429,33 @@ function UserManage() {
                                             </tr>
                                         );
                                     })}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            <button
+                                                class="btn btn-success brightness-125 w-[60%]"
+                                                onClick={() => {
+                                                    setIsOpenAddNewUser(true);
+                                                }}
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="w-4 h-4"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="#ffffff"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -470,43 +481,25 @@ function UserManage() {
                                 <tbody>
                                     {newProfileData.map((obj, index) => {
                                         return (
-                                            <tr class="hover">
+                                            <tr
+                                                class="hover cursor-pointer"
+                                                onClick={() => {
+                                                    setCurretProfile(newProfileData[index]);
+                                                    setIsOpenViewNewUser(true);
+                                                }}
+                                            >
                                                 <td class="text-sm">{index + 1}</td>
                                                 <td class="text-sm">{obj.userName}</td>
                                                 <td class="text-sm">{toTitleCase(obj.role)}</td>
                                                 <td class="text-center">
                                                     <button
-                                                        class="btn btn-xs btn-square btn-info brightness-125 m-1"
-                                                        onClick={() => {
-                                                            setIsOpenViewNewUser(true);
+                                                        class="btn btn-xs btn-square btn-success brightness-125 m-1"
+                                                        onClick={(e) => {
+                                                            setCurretProfile(newProfileData[index]);
+                                                            setIsOpenConfirmNewUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-4 w-4"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#ffffff"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                        >
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <line
-                                                                x1="12"
-                                                                y1="16"
-                                                                x2="12"
-                                                                y2="12"
-                                                            ></line>
-                                                            <line
-                                                                x1="12"
-                                                                y1="8"
-                                                                x2="12.01"
-                                                                y2="8"
-                                                            ></line>
-                                                        </svg>
-                                                    </button>
-                                                    <button class="btn btn-xs btn-square btn-success brightness-125 m-1">
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             class="h-4 w-4"
@@ -522,8 +515,10 @@ function UserManage() {
                                                     </button>
                                                     <button
                                                         class="btn btn-xs btn-square btn-error brightness-105 m-1"
-                                                        onClick={() => {
+                                                        onClick={(e) => {
+                                                            setCurretProfile(newProfileData[index]);
                                                             setIsOpenRemoveNewUser(true);
+                                                            e.stopPropagation();
                                                         }}
                                                     >
                                                         <svg
