@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
-const SignUpCard = () => {
+const SignUp = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -37,7 +37,7 @@ const SignUpCard = () => {
                             <h2 className="card-title text-center text-red-500 text-[30px] mb-4">
                                 Sign Up
                             </h2>
-                            <form onSubmit={handleSubmit} className="w-full">
+                            <div onSubmit={handleSubmit} className="w-full">
                                 {}
                                 <div className="mb-4">
                                     <label
@@ -139,7 +139,7 @@ const SignUpCard = () => {
                                         Sign Up
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                             {/* Social Media Links */}
                             <div className="flex flex-col items-center mt-4">
                                 <div className="flex items-center">
@@ -201,4 +201,4 @@ const SignUpCard = () => {
     );
 };
 
-export default SignUpCard;
+export default SignUp;

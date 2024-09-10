@@ -8,8 +8,8 @@ import StatisticPage from "./pages/StatisticPage.jsx";
 import UserManagementPage from "./pages/UserManagementPage.jsx";
 import EventManagement from "./pages/EventManagement.jsx";
 import TestLogin from "./pages/TestLogin.jsx";
-import SignUp from "./pages/SignUp.jsx";
-import SignIn from "./pages/SignIn.jsx"
+import SignInPage from "./pages/SignInPage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
 
 function App() {
     return (
@@ -21,9 +21,8 @@ function App() {
                     <Route path="/admin/eventManagement" element={<EventManagement />} />
                     <Route path="/admin/gameManagement" element={<GameManagementPage />} />
                     <Route path="/admin/statistic" element={<StatisticPage />} />
-                    <Route path="/" element={<SignIn />} />
-                    <Route path="/signUp" element={<SignUp />} />
-
+                    <Route path="/" element={<SignInPage />} />
+                    <Route path="/signUp" element={<SignUpPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

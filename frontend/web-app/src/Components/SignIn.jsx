@@ -3,26 +3,26 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter, faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { useMutation } from 'react-query';
-import { callApiSignIn } from '../service/user';
-import { loginSuccess } from '../redux/auth';
-import Notification from '../Components/Notification';
-import { useDispatch } from 'react-redux';
+import { useMutation } from "react-query";
+import { callApiSignIn } from "../service/user";
+import { loginSuccess } from "../redux/auth";
+import Notification from "./Notification";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
-    const [showNoti, setShowNoti] = useState(false)
+    const [showNoti, setShowNoti] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [notiMsg, setNotiMsg] = useState('');
+    const [notiMsg, setNotiMsg] = useState("");
 
     const [account, setAccount] = useState({
-        username: '',
-        password: '',
-    })
+        username: "",
+        password: "",
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,85 +31,80 @@ const SignIn = () => {
 
     const setInfo = (e) => {
         setAccount((prev) => {
-                return {
-                    ...prev,
-                    [e.target.name]: e.target.value,
-                }
-            }
-        )
-    }
+            return {
+                ...prev,
+                [e.target.name]: e.target.value,
+            };
+        });
+    };
 
-    const loginMutation = useMutation(
-        (account) => callApiSignIn(account),
-        {
-            onSuccess: (data) => {
-                console.log(data);
-                if (data.success) {        
-                    const { token, account } = data.metadata;
-                    // console.log(account);
-                    localStorage.setItem('accessToken', token);
-                    localStorage.setItem('idUser', account.idUser);
-                    localStorage.setItem('avatarUrl', account.avatarUrl);
-                    localStorage.setItem('username', account.username);
-                    localStorage.setItem('currentTab', "Trang chủ");
-                    // localStorage.setItem('fullName', account.fullName);
-                    // localStorage.setItem('email', account.email);
-                    // localStorage.setItem('phoneNumber', account.phoneNumber);
-                    // localStorage.setItem('address', account.address);
-                    // localStorage.setItem('lockedDate', account.lockedDate);
-                    // localStorage.setItem('role', account.role);
-                    // localStorage.setItem('status', account.status);
-                    // localStorage.setItem('field', account.field);
-                    // localStorage.setItem('longitude', account.longitude);
-                    // localStorage.setItem('latitude', account.latitude);
-                    
+    const loginMutation = useMutation((account) => callApiSignIn(account), {
+        onSuccess: (data) => {
+            console.log(data);
+            if (data.success) {
+                const { token, account } = data.metadata;
+                // console.log(account);
+                localStorage.setItem("accessToken", token);
+                localStorage.setItem("idUser", account.idUser);
+                localStorage.setItem("avatarUrl", account.avatarUrl);
+                localStorage.setItem("username", account.username);
+                localStorage.setItem("currentTab", "Trang chủ");
+                // localStorage.setItem('fullName', account.fullName);
+                // localStorage.setItem('email', account.email);
+                // localStorage.setItem('phoneNumber', account.phoneNumber);
+                // localStorage.setItem('address', account.address);
+                // localStorage.setItem('lockedDate', account.lockedDate);
+                // localStorage.setItem('role', account.role);
+                // localStorage.setItem('status', account.status);
+                // localStorage.setItem('field', account.field);
+                // localStorage.setItem('longitude', account.longitude);
+                // localStorage.setItem('latitude', account.latitude);
 
-                    const userInfo = {
-                        accessToken: token, 
-                        idUser: account.idUser,
-                        avatarUrl: account.avatarUrl,
-                        username: account.username,
-                        fullName: account.fullName,
-                        email: account.email,
-                        phoneNumber: account.phoneNumber,
-                        address: account.address,
-                        status: account.status,
-                        lockedDate: account.lockedDate,
-                        role: account.role, 
-                        expiresIn: '10h', 
-                        field: account.field || '',
-                        longitude: account.longitude || '',
-                        latitude: account.latitude || '',
-                    }
-                    dispatch(loginSuccess(userInfo))
-                    
-                    if(account.role === 'BRAND') {
-                        window.location.href = "http://localhost:3000/brand";
-                    } else {
-                        window.location.href = "http://localhost:3000/admin";
-                    }
+                const userInfo = {
+                    accessToken: token,
+                    idUser: account.idUser,
+                    avatarUrl: account.avatarUrl,
+                    username: account.username,
+                    fullName: account.fullName,
+                    email: account.email,
+                    phoneNumber: account.phoneNumber,
+                    address: account.address,
+                    status: account.status,
+                    lockedDate: account.lockedDate,
+                    role: account.role,
+                    expiresIn: "10h",
+                    field: account.field || "",
+                    longitude: account.longitude || "",
+                    latitude: account.latitude || "",
+                };
+                dispatch(loginSuccess(userInfo));
+
+                if (account.role === "BRAND") {
+                    window.location.href = "http://localhost:3000/brand";
                 } else {
-                    console.log("Login failed")
+                    window.location.href = "http://localhost:3000/admin";
                 }
-            },
-            onError: (error) => {
-                const msgErr = error.response.data.message;
-                setIsError(true);
-                setShowNoti(true);
-                setNotiMsg(msgErr);
+            } else {
+                console.log("Login failed");
             }
-        }
-    )
-    const submitHandler = async (e) => {
-        console.log("Submit: ", account);
-        if(account.username === '' || account.password === ''){
+        },
+        onError: (error) => {
+            const msgErr = error.response.data.message;
             setIsError(true);
             setShowNoti(true);
-            setNotiMsg("Some fields are missing")
+            setNotiMsg(msgErr);
+        },
+    });
+    const submitHandler = async (e) => {
+        console.log("Submit: ", account);
+        if (account.username === "" || account.password === "") {
+            setIsError(true);
+            setShowNoti(true);
+            setNotiMsg("Some fields are missing");
         }
 
         loginMutation.mutate(account);
-    }
+    };
 
     return (
         <div
@@ -129,7 +124,7 @@ const SignIn = () => {
                             <h2 className="card-title text-center text-red-500 text-[30px] mb-4">
                                 Login
                             </h2>
-                            <form onSubmit={submitHandler} className="w-full">
+                            <div onSubmit={submitHandler} className="w-full">
                                 <div className="mb-4">
                                     <label
                                         className="block mb-2 text-lg font-bold text-red-500"
@@ -202,7 +197,7 @@ const SignIn = () => {
                                         Login
                                     </button>
                                 </div>
-                            </form>
+                            </div>
                             <div className="flex flex-col items-center mt-4">
                                 <div className="flex items-center mb-4">
                                     <p className="text-sm mr-2 text-gray-400">
