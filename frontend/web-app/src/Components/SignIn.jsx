@@ -119,7 +119,7 @@ const SignIn = () => {
             <div className="font-Kanit" datatheme="retro">
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-neutral-content">
-                    <div className="card glass w-[500px] shadow-2xl relative w-[400px] sm:w-[500px]">
+                    <div className="card glass w-[500px] shadow-2xl relative sm:w-[500px]">
                         <div className="card-body flex flex-col items-center">
                             <h2 className="card-title text-center text-red-500 text-[30px] mb-4">
                                 Login
