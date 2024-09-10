@@ -11,6 +11,11 @@ import TestLogin from "./pages/TestLogin.jsx";
 import SignInPage from "./pages/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import EditAdminPage from "./pages/EditAdminPage.jsx";
+import EditUserPage from "./pages/EditUserPage.jsx";
+import ViewUserPage from "./pages/ViewUserPage.jsx";
+import ViewNewUserPage from "./pages/ViewNewUserPage.jsx";
+import RemoveUserPage from "./pages/RemoveUserPage.jsx";
+import RemoveNewUserPage from "./pages/RemoveNewUserPage.jsx";
 
 function App() {
     return (
@@ -25,6 +30,17 @@ function App() {
                     <Route path="/" element={<SignInPage />} />
                     <Route path="/signUp" element={<SignUpPage />} />
                     <Route path="/admin/editProfile" element={<EditAdminPage />} />
+                    <Route path="/admin/userManagement/editProfile" element={<EditUserPage />} />
+                    <Route path="/admin/userManagement/profile" element={<ViewUserPage />} />
+                    <Route path="/admin/userManagement/newProfile" element={<ViewNewUserPage />} />
+                    <Route
+                        path="/admin/userManagement/removeProfile"
+                        element={<RemoveUserPage />}
+                    />
+                    <Route
+                        path="/admin/userManagement/removeNewProfile"
+                        element={<RemoveNewUserPage />}
+                    />
                 </Routes>
             </BrowserRouter>
         </div>
