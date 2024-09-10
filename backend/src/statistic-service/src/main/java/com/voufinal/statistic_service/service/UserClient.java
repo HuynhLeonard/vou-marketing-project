@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class UserClient {
     private final RestTemplate restTemplate;
-    private final String EVENTS_URL = "http://user-service:8082/api/v1/users";
+    private final String EVENTS_URL = "http://localhost:8082/api/v1/users";
 
     @Autowired
     public UserClient(RestTemplate restTemplate) {

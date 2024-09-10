@@ -176,6 +176,7 @@ public class MessageController {
                 Optional<Quiz> existingQuizOpt = quizRepository.findById(quizDTO.getQuizId());
                 if (existingQuizOpt.isPresent()) {
                     Quiz existingQuiz = existingQuizOpt.get();
+                    existingQuiz.setQuestion(quizDTO.getQuestion());
                     existingQuiz.setAns1(quizDTO.getAns1());
                     existingQuiz.setAns2(quizDTO.getAns2());
                     existingQuiz.setAns3(quizDTO.getAns3());
