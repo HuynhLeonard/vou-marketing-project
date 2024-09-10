@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-public class StatisticResponse {
-    private Long participants;
+@AllArgsConstructor
+public class QuestionCorrectRates {
+    private Long questionId;
+    private Double rates;
 }

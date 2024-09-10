@@ -8,13 +8,11 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "quiz_question_stats")
-public class QuizQuestionStatistic {
+public class QuizQuestionStats {
     @Id
     @Column(name = "id_quiz_question")
     private Long idQuizQuestion;
 
-    @Column(name = "id_game")
-    private Long idGame;
 
     @Column(name = "id_event")
     private Long idEvent;
