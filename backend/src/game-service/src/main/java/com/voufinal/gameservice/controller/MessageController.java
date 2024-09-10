@@ -1,5 +1,6 @@
 package com.voufinal.gameservice.controller;
 
+import com.voufinal.gameservice.client.EventClient;
 import com.voufinal.gameservice.common.*;
 import com.voufinal.gameservice.dto.*;
 import com.voufinal.gameservice.ultil.RedisCache;
@@ -55,6 +56,9 @@ public class MessageController {
 
     @Autowired
     private GameService gameService;
+
+    @Autowired
+    private EventClient eventClient;
 
     @GetMapping("message/{room}")
     public ResponseEntity<List<String>> getMessages(@PathVariable String room) {
@@ -272,6 +276,26 @@ public class MessageController {
         }
         playSession.setTurns(playSession.getTurns() + 1);
         return ResponseEntity.ok(new SuccessResponse("Chúc mừng bạn đã nhận được 1 lượt", HttpStatus.OK, playSession));
+    }
+
+    @GetMapping("/events/{id_event}")
+    public ResponseEntity<?> findGameByIdEvent(@PathVariable Long id_event) {
+        try {
+            Game game = gameService.findGameByIdEvent(id_event);
+            return ResponseEntity.ok(game);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/{id_event}/participants")
+    public ResponseEntity<?> findParticipantsByEvent(@PathVariable Long id_event) {
+        try {
+            int numberParticipants = playSessionService.countParticipantsByIdEvent(id_event);
+            return ResponseEntity.ok(numberParticipants);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
 

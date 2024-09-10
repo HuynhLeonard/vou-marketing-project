@@ -2,10 +2,7 @@ package com.voufinal.event_service.controller;
 
 import com.voufinal.event_service.common.*;
 import com.voufinal.event_service.dto.*;
-import com.voufinal.event_service.entity.CreateRequestBrandsCooperation;
-import com.voufinal.event_service.entity.CreateRequestEvent;
-import com.voufinal.event_service.entity.EventDetail;
-import com.voufinal.event_service.entity.EventImageResponse;
+import com.voufinal.event_service.entity.*;
 import com.voufinal.event_service.exception.ErrorResponse;
 import com.voufinal.event_service.exception.InternalServerError;
 import com.voufinal.event_service.exception.NotFoundException;
@@ -311,6 +308,42 @@ public class EventController {
             if (result == 1)
                 return ResponseEntity.ok("Cập nhật thành công");
             return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<ApiResponse> getStatistics() {
+        try {
+            List<Event> events = eventService.getAllEvents();
+            AdminStatisticsResponse response = new AdminStatisticsResponse();
+            response.setTotalEvents((long) events.size());
+            response.setTotalVouchers(events.stream().mapToLong(Event::getNumberOfVouchers).sum());
+            response.setEventList(events);
+            return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse("Thống kê events", HttpStatus.OK, response));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new InternalServerError("Lỗi khi lấy thống kê ở Event Service"));
+        }
+    }
+
+    @GetMapping("/event-statistics/{id_event}")
+    public ResponseEntity<?> getEventStatistics(@PathVariable("id_event") Long id_event) {
+        try {
+            Event event = eventService.getEventById(id_event);
+            if (event == null)
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.ok(event);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PutMapping("/event-statistics/{id_event}")
+    public ResponseEntity<?> increaseShareCount(@PathVariable("id_event") Long id_event) {
+        try {
+            int updatedRow = eventService.increaseShareCount(id_event);
+            return ResponseEntity.ok(updatedRow);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }

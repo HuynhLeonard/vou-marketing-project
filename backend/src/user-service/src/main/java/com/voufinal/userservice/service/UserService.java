@@ -304,4 +304,8 @@ public class UserService {
         }
         return null;
     }
+
+    public List<User> findUsersByUserIds(List<Long> userIds) {
+        return userRepository.findUsersByIdUserIsIn(userIds);
+    }
 }

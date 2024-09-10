@@ -14,6 +14,7 @@ import com.voufinal.gameservice.model.UserResult;
 import com.voufinal.gameservice.socket.SocketService;
 import com.voufinal.gameservice.ultil.RedisCache;
 import com.voufinal.gameservice.model.Quiz;
+import com.voufinal.gameservice.client.StatisticsClient;
 
 
 import java.sql.Timestamp;
@@ -29,12 +30,6 @@ import java.util.stream.Collectors;
 // value: score
 
 
-
-
-
-
-
-
 @Service
 @Slf4j
 public class MessageService {
@@ -42,14 +37,15 @@ public class MessageService {
     private final RedisCache redisCache;
     private final ObjectMapper objectMapper;
     private final EventSchedulerService eventSchedulerService;
+    private final StatisticsClient statisticsClient;
 
     @Autowired
-    public MessageService(SocketService socketService, RedisCache redisCache, EventSchedulerService eventSchedulerService) {
+    public MessageService(SocketService socketService, RedisCache redisCache, EventSchedulerService eventSchedulerService, StatisticsClient statisticsClient) {
         this.socketService = socketService;
         this.redisCache = redisCache;
         this.eventSchedulerService = eventSchedulerService;
         this.objectMapper = new ObjectMapper();
-
+        this.statisticsClient = statisticsClient;
     }
 
     public List<String> getPlayers(String room) {
@@ -199,13 +195,12 @@ public class MessageService {
     private void handleQuestionTimeout(String room) {
         List<QuizRedis> quizzes = getQuizzes();
         List<UserResult> results = calculateResults(room);
+
         quizzes.remove(0);
         if (quizzes.isEmpty()) {
-//            sendMessage(room, "Game has ended", "SERVER", null, "game_end");
-//            ZonedDateTime sendResultsTime = ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")).plusSeconds(2);
-//            eventSchedulerService.scheduleJob(sendResultsTime.toLocalDateTime(), () -> {
-            sendMessage(room, results.toString() , "SERVER", null, "results");
-//            });
+            Long idEvent = Long.valueOf(room.split("_")[0]);
+            statisticsClient.saveWinner(idEvent, results);
+            sendMessage(room, results.toString(), "SERVER", null, "results");
             return;
         }
 

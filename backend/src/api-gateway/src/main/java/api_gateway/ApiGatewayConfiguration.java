@@ -38,7 +38,7 @@ public class ApiGatewayConfiguration {
                         .filters(f -> f.filter(new AuthenticationFilter(webClientBuilder)))
                         .uri("lb://gift-service")
                 )
-                .route("statistics-service", r -> r.path("/api/v1/statistic/**")
+                .route("statistics-service", r -> r.path("/api/v1/statistics/**")
                         .filters(f -> f.filter(new AuthenticationFilter(webClientBuilder)))
                         .uri("lb://statistics-service")
                 )
