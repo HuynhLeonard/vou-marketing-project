@@ -180,7 +180,7 @@ function UserManage() {
                                         <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base">
                                             Vai trò
                                         </th>
-                                        <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base text-center w-[35%]">
+                                        <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base text-center">
                                             Xác nhận
                                         </th>
                                     </tr>

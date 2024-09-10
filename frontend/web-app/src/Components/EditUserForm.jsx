@@ -276,27 +276,6 @@ function EditUserForm() {
                     class="backdrop-blur-sm w-full h-full absolute top-0 z-20 cursor-pointer"
                 ></Link>
                 <div class="card lg:card-side bg-base-200 shadow-2xl sm:w-[65%] xl:w-[55%] 2xl:w-[55%] absolute top-[20%] sm:left-[22%] xl:left-[24%] 2xl:left-[24%] z-20">
-                    <button
-                        className="save-button btn btn-circle btn-success btn-disabled brightness-125 absolute sm:top-[86%] sm:left-[93%] xl:top-[88%%] xl:left-[93%] 2xl:top-[86%] 2xl:left-[93%]"
-                        onClick={() => {
-                            confirmSave("large");
-                        }}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-6 w-6"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#ffffff"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                            <polyline points="7 3 7 8 15 8"></polyline>
-                        </svg>
-                    </button>
                     <figure class="w-1/2">
                         <img
                             class="object-cover ava-image cursor-pointer"
@@ -308,7 +287,7 @@ function EditUserForm() {
                         />
                         <input type="file" class="ava-input hidden" accept=".jpg,.jpeg,.png" />
                     </figure>
-                    <div class="card-body">
+                    <div class="card-body p-5">
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="username-title flex-none">Tên tài khoản:&nbsp;</div>
                             <input
@@ -368,7 +347,7 @@ function EditUserForm() {
                             <div class="name-title flex-none">Họ và tên:&nbsp;</div>
                             <input
                                 type="text"
-                                ss="name-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
+                                class="name-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                                 onKeyUp={() => {
                                     inputFill(".name-title", ".name-input");
                                 }}
@@ -474,7 +453,7 @@ function EditUserForm() {
                                 }}
                             />
                         </div>
-                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl mb-2">
                             <div class="birth-title flex-none">Ngày sinh:&nbsp;</div>
                             <input
                                 type="text"
@@ -484,6 +463,27 @@ function EditUserForm() {
                                 }}
                             />
                         </div>
+                        <button
+                            className="save-button btn btn-success btn-disabled brightness-125 w-full"
+                            onClick={() => {
+                                confirmSave("large");
+                            }}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="#ffffff"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -492,46 +492,21 @@ function EditUserForm() {
                     to="/admin/userManagement"
                     class="backdrop-blur-sm w-full h-[1000px] absolute top-0 z-20 cursor-pointer"
                 ></Link>
-                <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] absolute top-[28%] sm:top-[23%] md:top-[18%] left-[20%] z-20">
+                <div class="card card-side bg-base-200 shadow-2xl max-w-[60%] h-[60%] overflow-y-scroll no-scrollbar absolute top-[28%] sm:top-[30%] md:top-[30%] left-[20%] z-20">
                     <div class="card-body p-0">
-                        <div class="flex w-full items-center justify-between">
-                            <figure class="w-1/2">
-                                <img
-                                    class="object-cover small-ava-image cursor-pointer"
-                                    alt="Album"
-                                    src={avatar}
-                                    onClick={() => {
-                                        document.querySelector(".small-ava-input").click();
-                                    }}
-                                />
-                                <input
-                                    type="file"
-                                    class="small-ava-input hidden"
-                                    accept=".jpg,.jpeg,.png"
-                                />
-                            </figure>
-                            <button
-                                className="small-save-button btn btn-success btn-circle btn-disabled brightness-125 w-1/2 mx-1"
-                                onClick={() => {
-                                    confirmSave("small");
-                                }}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="#ffffff"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                    <polyline points="7 3 7 8 15 8"></polyline>
-                                </svg>
-                            </button>
-                        </div>
+                        <img
+                            class="object-fill small-ava-image cursor-pointer"
+                            alt="Album"
+                            src={avatar}
+                            onClick={() => {
+                                document.querySelector(".small-ava-input").click();
+                            }}
+                        />
+                        <input
+                            type="file"
+                            class="small-ava-input hidden"
+                            accept=".jpg,.jpeg,.png"
+                        />
                         <div class="p-4 flex flex-col">
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-username-title flex-none sm:text-lg md:text-xl">
@@ -721,7 +696,7 @@ function EditUserForm() {
                                     }}
                                 />
                             </div>
-                            <div class="flex text-base sm:text-lg md:text-xl">
+                            <div class="flex text-base sm:text-lg md:text-xl mb-2">
                                 <div class="small-birth-title flex-none sm:text-lg md:text-xl">
                                     Ngày sinh:&nbsp;
                                 </div>
@@ -733,6 +708,27 @@ function EditUserForm() {
                                     }}
                                 />
                             </div>
+                            <button
+                                className="small-save-button btn btn-success btn-disabled brightness-125 w-full"
+                                onClick={() => {
+                                    confirmSave("small");
+                                }}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#ffffff"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                    <polyline points="7 3 7 8 15 8"></polyline>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
