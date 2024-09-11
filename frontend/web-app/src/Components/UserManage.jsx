@@ -268,9 +268,6 @@ function UserManage() {
                                         <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base">
                                             Vai trò
                                         </th>
-                                        <th class="font-bold text-red-500 sm:text-sm xl:text-base 2xl:text-base text-center">
-                                            Xác nhận
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -286,52 +283,6 @@ function UserManage() {
                                                 <td>{index + 1}</td>
                                                 <td>{obj.username}</td>
                                                 <td>{toTitleCase(obj.role)}</td>
-                                                <td class="text-center">
-                                                    <button
-                                                        class="btn btn-sm btn-square btn-success brightness-125 m-1"
-                                                        onClick={(e) => {
-                                                            setCurretProfile(newProfileData[index]);
-                                                            setIsOpenConfirmNewUser(true);
-                                                            e.stopPropagation();
-                                                        }}
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-5 w-5"
-                                                            viewBox="0 0 24 24"
-                                                            fill="none"
-                                                            stroke="#000000"
-                                                            stroke-width="2"
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                        >
-                                                            <polyline points="20 6 9 17 4 12"></polyline>
-                                                        </svg>
-                                                    </button>
-                                                    <button
-                                                        class="btn btn-sm btn-square btn-error brightness-105 m-1"
-                                                        onClick={(e) => {
-                                                            setCurretProfile(newProfileData[index]);
-                                                            setIsOpenRemoveNewUser(true);
-                                                            e.stopPropagation();
-                                                        }}
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-5 w-5"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            stroke="currentColor"
-                                                        >
-                                                            <path
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M6 18L18 6M6 6l12 12"
-                                                            />
-                                                        </svg>
-                                                    </button>
-                                                </td>
                                             </tr>
                                         );
                                     })}

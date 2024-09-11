@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from "react";
-import avatar from "../utils/images/avatar.png";
+import avatar1 from "../utils/images/avatar.png";
 import { useMutation } from "react-query";
 import { IoMdClose, IoIosArrowDown } from "react-icons/io";
 import { useRef } from "react";
@@ -839,7 +839,7 @@ function EditUserForm({ currentProfile, handleClose }) {
           <div className="flex flex-col gap-4">
             <h3 className="font-bold text-[24px]">Chỉnh sửa tài khoản</h3>
             <div className="w-[150px] h-[150px]">
-              <img src={user.avatarUrl || '/images/defaultAva.jpg'} alt="avt" className="h-[150px] w-[150px] rounded-full" />
+              <img src={user.avatarUrl || avatar1} alt="avt" className="h-[150px] w-[150px] rounded-full" />
             </div>
             <div className="flex flex-row items-center ">
               <label className="flex flex-col justify-between mr-8 w-full">

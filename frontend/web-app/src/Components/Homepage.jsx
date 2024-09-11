@@ -49,20 +49,6 @@ function Homepage() {
     setIsOpenInfoForm(true)
   }
 
-  const header = [
-    "STT",
-    "Tên sự kiện",
-    "Số lượng vouchers",
-    "Số lượt chia sẻ sự kiện",
-    "Ngày bắt đầu",
-    "Ngày kết thúc",
-  ]
-
-  const scrollViewStyle = {
-    minHeight: "550px",
-    maxHeight: "550px",
-  }
-
 
   const newRows = useMemo(() => {
     const nRows = listEvents.map((row,index) => {
@@ -146,7 +132,7 @@ function Homepage() {
 
   useEffect(() => {
 
-  },[fullListEvents])
+},[fullListEvents])
 
     return (
         <div class="bg-white font-Kanit" data-theme="retro">

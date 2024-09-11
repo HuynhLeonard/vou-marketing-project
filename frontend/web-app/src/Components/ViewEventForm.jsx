@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import avatar from "../utils/images/avatar.png";
+import { convertDataToOutputString } from "../utils/date";
+
 
 function ViewEventForm({ currentProfile }) {
     const toTitleCase = (phrase) => {
@@ -21,7 +23,7 @@ function ViewEventForm({ currentProfile }) {
                     <figure class="w-1/2">
                         <img
                             class="object-cover"
-                            src={currentProfile.avatarUrl ? currentProfile.avatarUrl : avatar}
+                            src={currentProfile.imageUrl}
                             alt="Album"
                         />
                     </figure>
@@ -30,32 +32,32 @@ function ViewEventForm({ currentProfile }) {
                             <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-red-500">
                                 {currentProfile === undefined
                                     ? ""
-                                    : toTitleCase(currentProfile.name)}
+                                    : (currentProfile.eventName)}
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div>Số lượt chia sẻ:&nbsp;</div>
-                            <div>{currentProfile === undefined ? "" : currentProfile.shareNum}</div>
+                            <div>{currentProfile.shareCount ? currentProfile.shareCount : 0}</div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div>Tổng số voucher:&nbsp;</div>
                             <div>
-                                {currentProfile === undefined ? "" : currentProfile.voucherNum}
+                                {currentProfile === undefined ? "" : currentProfile.numberOfVouchers}
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div>Số voucher còn lại:&nbsp;</div>
                             <div>
-                                {currentProfile === undefined ? "" : currentProfile.voucherLeft}
+                                {currentProfile === undefined ? "" : currentProfile.remainingVouchers}
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div>Ngày bắt đầu:&nbsp;</div>
-                            {currentProfile === undefined ? "" : currentProfile.startDay}
+                            {convertDataToOutputString(currentProfile.startDate)}
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div>Ngày kết thúc:&nbsp;</div>
-                            {currentProfile === undefined ? "" : currentProfile.endDay}
+                            {convertDataToOutputString(currentProfile.endDate)}
                         </div>
                     </div>
                 </div>
@@ -71,7 +73,7 @@ function ViewEventForm({ currentProfile }) {
                                 <div class="font-bold text-lg sm:text-xl md:text-2xl text-red-500">
                                     {currentProfile === undefined
                                         ? ""
-                                        : toTitleCase(currentProfile.name)}
+                                        : (currentProfile.name)}
                                 </div>
                             </div>
                         </div>
