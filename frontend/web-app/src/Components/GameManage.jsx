@@ -425,7 +425,7 @@ function GameManage() {
                                         <tr class="hover">
                                             <td>{index + 1}</td>
                                             <td>
-                                                <img class="object-fill" src={avatar} alt="Album" />
+                                                <img class="object-fill" src={obj.image} alt="Album" />
                                             </td>
                                             <td>{toTitleCase(obj.name)}</td>
                                             <td>{toTitleCase(obj.type)}</td>
@@ -560,7 +560,7 @@ function GameManage() {
                             </svg>
                         </button>
                         <figure class="w-1/2">
-                            <img class="object-cover" src={avatar} alt="Album" />
+                            <img class="object-cover" src={currentGameProfile.image} alt="Album" />
                         </figure>
                         <div class="card-body">
                             <div class="flex flex-col items-center mb-5">
