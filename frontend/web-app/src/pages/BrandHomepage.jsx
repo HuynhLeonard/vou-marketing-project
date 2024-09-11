@@ -10,8 +10,12 @@ function BrandHomepage() {
             navigation: "/brand/eventManagement",
             title: "eventManagement-title",
         },
+        {
+            name: "TẠO SỰ KIỆN",
+            navigation: "/brand/addEvent",
+            title: "addEvent-title",
+        },
     ];
-
     return (
         <div>
             <BrandSidebar selectedIndexPage={0} categoryData={categoryData} />
