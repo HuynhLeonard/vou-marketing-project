@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../styles/inputCustom.css'
+import '../../Styles/inputCustom.css'
 import { FaCheck } from "react-icons/fa6";
 import { useState,useEffect } from 'react';
 

@@ -1,5 +1,3 @@
-'use client'
-import { userAgent } from 'next/server';
 import React from 'react'
 import { useRef } from 'react';
 
