@@ -52,38 +52,38 @@ function UserManage() {
 
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
+            {(isOpenViewUser ||
+                isOpenViewNewUser ||
+                isOpenRemoveUser ||
+                isOpenRemoveNewUser ||
+                isOpenEditUser ||
+                isOpenConfirmNewUser ||
+                isOpenAddNewUser) && (
+                <div>
+                    <div
+                        class="backdrop-blur-sm w-full h-full absolute top-0 z-20 cursor-pointer"
+                        onClick={() => {
+                            setIsOpenViewUser(false);
+                            setIsOpenViewNewUser(false);
+                            setIsOpenRemoveUser(false);
+                            setIsOpenRemoveNewUser(false);
+                            setIsOpenEditUser(false);
+                            setIsOpenConfirmNewUser(false);
+                            setIsOpenAddNewUser(false);
+                        }}
+                    ></div>
+                </div>
+            )}
+
+            {isOpenViewUser && <ViewUserForm currentProfile={currentProfile} />}
+            {isOpenViewNewUser && <ViewNewUserForm currentProfile={currentProfile} />}
+            {isOpenRemoveUser && <RemoveUserForm currentProfile={currentProfile} />}
+            {isOpenRemoveNewUser && <RemoveNewUserForm currentProfile={currentProfile} />}
+            {isOpenEditUser && <EditUserForm currentProfile={currentProfile} />}
+            {isOpenConfirmNewUser && <ConfirmNewUserForm currentProfile={currentProfile} />}
+            {isOpenAddNewUser && <AddNewUserForm />}
+
             <div class="lg:block hidden">
-                {(isOpenViewUser ||
-                    isOpenViewNewUser ||
-                    isOpenRemoveUser ||
-                    isOpenRemoveNewUser ||
-                    isOpenEditUser ||
-                    isOpenConfirmNewUser ||
-                    isOpenAddNewUser) && (
-                    <div>
-                        <div
-                            class="backdrop-blur-sm w-full h-full absolute top-0 z-20 cursor-pointer"
-                            onClick={() => {
-                                setIsOpenViewUser(false);
-                                setIsOpenViewNewUser(false);
-                                setIsOpenRemoveUser(false);
-                                setIsOpenRemoveNewUser(false);
-                                setIsOpenEditUser(false);
-                                setIsOpenConfirmNewUser(false);
-                                setIsOpenAddNewUser(false);
-                            }}
-                        ></div>
-                    </div>
-                )}
-
-                {isOpenViewUser && <ViewUserForm currentProfile={currentProfile} />}
-                {isOpenViewNewUser && <ViewNewUserForm currentProfile={currentProfile} />}
-                {isOpenRemoveUser && <RemoveUserForm currentProfile={currentProfile} />}
-                {isOpenRemoveNewUser && <RemoveNewUserForm currentProfile={currentProfile} />}
-                {isOpenEditUser && <EditUserForm currentProfile={currentProfile} />}
-                {isOpenConfirmNewUser && <ConfirmNewUserForm currentProfile={currentProfile} />}
-                {isOpenAddNewUser && <AddNewUserForm />}
-
                 <div class="flex w-full p-5 sm:p-1 sm:pt-5">
                     <div class="flex flex-col mr-2 items-center w-2/3 sm:mr-1">
                         <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-info mb-5">
@@ -311,37 +311,6 @@ function UserManage() {
                 </div>
             </div>
             <div class="lg:hidden">
-                {(isOpenViewUser ||
-                    isOpenViewNewUser ||
-                    isOpenRemoveUser ||
-                    isOpenRemoveNewUser ||
-                    isOpenEditUser ||
-                    isOpenConfirmNewUser ||
-                    isOpenAddNewUser) && (
-                    <div>
-                        <div
-                            class="backdrop-blur-sm w-full h-[1000px] absolute top-0 z-20 cursor-pointer"
-                            onClick={() => {
-                                setIsOpenViewUser(false);
-                                setIsOpenViewNewUser(false);
-                                setIsOpenRemoveUser(false);
-                                setIsOpenRemoveNewUser(false);
-                                setIsOpenEditUser(false);
-                                setIsOpenConfirmNewUser(false);
-                                setIsOpenAddNewUser(false);
-                            }}
-                        ></div>
-                    </div>
-                )}
-
-                {isOpenViewUser && <ViewUserForm currentProfile={currentProfile} />}
-                {isOpenViewNewUser && <ViewNewUserForm currentProfile={currentProfile} />}
-                {isOpenRemoveUser && <RemoveUserForm currentProfile={currentProfile} />}
-                {isOpenRemoveNewUser && <RemoveNewUserForm currentProfile={currentProfile} />}
-                {isOpenEditUser && <EditUserForm currentProfile={currentProfile} />}
-                {isOpenConfirmNewUser && <ConfirmNewUserForm currentProfile={currentProfile} />}
-                {isOpenAddNewUser && <AddNewUserForm />}
-
                 <div class="flex flex-col w-full p-5">
                     <div class="flex flex-col items-center">
                         <div class="font-bold text-lg sm:text-xl text-info mb-5">

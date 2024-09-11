@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Sidebar.css";
 
-function Sidebar({ selectedIndexPage }) {
+function Sidebar({ selectedIndexPage, categoryData }) {
     useEffect(() => {
         switch (selectedIndexPage) {
             case 0:
@@ -194,31 +194,15 @@ function Sidebar({ selectedIndexPage }) {
                     </div>
                     <div class="hidden flex-none lg:block">
                         <ul class="menu menu-horizontal text-lg text-red-500">
-                            <li class="hover:text-black">
-                                <Link to="/admin/" class="homepage-title">
-                                    TRANG CHỦ
-                                </Link>
-                            </li>
-                            <li class="hover:text-black">
-                                <Link to="/admin/userManagement" class="userManagement-title">
-                                    QUẢN LÝ NGƯỜI DÙNG
-                                </Link>
-                            </li>
-                            <li class="hover:text-black">
-                                <Link to="/admin/gameManagement" class="gameManagement-title">
-                                    QUẢN LÝ TRÒ CHƠI
-                                </Link>
-                            </li>
-                            <li class="hover:text-black">
-                                <Link to="/admin/eventManagement" class="voucherAndEvent-title">
-                                    VOUCHER VÀ EVENT
-                                </Link>
-                            </li>
-                            <li class="hover:text-black">
-                                <Link to="/admin/statistic" class="statistic-title">
-                                    THỐNG KÊ
-                                </Link>
-                            </li>
+                            {categoryData.map((obj) => {
+                                return (
+                                    <li class="hover:text-black">
+                                        <Link to={obj.navigation} class={obj.title}>
+                                            {obj.name}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>
@@ -226,31 +210,15 @@ function Sidebar({ selectedIndexPage }) {
             <div class="drawer-side z-50">
                 <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
                 <ul class="menu bg-base-100 min-h-full w-1/2 p-4 text-lg text-red-500">
-                    <li class="hover:text-black">
-                        <Link to="/admin/" class="homepage-title">
-                            TRANG CHỦ
-                        </Link>
-                    </li>
-                    <li class="hover:text-black">
-                        <Link to="/admin/userManagement" class="userManagement-title">
-                            QUẢN LÝ NGƯỜI DÙNG
-                        </Link>
-                    </li>
-                    <li class="hover:text-black">
-                        <Link to="/admin/gameManagement" class="gameManagement-title">
-                            QUẢN LÝ TRÒ CHƠI
-                        </Link>
-                    </li>
-                    <li class="hover:text-black">
-                        <Link to="/admin/eventManagement" class="voucherAndEvent-title">
-                            VOUCHER VÀ EVENT
-                        </Link>
-                    </li>
-                    <li class="hover:text-black">
-                        <Link to="/admin/statistic" class="statistic-title">
-                            THỐNG KÊ
-                        </Link>
-                    </li>
+                    {categoryData.map((obj) => {
+                        return (
+                            <li class="hover:text-black">
+                                <Link to={obj.navigation} class={obj.title}>
+                                    {obj.name}
+                                </Link>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </div>
