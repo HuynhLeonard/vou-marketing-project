@@ -15,6 +15,7 @@ import BrandHomepage from "./pages/BrandHomepage.jsx";
 import BrandEventManagementPage from "./pages/BrandEventManagementPage.jsx";
 import EditBrandPage from "./pages/EditBrandPage.jsx";
 import BrandEditEventPage from "./pages/BrandEditEventPage.jsx";
+import AddNewEventPage from "./pages/AddNewEventPage.jsx";
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/brand/eventManagement" element={<BrandEventManagementPage />} />
                     <Route path="/brand/editProfile" element={<EditBrandPage />} />
                     <Route path="/brand/editEvent" element={<BrandEditEventPage />} />
+                    <Route path="/brand/addEvent" element={<AddNewEventPage />} />
                 </Routes>
             </BrowserRouter>
         </div>
