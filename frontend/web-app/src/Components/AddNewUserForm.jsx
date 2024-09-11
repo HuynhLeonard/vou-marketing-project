@@ -1,7 +1,85 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, {useState} from "react";
+import { useRef } from "react";
+import { useMutation } from "react-query";
+import { callApiSignUp } from "../service/user";
 
 function AddNewUserForm() {
+    const formAccount = useRef();
+
+    const [account, setAccount] = useState({
+        fullName: "",
+        username: "",
+        password: "",
+        email: "",
+        phoneNumber: "",
+        role: "BRAND",
+    });
+
+    const setInfo = (e) => {
+        const fullName = account.username;
+        setAccount((prev) => {
+                return {
+                    ...prev,
+                    [e.target.name]: e.target.value,
+                    fullName : fullName,
+                }
+            }
+        )
+
+    }
+    
+    const signUpMutation = useMutation(
+        (account) => callApiSignUp(account),
+        {
+            onSuccess: (data) => {
+                console.log(data);
+                //handleClose();
+                //handleNoti(false,"Tạo thông tin thành công")
+
+            },
+            onError: (error) =>{
+                const msgErr = error.response.data.message;
+                //setNotiMsg(msgErr);
+                //setIsError(true);
+                //setShowNoti(true);               
+            } 
+        }
+    )
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        console.log("Submit: ", account);
+        if(account.username === "" || account.email === "" || account.password === "" || account.phoneNumber === ""){
+            //setNotiMsg("Yêu cầu điền đầy đủ các trường");
+            //setIsError(true);
+            //setShowNoti(true);
+            return;
+        }
+
+        const passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+
+        if (!passRegex.test(account.password)) {
+            console.log(passRegex.test(account.password))
+            //setNotiMsg("Sử dụng 8 ký tự trở lên bao gồm chữ hoa, chữ thường, số, ký hiệu (ví dụ: !@#$)");
+            //setIsError(true);
+            //setShowNoti(true);
+            return;
+        }
+        if (account.password.length < 8) {
+            //setNotiMsg("Mật khẩu phải lớn hơn 8 kí tự");
+            //setIsError(true);
+            //setShowNoti(true);
+            return;
+        }
+        formAccount.current.reset();
+        signUpMutation.mutate(account);
+    }
+
+    const testSubmit = () => {
+        console.log(account);
+    }
+
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
             <div class="lg:block hidden">
@@ -62,6 +140,8 @@ function AddNewUserForm() {
                             <div class="username-title flex-none">Tên tài khoản:&nbsp;</div>
                             <input
                                 type="text"
+                                name="username"
+                                onChange={setInfo}
                                 class="username-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                             />
                         </div>
@@ -91,10 +171,10 @@ function AddNewUserForm() {
                                         <a
                                             onClick={() => {
                                                 document.querySelector(".role-input").innerHTML =
-                                                    "Customer";
+                                                    "Player";
                                             }}
                                         >
-                                            Customer
+                                            Player
                                         </a>
                                     </li>
                                     <li>
@@ -110,10 +190,26 @@ function AddNewUserForm() {
                                 </ul>
                             </div>
                         </div>
+                        <div className="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <label className="role-title flex-none">
+                            Vai trò
+                            <select
+                                name="role"
+                                value={account.role}
+                                onChange={setInfo} 
+                                className="role-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7">
+                                <option value="PLAYER">Player</option>
+                                <option value="ADMIN">Admin</option>
+                                <option value="BRAND">Brand</option>
+                            </select>
+                            </label>
+                        </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="name-title flex-none">Họ và tên:&nbsp;</div>
                             <input
                                 type="text"
+                                name="fullName"
+                                onChange={setInfo}
                                 class="name-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                             />
                         </div>
@@ -121,6 +217,8 @@ function AddNewUserForm() {
                             <div class="email-title flex-none">Email:&nbsp;</div>
                             <input
                                 type="text"
+                                name="email"
+                                onChange={setInfo}
                                 class="email-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                             />
                         </div>
@@ -128,43 +226,10 @@ function AddNewUserForm() {
                             <div class="phone-title flex-none">Điện thoại:&nbsp;</div>
                             <input
                                 type="text"
+                                name="phoneNumber"
+                                onChange={setInfo}
                                 class="phone-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                             />
-                        </div>
-                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <div class="gender-title flex-none">Giới tính:&nbsp;</div>
-                            <div class="dropdown p-0 h-7 w-full">
-                                <div
-                                    tabindex="0"
-                                    role="button"
-                                    class="gender-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
-                                ></div>
-                                <ul
-                                    tabindex="0"
-                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
-                                >
-                                    <li>
-                                        <a
-                                            onClick={() => {
-                                                document.querySelector(".gender-input").innerHTML =
-                                                    "Nam";
-                                            }}
-                                        >
-                                            Nam
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            onClick={() => {
-                                                document.querySelector(".gender-input").innerHTML =
-                                                    "Nữ";
-                                            }}
-                                        >
-                                            Nữ
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="status-title flex-none">Trạng thái:&nbsp;</div>
@@ -201,24 +266,10 @@ function AddNewUserForm() {
                                 </ul>
                             </div>
                         </div>
-                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <div class="flex-none facebook-title">Facebook:&nbsp;</div>
-                            <input
-                                type="text"
-                                class="facebook-input input w-full sm:text-base xl:text-lg 2xl:text-xl p-0 h-7 placeholder-black"
-                            />
-                        </div>
-                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl mb-2">
-                            <div class="birth-title flex-none">Ngày sinh:&nbsp;</div>
-                            <input
-                                type="text"
-                                class="birth-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap p-0 h-7 placeholder-black w-full"
-                            />
-                        </div>
                         <button
                             className="save-button btn btn-success brightness-125 w-full"
                             onClick={() => {
-                                //confirmSave("large");
+                                testSubmit()
                             }}
                         >
                             <svg
