@@ -2,39 +2,45 @@
 import { useNavigate } from "react-router-dom";
 import Tag from "./Tag";
 
-const Card = ({id,name, date, vouchers,status, bannerImg}) => {
-  const navigate = useNavigate()
+const Card = ({ id, name, date, vouchers, status, bannerImg }) => {
+    const navigate = useNavigate();
 
-  const viewDetailEvent = () => {
-    navigate('/brand/eventManagement')
-  }
+    const viewDetailEvent = () => {
+        navigate("/brand/eventManagement");
+    };
 
-  return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-[328px] cursor-pointer hover:shadow-lg" onClick={viewDetailEvent}>
-    <div className="absolute">
-      <Tag status={status} />
-    </div>
-        <img
-            className="h-[200px] w-full"
-            src={bannerImg || "https://placehold.co/328x200"}
-            alt="event image"
-        />
-
-        <div className="flex w-full gap-2 px-4 py-2">
-            <div className="w-[200px] gap-2 flex grow flex-col">
-                <h5 className="text-lg font-bold max-h-[60px] overflow-clip">{name}</h5>
-                <span className="text-md text-gray-500">{date}</span>
+    return (
+        <div
+            className="bg-white rounded-lg shadow-md overflow-hidden w-[328px] cursor-pointer hover:shadow-lg"
+            data-them="retro"
+            onClick={viewDetailEvent}
+        >
+            <div className="absolute">
+                <Tag status={status} />
             </div>
+            <img
+                className="h-[200px] w-full"
+                src={bannerImg || "https://placehold.co/328x200"}
+                alt="event image"
+            />
 
-            <div className="w-[0.5px] h-[73px] bg-gray-500 "></div>
+            <div className="flex w-full gap-2 px-4 py-2">
+                <div className="w-[200px] gap-2 flex grow flex-col">
+                    <h5 className="text-lg font-bold max-h-[60px] overflow-clip text-red-500">
+                        {name}
+                    </h5>
+                    <span className="text-md text-black">{date}</span>
+                </div>
 
-            <div className="flex flex-1 grow flex-col items-center ">
-                <h2 className="text-primary text-heading1">{vouchers}</h2>
-                <span className="text-md text-gray-500">vouchers</span>
+                <div className="w-[0.5px] h-[73px] bg-black"></div>
+
+                <div className="flex flex-1 grow flex-col items-center ">
+                    <h2 className="text-info text-heading1">{vouchers}</h2>
+                    <span className="text-md text-gray-500">vouchers</span>
+                </div>
             </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Card
+export default Card;
