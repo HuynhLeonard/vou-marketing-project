@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -5,36 +6,10 @@ import "../Styles/Sidebar.css";
 
 function Sidebar({ selectedIndexPage, categoryData }) {
     useEffect(() => {
-        switch (selectedIndexPage) {
-            case 0:
-                document.querySelectorAll(".homepage-title").forEach((title) => {
-                    title.classList.add("selected");
-                });
-                break;
-            case 1:
-                document.querySelectorAll(".userManagement-title").forEach((title) => {
-                    title.classList.add("selected");
-                });
-                break;
-            case 2:
-                document.querySelectorAll(".gameManagement-title").forEach((title) => {
-                    title.classList.add("selected");
-                });
-                break;
-            case 3:
-                document.querySelectorAll(".voucherAndEvent-title").forEach((title) => {
-                    title.classList.add("selected");
-                });
-                break;
-            case 4:
-                document.querySelectorAll(".statistic-title").forEach((title) => {
-                    title.classList.add("selected");
-                });
-                break;
-            default:
-                break;
-        }
-    }, [selectedIndexPage]);
+        document.querySelectorAll("." + categoryData[selectedIndexPage].title).forEach((title) => {
+            title.classList.add("selected");
+        });
+    }, [categoryData]);
 
     return (
         <div class="drawer font-Kanit z-50" data-theme="retro">

@@ -6,16 +6,10 @@ import gameManageImage from "../utils/images/gameManage.png";
 import voucherManageImage from "../utils/images/voucherManage.png";
 import statisticManageImage from "../utils/images/statisticManage.png";
 
-import downloadIcon from "../utils/icons/download.png";
-import loveIcon from "../utils/icons/love.png";
-import userIcon from "../utils/icons/user.png";
-import gameIcon from "../utils/icons/game.png";
-import voucherIcon from "../utils/icons/voucher.png";
-import newIcon from "../utils/icons/new.png";
-import profitIcon from "../utils/icons/profit.png";
-
 import api from "../service/api";
 import axios from "axios";
+
+import eventDashboard from "../utils/images/eventDashboard.png";
 
 import { Link } from "react-router-dom";
 
@@ -26,92 +20,92 @@ function Homepage() {
                 <div class="flex w-full p-5">
                     <div class="flex flex-col mr-2 items-center w-2/3">
                         <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-info mb-5">
-                            THÔNG BÁO NGÀY HÔM NAY
+                            THÔNG SỐ TỔNG QUÁT
                         </div>
-                        <div class="stats shadow mb-5 w-full">
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={downloadIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Lượt tải về</div>
-                                <div class="stat-value text-red-400">2.8K</div>
-                                <div class="stat-desc">↗︎ 1.2K so với hôm qua (22%)</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={loveIcon} alt="love"></img>
-                                </div>
-                                <div class="stat-title text-black">Lượt yêu thích</div>
-                                <div class="stat-value text-red-400">4.2K</div>
-                                <div class="stat-desc">↗︎ 800 so với hôm qua (6%)</div>
-                            </div>
-                        </div>
-
-                        <div class="stats shadow mb-5 w-full overflow-hidden">
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={userIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Tổng người dùng</div>
-                                <div class="stat-value text-red-400">12.6K</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={gameIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Tổng trò chơi</div>
-                                <div class="stat-value text-red-400">2</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={voucherIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Tổng voucher</div>
-                                <div class="stat-value text-red-400">30</div>
-                            </div>
-                        </div>
-
-                        <div class="stats bg-base-100 text-primary-content w-full xl:h-[200px] 2xl:h-[250px]">
-                            <div class="stat">
-                                <div class="flex justify-between">
-                                    <div>
-                                        <div class="stat-title text-black">Người dùng mới</div>
-                                        <div class="stat-value text-red-400">5.6K</div>
-                                    </div>
-                                    <div class="stat-figure text-secondary">
-                                        <img src={newIcon} alt="download"></img>
+                        <div class="grid grid-cols-2 w-full h-[500px] gap-4 ">
+                            <div class="card bg-base-100 flex">
+                                <img
+                                    class="object-cover w-1/3"
+                                    src={eventDashboard}
+                                    alt="Event Dashboard"
+                                />
+                                <div class="card-body">
+                                    <div class="stat">
+                                        <div class="stat-title font-bold">Tổng số người dùng</div>
+                                        <div class="stat-value text-red-500">150</div>
                                     </div>
                                 </div>
-                                <div class="stat-actions">
-                                    <Link
-                                        to="/admin/userManagement"
-                                        class="btn bg-info text-white w-full"
-                                    >
-                                        Duyệt ngay
-                                    </Link>
+                            </div>
+                            <div class="card bg-base-100">
+                                <div class="card-body">
+                                    <div class="stat">
+                                        <div class="stat-figure text-primary">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                class="inline-block h-8 w-8 stroke-current"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <div class="stat-title">Total Likes</div>
+                                        <div class="stat-value text-primary">25.6K</div>
+                                        <div class="stat-desc">21% more than last month</div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="stat">
-                                <div class="flex justify-between">
-                                    <div>
-                                        <div class="stat-title text-black">Tổng doanh thu</div>
-                                        <div class="stat-value text-red-400">$15.400K</div>
-                                    </div>
-                                    <div class="stat-figure text-secondary">
-                                        <img src={profitIcon} alt="download"></img>
+                            <div class="card bg-base-100">
+                                <div class="card-body">
+                                    <div class="stat">
+                                        <div class="stat-figure text-primary">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                class="inline-block h-8 w-8 stroke-current"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <div class="stat-title">Total Likes</div>
+                                        <div class="stat-value text-primary">25.6K</div>
+                                        <div class="stat-desc">21% more than last month</div>
                                     </div>
                                 </div>
-                                <div class="stat-actions">
-                                    <Link
-                                        to="/admin/statistic"
-                                        class="btn bg-info text-white w-full"
-                                    >
-                                        Xem thống kê
-                                    </Link>
+                            </div>
+                            <div class="card bg-base-100">
+                                <div class="card-body">
+                                    <div class="stat">
+                                        <div class="stat-figure text-primary">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                class="inline-block h-8 w-8 stroke-current"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                        <div class="stat-title">Total Likes</div>
+                                        <div class="stat-value text-primary">25.6K</div>
+                                        <div class="stat-desc">21% more than last month</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
