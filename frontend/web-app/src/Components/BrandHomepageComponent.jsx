@@ -1,12 +1,5 @@
 import React from "react";
 import { Carousel } from "flowbite-react";
-import loveIcon from "../utils/icons/love.png";
-import gameIcon from "../utils/icons/game.png";
-import starIcon from "../utils/icons/star.png";
-import eventIcon from "../utils/icons/party.png";
-import voucherIcon from "../utils/icons/voucher.png";
-import newIcon from "../utils/icons/new.png";
-import profitIcon from "../utils/icons/profit.png";
 
 function BrandHomepageComponent() {
     return (
@@ -16,87 +9,6 @@ function BrandHomepageComponent() {
                     <div class="flex flex-col mr-2 items-center w-2/3">
                         <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-info mb-5">
                             THÔNG BÁO NGÀY HÔM NAY
-                        </div>
-                        <div class="stats shadow mb-5 w-full">
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={starIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Lượt đánh giá</div>
-                                <div class="stat-value text-red-400">2.8K</div>
-                                <div class="stat-desc">↗︎ 1.2K so với hôm qua (22%)</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={loveIcon} alt="love"></img>
-                                </div>
-                                <div class="stat-title text-black">Lượt yêu thích</div>
-                                <div class="stat-value text-red-400">4.2K</div>
-                                <div class="stat-desc">↗︎ 800 so với hôm qua (6%)</div>
-                            </div>
-                        </div>
-
-                        <div class="stats shadow mb-5 w-full overflow-hidden">
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={eventIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Tổng sự kiện</div>
-                                <div class="stat-value text-red-400">12.6K</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={gameIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Tổng trò chơi</div>
-                                <div class="stat-value text-red-400">2</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-figure text-secondary">
-                                    <img src={voucherIcon} alt="download"></img>
-                                </div>
-                                <div class="stat-title text-black">Tổng voucher</div>
-                                <div class="stat-value text-red-400">30</div>
-                            </div>
-                        </div>
-
-                        <div class="stats bg-base-100 text-primary-content w-full xl:h-[200px] 2xl:h-[250px]">
-                            <div class="stat">
-                                <div class="flex justify-between">
-                                    <div>
-                                        <div class="stat-title text-black">Người dùng mới</div>
-                                        <div class="stat-value text-red-400">5.6K</div>
-                                    </div>
-                                    <div class="stat-figure text-secondary">
-                                        <img src={newIcon} alt="download"></img>
-                                    </div>
-                                </div>
-                                <div class="stat-actions">
-                                    <button class="btn bg-info text-white w-full">
-                                        Duyệt ngay
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="flex justify-between">
-                                    <div>
-                                        <div class="stat-title text-black">Tổng doanh thu</div>
-                                        <div class="stat-value text-red-400">$15.400K</div>
-                                    </div>
-                                    <div class="stat-figure text-secondary">
-                                        <img src={profitIcon} alt="download"></img>
-                                    </div>
-                                </div>
-                                <div class="stat-actions">
-                                    <button class="btn bg-info text-white w-full">
-                                        Xem thống kê
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="flex flex-col ml-2 grow items-center">
@@ -111,25 +23,13 @@ function BrandHomepageComponent() {
                             indicators="false"
                         >
                             <button>
-                                <img
-                                    src={voucherManageImage}
-                                    alt="Voucher Management"
-                                    className="bg-info-content"
-                                />
+                                <feImage alt="Voucher Management" className="bg-info-content" />
                             </button>
                             <button>
-                                <img
-                                    src={eventManageImage}
-                                    alt="Event Management"
-                                    className="bg-red-400"
-                                />
+                                <img alt="Event Management" className="bg-red-400" />
                             </button>
                             <button>
-                                <img
-                                    src={statisticManageImage}
-                                    alt="Statistic Management"
-                                    className="bg-info-content"
-                                />
+                                <img alt="Statistic Management" className="bg-info-content" />
                             </button>
                         </Carousel>
                     </div>
@@ -179,12 +79,7 @@ function BrandHomepageComponent() {
                                     <div class="stat-value text-red-400">5.6K</div>
                                 </div>
                                 <div class="stat-actions">
-                                    <button
-                                        class="btn btn-sm bg-info text-white w-full"
-                                        onClick={() => {
-                                            subPageTransition(1);
-                                        }}
-                                    >
+                                    <button class="btn btn-sm bg-info text-white w-full">
                                         Duyệt ngay
                                     </button>
                                 </div>
@@ -196,12 +91,7 @@ function BrandHomepageComponent() {
                                     <div class="stat-value text-red-400">$15.400K</div>
                                 </div>
                                 <div class="stat-actions">
-                                    <button
-                                        class="btn btn-sm bg-info text-white w-full"
-                                        onClick={() => {
-                                            subPageTransition(4);
-                                        }}
-                                    >
+                                    <button class="btn btn-sm bg-info text-white w-full">
                                         Xem thống kê
                                     </button>
                                 </div>
@@ -220,22 +110,13 @@ function BrandHomepageComponent() {
                             indicators={false}
                         >
                             <button>
-                                <img
-                                    src={voucherManageImage}
-                                    alt="Voucher Management"
-                                    className="bg-info-content"
-                                />
+                                <img alt="Voucher Management" className="bg-info-content" />
+                            </button>
+                            <button>
+                                <img alt="Event Management" className="bg-red-400" />
                             </button>
                             <button>
                                 <img
-                                    src={eventManageImage}
-                                    alt="Event Management"
-                                    className="bg-red-400"
-                                />
-                            </button>
-                            <button>
-                                <img
-                                    src={statisticManageImage}
                                     alt="Statistic Management"
                                     className="bg-info-content h-full"
                                 />
