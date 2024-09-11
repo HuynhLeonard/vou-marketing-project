@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { logout } from '@redux/auth';
+import { logout } from '../../redux/auth';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
