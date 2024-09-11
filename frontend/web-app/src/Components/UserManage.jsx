@@ -33,6 +33,14 @@ function UserManage() {
     const [isError, setIsError] = useState(false);
     const [notiMsg, setNotiMsg] = useState("");
 
+    function handleCloseForm() {
+        setIsOpenEditUser(false)
+      }
+    
+      function handleCloseAddForm() {
+        setIsOpenAddNewUser(false)
+      }
+
     // call API
     const { isFetching, refetch } = useQuery("fetch-all-users", () => callApiGetAllUser(idUser), {
         onSuccess: (data) => {
@@ -564,7 +572,7 @@ function UserManage() {
             {isOpenViewNewUser && <ViewNewUserForm currentProfile={currentProfile} />}
             {isOpenRemoveUser && <RemoveUserForm currentProfile={currentProfile} />}
             {isOpenRemoveNewUser && <RemoveNewUserForm currentProfile={currentProfile} />}
-            {isOpenEditUser && <EditUserForm currentProfile={currentProfile} />}
+            {isOpenEditUser && <EditUserForm currentProfile={currentProfile} handleClose={handleCloseForm} />}
             {isOpenConfirmNewUser && <ConfirmNewUserForm currentProfile={currentProfile} />}
             {isOpenAddNewUser && <AddNewUserForm />}
         </div>
