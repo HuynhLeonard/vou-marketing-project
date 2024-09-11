@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useRef } from "react";
 import { useMutation } from "react-query";
 import { callApiSignUp } from "../service/user";
@@ -19,38 +19,37 @@ function AddNewUserForm() {
     const setInfo = (e) => {
         const fullName = account.username;
         setAccount((prev) => {
-                return {
-                    ...prev,
-                    [e.target.name]: e.target.value,
-                    fullName : fullName,
-                }
-            }
-        )
+            return {
+                ...prev,
+                [e.target.name]: e.target.value,
+                fullName: fullName,
+            };
+        });
+    };
 
-    }
-    
-    const signUpMutation = useMutation(
-        (account) => callApiSignUp(account),
-        {
-            onSuccess: (data) => {
-                console.log(data);
-                //handleClose();
-                //handleNoti(false,"Tạo thông tin thành công")
-
-            },
-            onError: (error) =>{
-                const msgErr = error.response.data.message;
-                //setNotiMsg(msgErr);
-                //setIsError(true);
-                //setShowNoti(true);               
-            } 
-        }
-    )
+    const signUpMutation = useMutation((account) => callApiSignUp(account), {
+        onSuccess: (data) => {
+            console.log(data);
+            //handleClose();
+            //handleNoti(false,"Tạo thông tin thành công")
+        },
+        onError: (error) => {
+            const msgErr = error.response.data.message;
+            //setNotiMsg(msgErr);
+            //setIsError(true);
+            //setShowNoti(true);
+        },
+    });
 
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log("Submit: ", account);
-        if(account.username === "" || account.email === "" || account.password === "" || account.phoneNumber === ""){
+        if (
+            account.username === "" ||
+            account.email === "" ||
+            account.password === "" ||
+            account.phoneNumber === ""
+        ) {
             //setNotiMsg("Yêu cầu điền đầy đủ các trường");
             //setIsError(true);
             //setShowNoti(true);
@@ -60,7 +59,7 @@ function AddNewUserForm() {
         const passRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
 
         if (!passRegex.test(account.password)) {
-            console.log(passRegex.test(account.password))
+            console.log(passRegex.test(account.password));
             //setNotiMsg("Sử dụng 8 ký tự trở lên bao gồm chữ hoa, chữ thường, số, ký hiệu (ví dụ: !@#$)");
             //setIsError(true);
             //setShowNoti(true);
@@ -74,11 +73,11 @@ function AddNewUserForm() {
         }
         formAccount.current.reset();
         signUpMutation.mutate(account);
-    }
+    };
 
     const testSubmit = () => {
         console.log(account);
-    }
+    };
 
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
@@ -147,62 +146,28 @@ function AddNewUserForm() {
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="role-title flex-none">Vai trò:&nbsp;</div>
-                            <div class="dropdown p-0 h-7 w-full">
-                                <div
-                                    tabindex="0"
-                                    role="button"
-                                    class="role-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
-                                ></div>
-                                <ul
-                                    tabindex="0"
-                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
-                                >
-                                    <li>
-                                        <a
-                                            onClick={() => {
-                                                document.querySelector(".role-input").innerHTML =
-                                                    "Brand";
-                                            }}
-                                        >
-                                            Brand
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            onClick={() => {
-                                                document.querySelector(".role-input").innerHTML =
-                                                    "Player";
-                                            }}
-                                        >
-                                            Player
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            onClick={() => {
-                                                document.querySelector(".role-input").innerHTML =
-                                                    "Admin";
-                                            }}
-                                        >
-                                            Admin
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="flex sm:text-base xl:text-lg 2xl:text-xl">
-                            <label className="role-title flex-none">
-                            Vai trò
                             <select
                                 name="role"
                                 value={account.role}
-                                onChange={setInfo} 
-                                className="role-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7">
+                                onChange={setInfo}
+                                className="role-input select select-sm sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 pl-1 w-full"
+                            >
                                 <option value="PLAYER">Player</option>
                                 <option value="ADMIN">Admin</option>
                                 <option value="BRAND">Brand</option>
                             </select>
-                            </label>
+                        </div>
+                        <div className="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div class="gender-title flex-none">Giới tính:&nbsp;</div>
+                            <select
+                                name="gender"
+                                value={account.gender}
+                                onChange={setInfo}
+                                className="gender-input select select-sm sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 pl-1 w-full"
+                            >
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                            </select>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="name-title flex-none">Họ và tên:&nbsp;</div>
@@ -233,43 +198,21 @@ function AddNewUserForm() {
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="status-title flex-none">Trạng thái:&nbsp;</div>
-                            <div class="dropdown p-0 h-7 w-full">
-                                <div
-                                    tabindex="0"
-                                    role="button"
-                                    class="status-input input sm:text-base xl:text-lg 2xl:text-xl font-normal pl-1 h-7"
-                                ></div>
-                                <ul
-                                    tabindex="0"
-                                    class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-1 mt-1 shadow"
-                                >
-                                    <li>
-                                        <a
-                                            onClick={() => {
-                                                document.querySelector(".status-input").innerHTML =
-                                                    "Hoạt động";
-                                            }}
-                                        >
-                                            Hoạt động
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            onClick={() => {
-                                                document.querySelector(".status-input").innerHTML =
-                                                    "Bị khóa";
-                                            }}
-                                        >
-                                            Bị khóa
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <select
+                                name="status"
+                                value={account.status}
+                                onChange={setInfo}
+                                className="status-input select select-sm sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 pl-1 w-full"
+                            >
+                                <option value="Active">Hoạt động</option>
+                                <option value="Blocked">Bị khóa</option>
+                                <option value="Pending">Chờ duyệt</option>
+                            </select>
                         </div>
                         <button
                             className="save-button btn btn-success brightness-125 w-full"
                             onClick={() => {
-                                testSubmit()
+                                testSubmit();
                             }}
                         >
                             <svg
@@ -359,51 +302,16 @@ function AddNewUserForm() {
                                 <div class="small-role-title sm:text-lg md:text-xl flex-none">
                                     Vai trò:&nbsp;
                                 </div>
-                                <div class="dropdown p-0 h-6 w-full">
-                                    <div
-                                        tabindex="0"
-                                        role="button"
-                                        class="small-role-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
-                                    ></div>
-                                    <ul
-                                        tabindex="0"
-                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
-                                    >
-                                        <li>
-                                            <a
-                                                onClick={() => {
-                                                    document.querySelector(
-                                                        ".small-role-input"
-                                                    ).innerHTML = "Brand";
-                                                }}
-                                            >
-                                                Brand
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                onClick={() => {
-                                                    document.querySelector(
-                                                        ".small-role-input"
-                                                    ).innerHTML = "Customer";
-                                                }}
-                                            >
-                                                Customer
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                onClick={() => {
-                                                    document.querySelector(
-                                                        ".small-role-input"
-                                                    ).innerHTML = "Admin";
-                                                }}
-                                            >
-                                                Admin
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select
+                                    name="role"
+                                    value={account.role}
+                                    onChange={setInfo}
+                                    className="small-role-input select select-xs sm:text-lg md:text-xl font-normal p-0 pl-1 w-full"
+                                >
+                                    <option value="PLAYER">Player</option>
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="BRAND">Brand</option>
+                                </select>
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-name-title flex-none sm:text-lg md:text-xl">
@@ -436,79 +344,30 @@ function AddNewUserForm() {
                                 <div class="small-gender-title sm:text-lg md:text-xl flex-none">
                                     Giới tính:&nbsp;
                                 </div>
-                                <div class="dropdown p-0 h-6 w-full">
-                                    <div
-                                        tabindex="0"
-                                        role="button"
-                                        class="small-gender-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
-                                    ></div>
-                                    <ul
-                                        tabindex="0"
-                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
-                                    >
-                                        <li>
-                                            <a
-                                                onClick={() => {
-                                                    document.querySelector(
-                                                        ".small-gender-input"
-                                                    ).innerHTML = "Nam";
-                                                }}
-                                            >
-                                                Nam
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                onClick={() => {
-                                                    document.querySelector(
-                                                        ".small-gender-input"
-                                                    ).innerHTML = "Nữ";
-                                                }}
-                                            >
-                                                Nữ
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select
+                                    name="gender"
+                                    value={account.gender}
+                                    onChange={setInfo}
+                                    className="small-gender-input select select-xs sm:text-lg md:text-xl font-normal p-0 pl-1 w-full"
+                                >
+                                    <option value="male">Nam</option>
+                                    <option value="female">Nữ</option>
+                                </select>
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="small-status-title flex-none sm:text-lg md:text-xl">
                                     Trạng thái:&nbsp;
                                 </div>
-                                <div class="dropdown p-0 h-6 w-full">
-                                    <div
-                                        tabindex="0"
-                                        role="button"
-                                        class="small-status-input input text-base sm:text-lg md:text-xl font-normal pl-1 h-6 mb-1"
-                                    ></div>
-                                    <ul
-                                        tabindex="0"
-                                        class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-0 shadow"
-                                    >
-                                        <li>
-                                            <a
-                                                onClick={() => {
-                                                    document.querySelector(
-                                                        ".small-status-input"
-                                                    ).innerHTML = "Hoạt động";
-                                                }}
-                                            >
-                                                Hoạt động
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                onClick={() => {
-                                                    document.querySelector(
-                                                        ".small-status-input"
-                                                    ).innerHTML = "Bị khóa";
-                                                }}
-                                            >
-                                                Bị khóa
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select
+                                    name="status"
+                                    value={account.status}
+                                    onChange={setInfo}
+                                    className="small-status-input select select-xs sm:text-lg md:text-xl font-normal p-0 pl-1 w-full"
+                                >
+                                    <option value="PLAYER">Player</option>
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="BRAND">Brand</option>
+                                </select>
                             </div>
                             <div class="flex text-base sm:text-lg md:text-xl mb-1">
                                 <div class="flex-none small-facebook-title sm:text-lg md:text-xl">
