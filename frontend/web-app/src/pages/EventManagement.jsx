@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "../Components/Navigation";
-import VoucherManage from "../Components/VoucherManage";
+import EventManage from "../Components/EventManage";
 import NavigationTwo from "../Components/NavigationTwo";
 import Sidebar from "../Components/Sidebar";
 
@@ -18,8 +18,8 @@ const EventManagement = () => {
             title: "gameManagement-title",
         },
         {
-            name: "VOUCHER VÀ EVENT",
-            navigation: "/admin/voucherAndEvent",
+            name: "QUẢN LÝ EVENT",
+            navigation: "/admin/eventManagement",
             title: "voucherAndEvent-title",
         },
         { name: "THỐNG KÊ", navigation: "/admin/statistic", title: "statistic-title" },
@@ -28,7 +28,7 @@ const EventManagement = () => {
     return (
         <div>
             <Sidebar selectedIndexPage={3} categoryData={categoryData} />
-            <VoucherManage />
+            <EventManage />
         </div>
     );
 };

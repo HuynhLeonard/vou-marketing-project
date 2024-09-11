@@ -21,7 +21,7 @@ function App() {
                 <Routes>
                     <Route path="/admin" element={<AdminHomePage />} />
                     <Route path="/admin/userManagement" element={<UserManagementPage />} />
-                    <Route path="/admin/voucherAndEvent" element={<EventManagement />} />
+                    <Route path="/admin/eventManagement" element={<EventManagement />} />
                     <Route path="/admin/gameManagement" element={<GameManagementPage />} />
                     <Route path="/admin/statistic" element={<StatisticPage />} />
                     <Route path="/" element={<SignInPage />} />

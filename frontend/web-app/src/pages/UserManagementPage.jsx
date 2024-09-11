@@ -18,8 +18,8 @@ const UserManagementPage = () => {
             title: "gameManagement-title",
         },
         {
-            name: "VOUCHER VÀ EVENT",
-            navigation: "/admin/voucherAndEvent",
+            name: "QUẢN LÝ EVENT",
+            navigation: "/admin/eventManagement",
             title: "voucherAndEvent-title",
         },
         { name: "THỐNG KÊ", navigation: "/admin/statistic", title: "statistic-title" },
