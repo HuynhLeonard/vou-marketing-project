@@ -154,7 +154,7 @@ function EventManage() {
                     <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-info mb-5">
                         DANH SÁCH SỰ KIỆN
                     </div>
-                    <div class="w-full h-[500px] overflow-x-hidden overflow-y-scroll no-scrollbar bg-base-100">
+                    <div class="w-full h-[1000px] overflow-x-hidden overflow-y-scroll no-scrollbar bg-base-100">
                         <table class="table">
                             <thead class="sticky top-0 bg-white z-10">
                                 <tr>
