@@ -16,7 +16,16 @@ import { useSelector } from "react-redux";
 import { vi } from "date-fns/locale";
 import { PropagateLoader } from "react-spinners";
 
+import { useQuery } from 'react-query';
+import { callApiGetMyEvents } from '../service/event';
+import { convertDataToOutputString, compareDates } from '../utils/date';
+import { updateStatesEvent } from '../redux/event';
+import { callApiGetAllBrands } from '../service/brand';
+import { callApiGetItems } from '../service/item';
+import { useDispatch } from "react-redux";
+
 const AddNewEventForm = () => {
+    const dispatch = useDispatch()
     const formDataEvent = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
     const [dataEvent, setDataEvent] = useState({ gameInfoDTO: {} });
@@ -320,8 +329,33 @@ const AddNewEventForm = () => {
         setShowNoti(false);
     };
 
+    const {isFetching: isFetchingItemsAndBrands, refetch: refetchItemsAndBrands} = useQuery(
+        "fetch-items-brands",
+        async () => {
+          const brands = await callApiGetAllBrands();
+          const items = await callApiGetItems();
+          console.log(items);
+          return {brands,items}
+        },
+        {
+          onSuccess: (data) => {
+            console.log(data);
+            // const dataBrandCoop = data.brands?.metadata;
+            // const listAvailableBrands = dataBrandCoop.filter(brand => brand.idUser !== brandId);
+            const listAvailableItems = data.items?.metadata;
+            dispatch(updateStatesEvent({listAvailableBrands,listAvailableItems}))        
+          },
+          onError: (error) => {
+            // Handle error and log the appropriate message
+            console.log(error.response?.data?.message || error.message);
+          },
+          staleTime: Infinity, // Data will never be considered stale
+          cacheTime: Infinity, // Data will be cached indefinitely      
+        }
+      )
+
     return (
-        <div className="container w-full P-5 bg-white" data-theme="retro">
+        <div className="ml-[500px] container w-full P-5 bg-white" data-theme="retro">
             {isLoading ? (
                 <div className="flex w-[90%] h-screen items-center justify-center absolute z-50">
                     <PropagateLoader color="#EA661C" />

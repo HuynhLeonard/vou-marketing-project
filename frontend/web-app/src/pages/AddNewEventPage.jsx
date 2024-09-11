@@ -13,7 +13,7 @@ function AddNewEventPage() {
     ];
 
     return (
-        <div>
+        <div className="bg-white">
             <BrandSideBar categoryData={categoryData} />
             <AddNewEventForm />
         </div>
