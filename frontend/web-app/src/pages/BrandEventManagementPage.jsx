@@ -10,7 +10,6 @@ function BrandEventManagementPage() {
             navigation: "/brand/eventManagement",
             title: "eventManagement-title",
         },
-        { name: "THỐNG KÊ", navigation: "/brand/statistic", title: "statistic-title" },
     ];
 
     return (
