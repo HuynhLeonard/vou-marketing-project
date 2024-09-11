@@ -71,7 +71,7 @@ function AddNewUserForm() {
             //setShowNoti(true);
             return;
         }
-        formAccount.current.reset();
+        //formAccount.current.reset();
         signUpMutation.mutate(account);
     };
 
@@ -145,6 +145,15 @@ function AddNewUserForm() {
                             />
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                            <div class="username-title flex-none">Mật khẩu:&nbsp;</div>
+                            <input
+                                type="text"
+                                name="password"
+                                onChange={setInfo}
+                                class="username-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
+                            />
+                        </div>
+                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="role-title flex-none">Vai trò:&nbsp;</div>
                             <select
                                 name="role"
@@ -169,7 +178,7 @@ function AddNewUserForm() {
                                 <option value="female">Nữ</option>
                             </select>
                         </div>
-                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                        {/* <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="name-title flex-none">Họ và tên:&nbsp;</div>
                             <input
                                 type="text"
@@ -177,7 +186,7 @@ function AddNewUserForm() {
                                 onChange={setInfo}
                                 class="name-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                             />
-                        </div>
+                        </div> */}
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="email-title flex-none">Email:&nbsp;</div>
                             <input
@@ -196,7 +205,7 @@ function AddNewUserForm() {
                                 class="phone-input input sm:text-base xl:text-lg 2xl:text-xl whitespace-nowrap pl-1 h-7 placeholder-black w-full"
                             />
                         </div>
-                        <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
+                        {/* <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
                             <div class="status-title flex-none">Trạng thái:&nbsp;</div>
                             <select
                                 name="status"
@@ -204,16 +213,14 @@ function AddNewUserForm() {
                                 onChange={setInfo}
                                 className="status-input select select-sm sm:text-base xl:text-lg 2xl:text-xl font-normal p-0 pl-1 w-full"
                             >
-                                <option value="Active">Hoạt động</option>
-                                <option value="Blocked">Bị khóa</option>
-                                <option value="Pending">Chờ duyệt</option>
+                                <option value="ACTIVE">Hoạt động</option>
+                                <option value="INACTIVE">Bị khóa</option>
+                                <option value="PENDING">Chờ duyệt</option>
                             </select>
-                        </div>
+                        </div> */}
                         <button
                             className="save-button btn btn-success brightness-125 w-full"
-                            onClick={() => {
-                                testSubmit();
-                            }}
+                            onClick={submitHandler}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
