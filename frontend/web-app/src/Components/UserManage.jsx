@@ -9,11 +9,18 @@ import RemoveNewUserForm from "./RemoveNewUserForm";
 import EditUserForm from "./EditUserForm";
 import ConfirmNewUserForm from "./ConfirmNewUserForm";
 import AddNewUserForm from "./AddNewUserForm";
+import { List } from "flowbite-react";
+import { useQuery } from "react-query";
+import {callApiGetAllUser} from "../service/user"
+import { useSelector } from "react-redux";
 
 function UserManage() {
+    const idUser = useSelector(state => state.auth.idUser);
     const [profileData, setProfileData] = useState([]);
     const [newProfileData, setNewProfileData] = useState([]);
     const [currentProfile, setCurretProfile] = useState({});
+    const [shortlistUsers, setShortlistUsers] = useState([]);
+    const [fulllistUsers, setFulllistUsers] = useState([]);
 
     const [isOpenViewUser, setIsOpenViewUser] = useState(false);
     const [isOpenViewNewUser, setIsOpenViewNewUser] = useState(false);
@@ -22,7 +29,48 @@ function UserManage() {
     const [isOpenEditUser, setIsOpenEditUser] = useState(false);
     const [isOpenConfirmNewUser, setIsOpenConfirmNewUser] = useState(false);
     const [isOpenAddNewUser, setIsOpenAddNewUser] = useState(false);
+    const [showNoti, setShowNoti] = useState(false)
+    const [isError, setIsError] = useState(false);
+    const [notiMsg, setNotiMsg] = useState('');
 
+    // call API
+    const {isFetching, refetch} = useQuery(
+        "fetch-all-users",
+        () => callApiGetAllUser(idUser),
+        {
+          onSuccess: (data) => {
+            console.log(data.metadata);
+            let numberOfBrand = 0;
+            let numberOfAdmin = 0;
+            let numberOfPlayer = 0;
+            const list = data.metadata.map((user,index) => {
+              return {
+                no: index+1,
+                name: user.fullName,
+                email: user.email,
+                phone: user.phoneNumber,
+                role: user.role,
+                status: user.status,
+              }
+            })
+
+            setFulllistUsers(data.metadata);
+            setShortlistUsers(list);
+            setProfileData(data.metadata)
+            const newProfile = data.metadata.filter(user => user.status === "PENDING");
+            setNewProfileData(newProfile);
+          },
+          onError: (error) => {
+            const msgErr = error.response.data.message;
+            setIsError(true);
+            setShowNoti(true);
+            setNotiMsg(msgErr);
+          },
+        }
+      )
+
+
+    // end Leo
     const toTitleCase = (phrase) => {
         return phrase
             .toLowerCase()
@@ -32,23 +80,10 @@ function UserManage() {
     };
 
     useEffect(() => {
-        var userList = [];
-        var newUserList = [];
-
-        var keys = Object.keys(userData);
-        keys.forEach(function (key) {
-            if (userData[key].status !== "Pending") {
-                userList.push(userData[key]);
-            } else {
-                newUserList.push(userData[key]);
-            }
-        });
-
-        setProfileData(userList);
-        setNewProfileData(newUserList);
-
-        return () => {};
-    }, [profileData, newProfileData, currentProfile]);
+        refetch()
+        console.log(profileData);
+        console.log(newProfileData);
+    }, []);
 
     return (
         <div class="bg-white font-Kanit" data-theme="retro">
@@ -124,13 +159,13 @@ function UserManage() {
                                                 }}
                                             >
                                                 <td>{index + 1}</td>
-                                                <td>{toTitleCase(obj.userName)}</td>
+                                                <td>{(obj.username)}</td>
                                                 <td>{obj.email}</td>
-                                                <td>{toTitleCase(obj.role)}</td>
+                                                <td>{(obj.role)}</td>
                                                 <td>
-                                                    {obj.status === "Active"
+                                                    {obj.status === "ACTIVE"
                                                         ? "Hoạt động"
-                                                        : "Bị khóa"}
+                                                        : (obj.status === "PENDING" ? "Đang chờ" : "Bị khóa") }
                                                 </td>
                                                 <td class="text-center">
                                                     <button
@@ -253,7 +288,7 @@ function UserManage() {
                                                 }}
                                             >
                                                 <td>{index + 1}</td>
-                                                <td>{obj.userName}</td>
+                                                <td>{obj.username}</td>
                                                 <td>{toTitleCase(obj.role)}</td>
                                                 <td class="text-center">
                                                     <button
@@ -459,7 +494,7 @@ function UserManage() {
                                             >
                                                 <td class="text-sm">{index + 1}</td>
                                                 <td class="text-sm">{obj.userName}</td>
-                                                <td class="text-sm">{toTitleCase(obj.role)}</td>
+                                                <td class="text-sm">{(obj.role)}</td>
                                                 <td class="text-center">
                                                     <button
                                                         class="btn btn-xs btn-square btn-success brightness-125 m-1"

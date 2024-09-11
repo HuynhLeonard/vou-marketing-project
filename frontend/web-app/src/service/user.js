@@ -39,6 +39,6 @@ export const callApiGetUser = async (idUser) => {
 };
 
 export const callApiGetAllUser = async (idUser) => {
-    const { data } = await api.get(`/users?id_user=${idUser}`);
+    const { data } = await api.get(`http://localhost:8082/api/v1/users?id_user=${idUser}`);
     return data;
 };

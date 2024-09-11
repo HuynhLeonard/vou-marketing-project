@@ -1,5 +1,5 @@
 import React from "react";
-import avatar from "../utils/images/ava.jpg";
+import avatar from "../utils/images/avatar.png";
 
 function ViewNewUserForm({ currentProfile }) {
     const toTitleCase = (phrase) => {
@@ -15,17 +15,17 @@ function ViewNewUserForm({ currentProfile }) {
             <div class="lg:block hidden">
                 <div class="card lg:card-side bg-base-200 shadow-2xl sm:w-[65%] xl:w-[55%] 2xl:w-[55%] absolute top-[20%] sm:left-[22%] xl:left-[24%] 2xl:left-[24%] z-20">
                     <figure class="w-1/2">
-                        <img class="object-cover" src={avatar} alt="Album" />
+                        <img class="object-cover" src={currentProfile.avatarUrl ? currentProfile.avatarUrl : avatar} alt="Album" />
                     </figure>
                     <div class="card-body">
                         <div class="flex flex-col items-center mb-5">
                             <div class="font-bold sm:text-lg xl:text-xl 2xl:text-2xl text-red-500">
-                                {currentProfile === undefined ? "" : currentProfile.userName}
+                                {currentProfile === undefined ? "" : currentProfile.username}
                             </div>
                             <div class="badge badge-info">
                                 {currentProfile === undefined
                                     ? ""
-                                    : toTitleCase(currentProfile.role)}
+                                    : (currentProfile.role)}
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
@@ -51,9 +51,9 @@ function ViewNewUserForm({ currentProfile }) {
                             <div>
                                 {currentProfile === undefined
                                     ? ""
-                                    : currentProfile.gender === "male"
+                                    : currentProfile.gender === "MALE"
                                     ? "Nam"
-                                    : "Nữ"}
+                                    : (currentProfile.gender === "FEMALE" ? "Nữ" : "")}
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
@@ -61,9 +61,9 @@ function ViewNewUserForm({ currentProfile }) {
                             <div>
                                 {currentProfile === undefined
                                     ? ""
-                                    : currentProfile.status === "Active"
+                                    : currentProfile.status === "ACTIVE"
                                     ? "Hoạt động"
-                                    : "Bị khóa"}
+                                    : (currentProfile.status === "PENDING" ? "Đang chờ" : "Bị khóa")}
                             </div>
                         </div>
                         <div class="flex sm:text-base xl:text-lg 2xl:text-xl">
