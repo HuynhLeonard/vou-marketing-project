@@ -4,78 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84621e91-3137-41ef-bfbd-f809ff5642c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/GameServiceApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/client/EventClient$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/client/EventClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/client/StatisticsClient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/ApiResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/AuthFailureResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/BadRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/ConflictResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/CreatedResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/ErrorResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/ForbiddenResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/InternalServerError.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/NoContentResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/NotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/NotFoundResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/SuccessResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/common/UnprocessableContentResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/config/AppConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/config/RedisConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/config/ScheduleConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/config/ServerCommandLineRunner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/config/SocketIOConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/constants/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/controller/MessageController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/controller/NotificationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/EventDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/GameInfoDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/GiftTurnRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/Notification.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/PlayerDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/QuizDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/RewardDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/dto/RewardDetail.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/BaseModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/Message$MessageBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/Message.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/MessageType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/Option.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/PlaySession.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/PlayerResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/PlayerResultRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/Quiz.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/QuizGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/QuizGameStats.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/QuizRedis.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/ShakeGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/model/UserResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/repository/GameRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/repository/PlaySessionRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/repository/QuizGameRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/repository/QuizRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/repository/ShakeGameRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/EventSchedulerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/GameService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/MessageService$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/MessageService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/NotificationConsumerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/PlaySessionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/PlayerService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/QuizService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/RewardService$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/RewardService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/service/TextToSpeechService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/socket/SocketModule.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/socket/SocketService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-service/target/classes/com/voufinal/gameservice/ultil/RedisCache.class" beforeDir="false" />
-    </list>
+    <list default="true" id="84621e91-3137-41ef-bfbd-f809ff5642c9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -209,14 +138,6 @@
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -229,6 +150,7 @@
       <workItem from="1726049114024" duration="776000" />
       <workItem from="1726051021699" duration="40000" />
       <workItem from="1726074558234" duration="612000" />
+      <workItem from="1726080097833" duration="36000" />
     </task>
     <servers />
   </component>
