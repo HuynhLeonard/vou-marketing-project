@@ -11,12 +11,12 @@ export const callApiSignUp = async (userData) => {
 };
 
 export const callApiChangePassword = async (newData) => {
-    const { data } = await api.post(`/auth/change-password`, newData);
+    const { data } = await api.post(`http://localhost:8081/api/v1/auth/change-password`, newData);
     return data;
 };
 
 export const callApiUpdateAccount = async (idUser, updatedData) => {
-    const { data } = await api.put(`/users/${idUser}`, updatedData);
+    const { data } = await api.put(`http://localhost:8082/api/v1/users/${idUser}`, updatedData);
     return data;
 };
 
@@ -25,7 +25,7 @@ export const callApiUpdateAccountImage = async (idUser, avatar) => {
     const formData = new FormData();
     formData.append("avatar", avatar);
 
-    const { data } = await api.patch(`/users/${idUser}/avatar`, formData, {
+    const { data } = await api.patch(`http://localhost:8082/api/v1/users/${idUser}/avatar`, formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
@@ -34,7 +34,7 @@ export const callApiUpdateAccountImage = async (idUser, avatar) => {
 };
 
 export const callApiGetUser = async (idUser) => {
-    const { data } = await api.get(`/brands/${idUser}`);
+    const { data } = await api.get(`http://localhost:8082/api/v1/brands/${idUser}`);
     return data;
 };
 
