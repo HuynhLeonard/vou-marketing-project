@@ -10,7 +10,7 @@ const SearchBar = () => {
             <div className="form__group field w-[80%]">
                 <input
                     type="input"
-                    className="form__field input input-ghost"
+                    className="form__field input input-ghost w-full"
                     placeholder="Ten su kien"
                     name="name"
                     id="name"
@@ -20,7 +20,7 @@ const SearchBar = () => {
             <div className="form__group field">
                 <input
                     type="input"
-                    className="form__field input input-ghost"
+                    className="form__field input input-ghost w-full"
                     placeholder="01/01/2024"
                     name="date"
                     id="date"
