@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import "../Styles/Sidebar.css";
 
 function Sidebar({ selectedIndexPage, categoryData }) {
+    const username = localStorage.getItem('username')
+
     useEffect(() => {
+        console.log(username);
         if (selectedIndexPage !== undefined) {
             document
                 .querySelectorAll("." + categoryData[selectedIndexPage].title)
@@ -54,7 +57,7 @@ function Sidebar({ selectedIndexPage, categoryData }) {
                             >
                                 <div class="card-body p-2 flex flex-col items-center">
                                     <h1 class="text-center font-bold text-2xl text-red-500">
-                                        YuLockii
+                                        {username}
                                     </h1>
                                     <span class="justify-center badge badge-info">Admin</span>
                                     <div class="flex">
@@ -101,7 +104,7 @@ function Sidebar({ selectedIndexPage, categoryData }) {
                                 </div>
                             </div>
                             <div class="flex flex-col ml-1 items-center">
-                                <span class="text-lg">YuLockii</span>
+                                <span class="text-lg">{username}</span>
                                 <span class="justify-center badge badge-info">Admin</span>
                             </div>
                         </div>
@@ -119,7 +122,7 @@ function Sidebar({ selectedIndexPage, categoryData }) {
                             >
                                 <div class="card-body p-2 flex flex-col items-center">
                                     <h1 class="text-center font-bold text-3xl text-red-500">
-                                        YuLockii
+                                        {username}
                                     </h1>
                                     <span class="justify-center badge badge-info">Admin</span>
                                     <div class="flex">
@@ -166,7 +169,7 @@ function Sidebar({ selectedIndexPage, categoryData }) {
                                 </div>
                             </div>
                             <div class="flex flex-col ml-1 items-center">
-                                <span class="text-xl">YuLockii</span>
+                                <span class="text-xl">{username}</span>
                                 <span class="justify-center badge badge-info">Admin</span>
                             </div>
                         </div>

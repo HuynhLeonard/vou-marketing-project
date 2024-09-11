@@ -827,8 +827,8 @@ function EditUserForm({ currentProfile, handleClose }) {
 
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-      <div className="relative bg-white p-5 rounded-lg shadow-lg w-full max-w-4xl h-auto mx-4">
+    <div data-theme="retro" className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+      <div className="relative bg-base-100 p-5 rounded-lg shadow-lg w-full max-w-4xl h-auto mx-4">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-900"
           onClick={handleClose}
@@ -837,28 +837,28 @@ function EditUserForm({ currentProfile, handleClose }) {
         </button>
         <form className="container ml-4 mr-4" ref={formAccount}>
           <div className="flex flex-col gap-4">
-            <h3 className="font-bold text-[24px]">Chỉnh sửa tài khoản</h3>
+            <h3 className="font-bold text-info text-[24px]">Chỉnh sửa tài khoản</h3>
             <div className="w-[150px] h-[150px]">
               <img src={user.avatarUrl || avatar1} alt="avt" className="h-[150px] w-[150px] rounded-full" />
             </div>
             <div className="flex flex-row items-center ">
               <label className="flex flex-col justify-between mr-8 w-full">
                 Họ và tên
-                <input type="text" name="fullName" value={user.fullName} onChange={handleChange} className="input_text" />
+                <input type="text" name="fullName" value={user.fullName} onChange={handleChange} className="input_text input input-bordered input-info" />
               </label>
               <label className="flex flex-col justify-between mr-8 w-full">
                 Username
-                <input type="text" name="username" value={user.username} onChange={handleChange} className="input_text" />
+                <input type="text" name="username" value={user.username} onChange={handleChange} className="input_text input input-bordered input-info" />
               </label>
             </div>
             <div className="flex flex-row items-center">
               <label className="flex flex-col justify-between mr-8 w-full">
                 Email
-                <input type="email" name="email" value={user.email} onChange={handleChange} className="input_text" />
+                <input type="email" name="email" value={user.email} onChange={handleChange} className="input_text input input-bordered input-info" />
               </label>
               <label className="flex flex-col justify-between mr-8 w-full">
                 Số điện thoại
-                <input type="number" name="phoneNumber" value={user.phoneNumber} onChange={handleChange} className="input_text" />
+                <input type="number" name="phoneNumber" value={user.phoneNumber} onChange={handleChange} className="input_text input input-bordered input-info" />
               </label>
             </div>
             <div className="flex flex-row items-center">
@@ -869,7 +869,7 @@ function EditUserForm({ currentProfile, handleClose }) {
                     name="role"
                     value={user.role}
                     onChange={handleChange} 
-                    className="input_dropdown">
+                    className="input_dropdown input input-bordered input-info">
                     <option value="PLAYER">Player</option>
                     <option value="ADMIN">Admin</option>
                     <option value="BRAND">Brand</option>
@@ -884,7 +884,7 @@ function EditUserForm({ currentProfile, handleClose }) {
                     name="status"
                     value={user.status}
                     onChange={handleChange} 
-                    className="input_dropdown">
+                    className="input_dropdown input input-bordered input-info">
                     <option value="ACTIVE">Active</option>
                     <option value="INACTIVE">Inactive</option>
                     <option value="PENDING">Pending</option>
