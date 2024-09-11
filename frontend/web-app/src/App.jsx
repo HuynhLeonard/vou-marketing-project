@@ -28,6 +28,7 @@ function App() {
                     <Route path="/signUp" element={<SignUpPage />} />
                     <Route path="/admin/editProfile" element={<EditAdminPage />} />
                     <Route path="/brand" element={<BrandHomepage />} />
+                    <Route path="/brand/eventManagement" element={<BrandEventManagementPage />} />
                 </Routes>
             </BrowserRouter>
         </div>

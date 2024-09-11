@@ -1,3 +1,8 @@
 [{
-    "type": ""
+    "name": "Event 1",
+    "shareNum": 10,
+    "voucherNum": 30,
+    "voucherLeft": 5,
+    "startDay": "01/09/2024",
+    "endDay": "30/09/2024"
 }]
