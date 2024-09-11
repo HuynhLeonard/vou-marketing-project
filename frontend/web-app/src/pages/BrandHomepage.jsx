@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../Components/Sidebar";
+import BrandSidebar from "../Components/BrandSideBar";
 import BrandHomepageComponent from "../Components/BrandHomepageComponent";
 
 function BrandHomepage() {
@@ -14,7 +14,7 @@ function BrandHomepage() {
 
     return (
         <div>
-            <Sidebar selectedIndexPage={0} categoryData={categoryData} />
+            <BrandSidebar selectedIndexPage={0} categoryData={categoryData} />
             <BrandHomepageComponent />
         </div>
     );

@@ -1,8 +1,8 @@
 import React from "react";
-import BrandSidebar from "../Components/BrandSideBar";
-import BrandEventManagement from "../Components/BrandEventManagement";
+import BrandSideBar from "../Components/BrandSideBar";
+import EditBrandForm from "../Components/EditBrandForm";
 
-function BrandEventManagementPage() {
+function EditBrandPage() {
     const categoryData = [
         { name: "TRANG CHỦ", navigation: "/brand", title: "homepage-title" },
         {
@@ -14,10 +14,10 @@ function BrandEventManagementPage() {
 
     return (
         <div>
-            <BrandSidebar selectedIndexPage={1} categoryData={categoryData} />
-            <BrandEventManagement />
+            <BrandSideBar categoryData={categoryData} />
+            <EditBrandForm />
         </div>
     );
 }
 
-export default BrandEventManagementPage;
+export default EditBrandPage;
