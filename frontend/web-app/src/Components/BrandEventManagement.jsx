@@ -66,7 +66,7 @@ const BrandEventManagement = () => {
     );
 
     return (
-        <div className="container w-full p-5 bg-white" data-theme="retro">
+        <div className="container w-full p-5 bg-white ml-[500px]" data-theme="retro">
             <div className={`${showNoti ? "" : "hidden"} flex flex-row justify-end`}>
                 <Notification
                     type={`${isError ? "error" : "success"}`}
@@ -82,7 +82,7 @@ const BrandEventManagement = () => {
                 QUẢN LÝ SỰ KIỆN
             </h1>
             <SearchBar />
-            <div className="container bg-base-100 flex flex-wrap gap-6 my-4">
+            <div className="container bg-white flex flex-wrap gap-6 my-4">
                 {listEvents.length === 0 ? (
                     <div className="text-lg font-regular my-2">Bạn chưa có sự kiện nào</div>
                 ) : (

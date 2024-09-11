@@ -16,7 +16,6 @@ const SearchBar = () => {
                     id="name"
                     required
                 />
-                <label className="form__label">Tên sự kiện</label>
             </div>
             <div className="form__group field">
                 <input
@@ -27,7 +26,6 @@ const SearchBar = () => {
                     id="date"
                     required
                 />
-                <label className="form__label">Ngày bắt đầu</label>
             </div>
         </div>
     );
