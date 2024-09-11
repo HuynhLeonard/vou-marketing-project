@@ -10,11 +10,15 @@ function AddNewEventPage() {
             navigation: "/brand/eventManagement",
             title: "eventManagement-title",
         },
+        {
+            name: "TẠO SỰ KIỆN",
+            navigation: "/brand/addEvent",
+            title: "addEvent-title",
+        },
     ];
-
     return (
         <div>
-            <BrandSideBar categoryData={categoryData} />
+            <BrandSideBar selectedIndexPage={2} categoryData={categoryData} />
             <AddNewEventForm />
         </div>
     );

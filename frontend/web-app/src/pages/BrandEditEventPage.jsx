@@ -10,6 +10,11 @@ function BrandEditEventPage() {
             navigation: "/brand/eventManagement",
             title: "eventManagement-title",
         },
+        {
+            name: "TẠO SỰ KIỆN",
+            navigation: "/brand/addEvent",
+            title: "addEvent-title",
+        },
     ];
 
     return (
