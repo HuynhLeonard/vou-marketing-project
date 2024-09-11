@@ -26,7 +26,10 @@ function Homepage() {
                             THÔNG SỐ TỔNG QUÁT
                         </div>
                         <div class="grid grid-cols-2 w-full h-[500px] gap-4">
-                            <div class="bg-base-100 flex rounded-2xl shadow-2xl">
+                            <Link
+                                to="/admin/userManagement"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
                                 <img
                                     class="object-cover w-1/3 bg-blue-600"
                                     src={userDashboard}
@@ -38,8 +41,11 @@ function Homepage() {
                                         <div class="stat-value text-blue-600 text-8xl">150</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="bg-base-100 flex rounded-2xl shadow-2xl">
+                            </Link>
+                            <Link
+                                to="/admin/userManagement"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
                                 <img
                                     class="object-cover w-1/3 bg-red-600"
                                     src={brandDashboard}
@@ -51,8 +57,11 @@ function Homepage() {
                                         <div class="stat-value text-red-600 text-8xl">10</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="bg-base-100 flex rounded-2xl shadow-2xl">
+                            </Link>
+                            <Link
+                                to="/admin/voucherAndEvent"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
                                 <img
                                     class="object-cover w-1/3 bg-green-600"
                                     src={eventDashboard}
@@ -64,8 +73,11 @@ function Homepage() {
                                         <div class="stat-value text-green-600 text-8xl">18</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="bg-base-100 flex rounded-2xl shadow-2xl">
+                            </Link>
+                            <Link
+                                to="/admin/voucherAndEvent"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
                                 <img
                                     class="object-cover w-1/3 bg-yellow-600"
                                     src={voucherDashboard}
@@ -77,7 +89,7 @@ function Homepage() {
                                         <div class="stat-value text-yellow-600 text-8xl">80</div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <div class="flex flex-col ml-2 grow items-center">
@@ -129,66 +141,43 @@ function Homepage() {
                         <div class="font-bold text-lg sm:text-xl text-info mb-5">
                             THÔNG BÁO NGÀY HÔM NAY
                         </div>
-                        <div class="stats shadow mb-5 w-full text-sm">
-                            <div class="stat">
-                                <div class="stat-title text-black">Lượt tải về</div>
-                                <div class="stat-value text-red-400">2.8K</div>
-                                <div class="stat-desc">↗︎ 1.2K (22%)</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-title text-black">Lượt yêu thích</div>
-                                <div class="stat-value text-red-400">4.2K</div>
-                                <div class="stat-desc">↗︎ 800 (6%)</div>
-                            </div>
-                        </div>
-
-                        <div class="stats shadow mb-5 w-full text-sm">
-                            <div class="stat">
-                                <div class="stat-title text-black">Tổng người dùng</div>
-                                <div class="stat-value text-red-400">12.6K</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-title text-black">Tổng trò chơi</div>
-                                <div class="stat-value text-red-400">2</div>
-                            </div>
-
-                            <div class="stat">
-                                <div class="stat-title text-black">Tổng voucher</div>
-                                <div class="stat-value text-red-400">30</div>
-                            </div>
-                        </div>
-
-                        <div class="stats bg-base-100 text-primary-content w-full text-sm mb-5">
-                            <div class="stat">
-                                <div>
-                                    <div class="stat-title text-black">Người dùng mới</div>
-                                    <div class="stat-value text-red-400">5.6K</div>
+                        <div class="grid grid-cols-2 w-full h-[500px] gap-4 mb-5">
+                            <Link
+                                to="/admin/userManagement"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
+                                <div class="stat">
+                                    <div class="stat-title font-bold">Tổng số người dùng</div>
+                                    <div class="stat-value text-blue-600 text-8xl">150</div>
                                 </div>
-                                <div class="stat-actions">
-                                    <Link
-                                        to="/admin/userManagement"
-                                        class="btn btn-sm bg-info text-white w-full"
-                                    >
-                                        Duyệt ngay
-                                    </Link>
+                            </Link>
+                            <Link
+                                to="/admin/userManagement"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
+                                <div class="stat">
+                                    <div class="stat-title font-bold">Tổng số nhãn hàng</div>
+                                    <div class="stat-value text-red-600 text-8xl">10</div>
                                 </div>
-                            </div>
-                            <div class="stat">
-                                <div>
-                                    <div class="stat-title text-black">Tổng doanh thu</div>
-                                    <div class="stat-value text-red-400">$15.400K</div>
+                            </Link>
+                            <Link
+                                to="/admin/voucherAndEvent"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
+                                <div class="stat">
+                                    <div class="stat-title font-bold">Tổng số sự kiện</div>
+                                    <div class="stat-value text-green-600 text-8xl">18</div>
                                 </div>
-                                <div class="stat-actions">
-                                    <Link
-                                        to="/admin/statistic"
-                                        class="btn btn-sm bg-info text-white w-full"
-                                    >
-                                        Xem thống kê
-                                    </Link>
+                            </Link>
+                            <Link
+                                to="/admin/voucherAndEvent"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                            >
+                                <div class="stat">
+                                    <div class="stat-title font-bold">Tổng số voucher</div>
+                                    <div class="stat-value text-yellow-600 text-8xl">80</div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     <div class="flex flex-col items-center justify-center">
