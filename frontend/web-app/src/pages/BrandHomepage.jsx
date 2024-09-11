@@ -7,13 +7,18 @@ function BrandHomepage() {
         { name: "TRANG CHỦ", navigation: "/brand", title: "homepage-title" },
         {
             name: "QUẢN LÝ SỰ KIỆN",
-            navigation: "/brand/eventrManagement",
+            navigation: "/brand/eventManagement",
             title: "eventManagement-title",
         },
         { name: "THỐNG KÊ", navigation: "/brand/statistic", title: "statistic-title" },
     ];
 
-    return <div></div>;
+    return (
+        <div>
+            <Sidebar selectedIndexPage={0} categoryData={categoryData} />
+            <BrandHomepageComponent />
+        </div>
+    );
 }
 
 export default BrandHomepage;

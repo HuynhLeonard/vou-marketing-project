@@ -11,6 +11,8 @@ import TestLogin from "./pages/TestLogin.jsx";
 import SignInPage from "./pages/SignInPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import EditAdminPage from "./pages/EditAdminPage.jsx";
+import BrandHomepage from "./pages/BrandHomepage.jsx";
+import BrandEventManagementPage from "./pages/BrandEventManagementPage.jsx";
 
 function App() {
     return (
@@ -25,6 +27,7 @@ function App() {
                     <Route path="/" element={<SignInPage />} />
                     <Route path="/signUp" element={<SignUpPage />} />
                     <Route path="/admin/editProfile" element={<EditAdminPage />} />
+                    <Route path="/brand" element={<BrandHomepage />} />
                 </Routes>
             </BrowserRouter>
         </div>

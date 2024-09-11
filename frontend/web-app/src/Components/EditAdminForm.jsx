@@ -131,7 +131,7 @@ function EditAdminForm() {
                     </div>
                     <div class="p-5 visible lg:invisible lg:h-0">
                         <button
-                            className="save-button btn btn-success btn-disabled brightness-125 w-full"
+                            className="save-button btn btn-success brightness-125 w-full"
                             onClick={() => {
                                 confirmSave("large");
                             }}
@@ -344,7 +344,7 @@ function EditAdminForm() {
                     </div>
                     <div class="p-5 mt-5 invisible lg:visible">
                         <button
-                            className="save-button btn btn-success btn-disabled brightness-125 w-full"
+                            className="save-button btn btn-success brightness-125 w-full"
                             onClick={() => {
                                 confirmSave("large");
                             }}
