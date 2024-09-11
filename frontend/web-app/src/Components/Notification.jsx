@@ -1,4 +1,3 @@
-'use client'
 import { IoClose } from "react-icons/io5";
 import { useRef } from 'react';
 
