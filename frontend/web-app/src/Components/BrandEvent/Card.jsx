@@ -6,7 +6,7 @@ const Card = ({ id, name, date, vouchers, status, bannerImg }) => {
     const navigate = useNavigate();
 
     const viewDetailEvent = () => {
-        navigate("/brand/eventManagement");
+        navigate(`/brand/editEvent?id=${id}&s=${status}`, {scroll: true});
     };
 
     return (
