@@ -6,9 +6,13 @@ import "../Styles/Sidebar.css";
 
 function Sidebar({ selectedIndexPage, categoryData }) {
     useEffect(() => {
-        document.querySelectorAll("." + categoryData[selectedIndexPage].title).forEach((title) => {
-            title.classList.add("selected");
-        });
+        if (selectedIndexPage !== undefined) {
+            document
+                .querySelectorAll("." + categoryData[selectedIndexPage].title)
+                .forEach((title) => {
+                    title.classList.add("selected");
+                });
+        }
     }, [categoryData]);
 
     return (
