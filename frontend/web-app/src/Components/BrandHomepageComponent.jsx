@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Carousel } from "flowbite-react";
 
 import userManageImage from "../utils/images/userManage.png";
@@ -22,9 +21,9 @@ function BrandHomepageComponent() {
                             THÔNG SỐ TỔNG QUÁT
                         </div>
                         <div class="grid grid-cols-2 w-full h-[500px] gap-4">
-                            <Link
+                            <div
                                 to="/admin/userManagement"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <img
                                     class="object-cover w-1/3 bg-blue-600"
@@ -37,10 +36,10 @@ function BrandHomepageComponent() {
                                         <div class="stat-value text-blue-600 text-8xl">150</div>
                                     </div>
                                 </div>
-                            </Link>
-                            <Link
+                            </div>
+                            <div
                                 to="/admin/userManagement"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <img
                                     class="object-cover w-1/3 bg-red-600"
@@ -53,10 +52,10 @@ function BrandHomepageComponent() {
                                         <div class="stat-value text-red-600 text-8xl">10</div>
                                     </div>
                                 </div>
-                            </Link>
-                            <Link
+                            </div>
+                            <div
                                 to="/admin/voucherAndEvent"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <img
                                     class="object-cover w-1/3 bg-green-600"
@@ -69,10 +68,10 @@ function BrandHomepageComponent() {
                                         <div class="stat-value text-green-600 text-8xl">18</div>
                                     </div>
                                 </div>
-                            </Link>
-                            <Link
+                            </div>
+                            <div
                                 to="/admin/voucherAndEvent"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <img
                                     class="object-cover w-1/3 bg-yellow-600"
@@ -85,7 +84,7 @@ function BrandHomepageComponent() {
                                         <div class="stat-value text-yellow-600 text-8xl">80</div>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-col ml-2 grow items-center">
@@ -99,34 +98,34 @@ function BrandHomepageComponent() {
                             rightControl=" "
                             indicators={false}
                         >
-                            <Link to="/admin/userManagement">
+                            <div to="/admin/userManagement">
                                 <img
                                     src={userManageImage}
                                     alt="User Management"
                                     className="bg-info-content"
                                 />
-                            </Link>
-                            <Link to="/admin/gameManagement">
+                            </div>
+                            <div to="/admin/gameManagement">
                                 <img
                                     src={gameManageImage}
                                     alt="Game Management"
                                     className="bg-red-400"
                                 />
-                            </Link>
-                            <Link to="/admin/eventManagement">
+                            </div>
+                            <div to="/admin/eventManagement">
                                 <img
                                     src={voucherManageImage}
                                     alt="Voucher Management"
                                     className="bg-info-content"
                                 />
-                            </Link>
-                            <Link to="/admin/statistic">
+                            </div>
+                            <div to="/admin/statistic">
                                 <img
                                     src={statisticManageImage}
                                     alt="Statistic Management"
                                     className="bg-red-400"
                                 />
-                            </Link>
+                            </div>
                         </Carousel>
                     </div>
                 </div>
@@ -138,42 +137,42 @@ function BrandHomepageComponent() {
                             THÔNG BÁO NGÀY HÔM NAY
                         </div>
                         <div class="grid grid-cols-2 w-full h-[500px] gap-4 mb-5">
-                            <Link
+                            <div
                                 to="/admin/userManagement"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <div class="stat">
                                     <div class="stat-title font-bold">Tổng số người dùng</div>
                                     <div class="stat-value text-blue-600 text-8xl">150</div>
                                 </div>
-                            </Link>
-                            <Link
+                            </div>
+                            <div
                                 to="/admin/userManagement"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <div class="stat">
                                     <div class="stat-title font-bold">Tổng số nhãn hàng</div>
                                     <div class="stat-value text-red-600 text-8xl">10</div>
                                 </div>
-                            </Link>
-                            <Link
+                            </div>
+                            <div
                                 to="/admin/voucherAndEvent"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <div class="stat">
                                     <div class="stat-title font-bold">Tổng số sự kiện</div>
                                     <div class="stat-value text-green-600 text-8xl">18</div>
                                 </div>
-                            </Link>
-                            <Link
+                            </div>
+                            <div
                                 to="/admin/voucherAndEvent"
-                                class="bg-base-100 flex rounded-2xl shadow-2xl cursor-pointer"
+                                class="bg-base-100 flex rounded-2xl shadow-2xl"
                             >
                                 <div class="stat">
                                     <div class="stat-title font-bold">Tổng số voucher</div>
                                     <div class="stat-value text-yellow-600 text-8xl">80</div>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-col items-center justify-center">
@@ -187,34 +186,34 @@ function BrandHomepageComponent() {
                             rightControl=" "
                             indicators={false}
                         >
-                            <Link to="/admin/userManagement">
+                            <div to="/admin/userManagement">
                                 <img
                                     src={userManageImage}
                                     alt="User Management"
                                     className="bg-info-content"
                                 />
-                            </Link>
-                            <Link to="/admin/gameManagement">
+                            </div>
+                            <div to="/admin/gameManagement">
                                 <img
                                     src={gameManageImage}
                                     alt="Game Management"
                                     className="bg-red-400"
                                 />
-                            </Link>
-                            <Link to="/admin/eventManagement">
+                            </div>
+                            <div to="/admin/eventManagement">
                                 <img
                                     src={voucherManageImage}
                                     alt="Voucher Management"
                                     className="bg-info-content"
                                 />
-                            </Link>
-                            <Link to="/admin/statistic">
+                            </div>
+                            <div to="/admin/statistic">
                                 <img
                                     src={statisticManageImage}
                                     alt="Statistic Management"
                                     className="bg-red-400"
                                 />
-                            </Link>
+                            </div>
                         </Carousel>
                     </div>
                 </div>
